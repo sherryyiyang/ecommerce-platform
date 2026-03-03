@@ -1,7 +1,23 @@
 {
-  "status": "init",
-  "scope": "codebase",
+  "status": "commited",
   "type": "frontend",
-  "localEndpoint": "http://localhost:5173/",
-  "serverPort": 52383
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:5174",
+  "loginUser": "example@gmail.com",
+  "loginPassword": "123456789",
+  "executionArgs": {
+    "projectName": "ecommerce-platform",
+    "projectPath": "/Users/sherryyang/Projects/ecommerce-platform",
+    "testIds": [],
+    "additionalInstruction": "",
+    "serverMode": "development",
+    "envs": {
+      "API_URL": "https://api.testsprite.com:11443",
+      "API_KEY": "sk-user-bsCyksRpL8NzmdpLD3DLuoSODrPSI-TcN_dthya8JflaEeyq-_n0SXG-P0JoH0bY-LoVCKAV08k86EiEjIxdw5zpayPSYjUH17L0Nh-Nc2gnLD1GAZa2JxsxPoTNWF_7IO4",
+      "TESTSPRITE_URL": "https://dev.d3jiomw0rrav5x.amplifyapp.com",
+      "TS_API_ENDPOINT": "https://api.testsprite.com:11443/api"
+    }
+  },
+  "serverPort": 63767,
+  "proxy": "http://994b783e-cc91-47a2-9f45-52df09c93a10:lVGJPYBjhiIRGTnAosGiJIYfkAZJwqFJ@tun.testsprite.com:8080"
 }

@@ -1,0 +1,106 @@
+version: "2"
+type: frontend
+tech_stack:
+  - TypeScript
+  - React 19 + React Router
+  - Material UI (MUI)
+  - Vite
+routes:
+  - path: /
+    file: src/pages/ProductCatalog.tsx
+    auth_required: false
+    description: Product catalog landing page with product cards and buy action
+  - path: /login
+    file: src/pages/Login.tsx
+    auth_required: false
+    description: Login page using hardcoded test credentials
+  - path: /product/:id
+    file: src/pages/ProductDetails.tsx
+    auth_required: false
+    description: Product details page with buy action for selected product
+  - path: /orders
+    file: src/pages/OrderHistory.tsx
+    auth_required: true
+    description: Auth-protected order history page
+  - path: /admin
+    file: src/pages/AdminPage.tsx
+    auth_required: true
+    description: Auth-protected admin product management page
+features:
+  - name: User Login
+    description: Authenticate with email and password and redirect to catalog on success
+    files:
+      - src/pages/Login.tsx
+      - src/App.tsx
+    entry_route: /login
+    user_interactions:
+      - Enter email in Email field
+      - Enter password in Password field
+      - Click Login button
+      - Observe invalid credentials error for wrong input
+    api_calls: []
+    auth_required: false
+  - name: Browse Product Catalog
+    description: View mocked product list, open details, and trigger purchase flow
+    files:
+      - src/pages/ProductCatalog.tsx
+      - src/mockData.ts
+    entry_route: /
+    user_interactions:
+      - View list of product cards
+      - Click View Details to navigate to product page
+      - Click Buy Now to purchase or redirect to login if unauthenticated
+      - Observe success snackbar after mock purchase
+    api_calls: []
+    auth_required: false
+  - name: View Product Details
+    description: Open a product detail page and perform mock buy action
+    files:
+      - src/pages/ProductDetails.tsx
+      - src/mockData.ts
+    entry_route: /product/:id
+    user_interactions:
+      - Open a product details route by product id
+      - View product image, name, category, and price
+      - Click Buy Now to purchase or redirect to login if unauthenticated
+      - Observe product-not-found error for invalid id
+    api_calls: []
+    auth_required: false
+  - name: View Order History
+    description: Access historical orders after authentication
+    files:
+      - src/pages/OrderHistory.tsx
+      - src/App.tsx
+    entry_route: /orders
+    user_interactions:
+      - Login with valid credentials
+      - Navigate to Orders from top navigation
+      - View mock order list details
+    api_calls: []
+    auth_required: true
+  - name: Admin Product Management
+    description: Manage products in the admin UI after authentication
+    files:
+      - src/pages/AdminPage.tsx
+      - src/App.tsx
+      - src/mockData.ts
+    entry_route: /admin
+    user_interactions:
+      - Login with valid credentials
+      - Navigate to Admin from top navigation
+      - Add, edit, and delete products in the UI
+    api_calls: []
+    auth_required: true
+known_limitations:
+  - issue: Authentication is in-memory only and resets on page refresh
+    location: src/App.tsx
+    impact: Sessions are not persistent across reloads
+  - issue: Login uses hardcoded credentials instead of backend auth
+    location: src/pages/Login.tsx
+    impact: No real user management or secure authentication flow
+  - issue: Product, order, and purchase data are mock-data driven with artificial delays
+    location: src/mockData.ts
+    impact: No real backend integration or persisted transactions
+  - issue: Admin CRUD operations are UI-only and not persisted to a backend
+    location: src/pages/AdminPage.tsx
+    impact: Changes exist only in client state during the current session
