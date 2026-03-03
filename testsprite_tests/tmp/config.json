@@ -1,18 +1,7 @@
 {
-  "status": "commited",
-  "type": "frontend",
+  "status": "init",
   "scope": "codebase",
-  "localEndpoint": "http://localhost:5173",
-  "loginUser": "test@example.com",
-  "loginPassword": "123456abc.",
-  "executionArgs": {
-    "projectName": "ecommerce-platform",
-    "projectPath": "/Users/sherry/Projects/ecommerce-platform",
-    "testIds": [],
-    "additionalInstruction": "",
-    "envs": {
-      "API_KEY": "sk-user-hm3ugh-1AcoL5NHq20I1IYOXtH3uSCvavIRYWDrfMTZVH7nYkXFpai_hj7mf8whaPttwGsRPRdKzz0e871OETqmnOL6Hd6yTXSSUNhAHGwZLv0FigAaXT2qsESGshbv5Ku8"
-    }
-  },
-  "proxy": "http://e5f439c5-4da8-43f6-a1d0-ebc1b78a70d2:M3muTw4pXEB7rqMckuuMIU7gBAQRYbb6@tun.testsprite.com:8080"
+  "type": "frontend",
+  "localEndpoint": "http://localhost:5173/",
+  "serverPort": 52383
 }
