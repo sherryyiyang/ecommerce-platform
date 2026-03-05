@@ -15,9 +15,10 @@
       "API_URL": "https://api.testsprite.com:11443",
       "API_KEY": "sk-user-bsCyksRpL8NzmdpLD3DLuoSODrPSI-TcN_dthya8JflaEeyq-_n0SXG-P0JoH0bY-LoVCKAV08k86EiEjIxdw5zpayPSYjUH17L0Nh-Nc2gnLD1GAZa2JxsxPoTNWF_7IO4",
       "TESTSPRITE_URL": "https://dev.d3jiomw0rrav5x.amplifyapp.com",
-      "TS_API_ENDPOINT": "https://api.testsprite.com:11443/api"
+      "TS_API_ENDPOINT": "https://api.testsprite.com:11443/api",
+      "TS_TUNNEL_ENDPOINT": "nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com"
     }
   },
-  "serverPort": 63767,
-  "proxy": "http://994b783e-cc91-47a2-9f45-52df09c93a10:lVGJPYBjhiIRGTnAosGiJIYfkAZJwqFJ@tun.testsprite.com:8080"
+  "serverPort": 61062,
+  "proxy": "http://507daed6-a698-4fa3-9f27-7e3b63cc3387:YpvcKMk6kq2PYC6nH4RHulKsMF225GlT@nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com:8080"
 }

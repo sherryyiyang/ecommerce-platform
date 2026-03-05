@@ -31,271 +31,212 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174", wait_until="commit", timeout=10000)
+        await page.goto("http://localhost:5174")
         
-        # -> Click the 'Login' link in the top navigation to open the login form (element index 8).
+        # -> Click the 'Login' link in the top navigation to open the login page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the Email and Password fields on the login form and click the Login button.
+        # -> Type 'example@gmail.com' into the Email field (index 459).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('123456789')
+        await asyncio.sleep(3); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Click on 'Orders' in the top navigation (element index 812) to open the Orders page and then verify the Orders page content.
+        # -> Click the Login button (use fresh element index 756) to submit the form.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Login' link in the top navigation (element index 957) to open the login form so the test can re-authenticate (then will fill credentials and click Login).
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
-        
-        # -> Fill the Email field (index 1355) with example@gmail.com, fill the Password field (index 1363) with 123456789, then click the Login button (index 1369).
+        # -> Input credentials into Email and Password fields and submit the form (send Enter) to attempt login.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('123456789')
+        await asyncio.sleep(3); await elem.fill('123456789')
         
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
-        
-        # -> Fill Email (index 1650) and Password (index 1651) and click Login (index 1654).
+        # -> Fill Email (index 1549) with 'example@gmail.com', fill Password (index 1557) with '123456789', then click the Login button (index 1563).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('123456789')
+        await asyncio.sleep(3); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Orders' link (element index 2084) to open the Orders page so the Orders page URL and content can be verified.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
-        
-        # -> Click the 'Login' link in the top navigation to open the Login form so credentials can be entered (click element index 2367).
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
-        
-        # -> Fill the Email field (index 2764) with example@gmail.com, fill the Password field (index 2772) with 123456789, then click the Login button (index 2778).
+        # -> Fill Email and Password using indexes 2013 and 2014, then click the Login button at index 2017 to authenticate.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('123456789')
+        await asyncio.sleep(3); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Click the Orders link (index 3170) to open the Orders page so the URL and 'Order History' content can be verified.
+        # -> Click the 'Orders' link in the top navigation to open the Orders page (use element index 2447).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Login' link in the top navigation to open the Login form (element index 3315).
+        # -> Click the 'Login' link in the top navigation to open the login page (use element index 2729).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Fill Email (index 3713) and Password (index 3721), then click Login (index 3727). After the page updates, proceed to click Orders and verify '/orders' and 'Order History'.
+        # -> Fill the Email field (index 3127) with 'example@gmail.com', then fill Password (index 3135) with '123456789', then click the Login button (index 3141) to authenticate.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('123456789')
+        await asyncio.sleep(3); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Fill Email (index 4008) with example@gmail.com, fill Password (index 4009) with 123456789, then click the Login button (index 4012).
+        # -> Fill Email (index=3422) with 'example@gmail.com', fill Password (index=3423) with '123456789', then click the Login button (index=3426).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('123456789')
+        await asyncio.sleep(3); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the Email (index 4754) and Password (index 4762) fields then click the Login button (index 4768) to authenticate. After that, re-check the page for the Orders link.
+        # -> Fill Email (index=3765) with 'example@gmail.com', fill Password (index=3766) with '123456789', then click the Login button (index=3769) to authenticate.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('123456789')
+        await asyncio.sleep(3); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Click the Orders link (element index 5306) to open the Orders page. After navigation, verify the URL contains '/orders' and verify the page contains the text 'Order History'.
+        # -> Click the 'Orders' link in the top navigation (use element index 4200) to open the Orders page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Login' link in the top navigation to open the login form (click element index 5589).
+        # -> Click the 'Login' link in the top navigation to open the login page (use element index 4549).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the Email and Password fields (indexes 5987 and 5995) with the provided credentials and click the Login button (index 6001). After that, check for the Orders link and navigate to Orders to verify '/orders' and 'Order History'.
+        # -> Fill Email (index 5017) and Password (index 5025) then click the Login button (index 5031) to authenticate.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('123456789')
+        await asyncio.sleep(3); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the Email field (index 6280) with example@gmail.com, fill the Password field (index 6281) with 123456789, then click the Login button (index 6284) to authenticate. After the login action completes, re-evaluate the page for the Orders link.
+        # -> Fill the Email (index=5310) and Password (index=5311) fields and click the Login button (index=5314) to authenticate.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('123456789')
+        await asyncio.sleep(3); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Orders' link in the top navigation (element index 6716) to open the Orders page and then verify the Orders page content.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
-        
-        # -> Click the 'Login' link in the top navigation to open the login form so credentials can be entered (click element index 6998).
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
-        
-        # -> Fill the Email (index 7396) and Password (index 7404) fields, then click the Login button (index 7410). After that, re-evaluate the page for the Orders link.
+        # -> Fill Email (index 5697) with example@gmail.com, fill Password (index 5698) with 123456789, then click Login (index 5701). After the click, wait for the page to update and report the new state.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('123456789')
+        await asyncio.sleep(3); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Fill Email (index 7691) and Password (index 7692), then click the Login button (index 7695). After the click, re-evaluate the page for the Orders link and proceed.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await page.wait_for_timeout(3000); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
-        
-        # -> Click the 'Orders' link (element index 8125) to open the Orders page so the URL and page content can be verified.
+        # -> Click the 'Orders' link in the top navigation and verify the Orders page loaded (URL contains '/orders') and that the text 'Order History' is visible.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
         frame = context.pages[-1]
-        # Verify the current URL contains the root path '/' as requested by the test plan
-        assert "/" in frame.url
-        
-        # Check the top navigation links to determine if an 'Orders' link exists.
-        # Use only the provided xpaths for header links.
-        txt1 = (await frame.locator('xpath=/html/body/div/header/div/a[1]').inner_text()).strip()
-        txt2 = (await frame.locator('xpath=/html/body/div/header/div/a[2]').inner_text()).strip()
-        txt3 = (await frame.locator('xpath=/html/body/div/header/div/a[3]').inner_text()).strip()
-        
-        if 'Orders' not in (txt1, txt2, txt3):
-            # The Orders feature/link does not exist on the page. Report the issue and stop the test as instructed.
-            raise AssertionError("Orders link is missing from the top navigation; feature not present.")
+        current_url = await frame.evaluate("() => window.location.href")
+        assert "/" in current_url, "Expected URL to contain '/'"
+        assert await frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0).is_visible(), "Expected element to be visible"
+        raise AssertionError("Orders link not found in top navigation; feature missing")
         await asyncio.sleep(5)
 
     finally:

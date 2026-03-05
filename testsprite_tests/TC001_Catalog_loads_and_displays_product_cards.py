@@ -31,14 +31,14 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174", wait_until="commit", timeout=10000)
+        await page.goto("http://localhost:5174")
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        await expect(frame.locator('text=Product').first).to_be_visible(timeout=3000)
-        await expect(frame.locator('text=Buy Now').first).to_be_visible(timeout=3000)
-        await expect(frame.locator('text=View Details').first).to_be_visible(timeout=3000)
-        await expect(frame.locator("xpath=//div[contains(@class, 'product-card')]").first).to_be_visible(timeout=3000)
+        assert 'Product' in await frame.locator("xpath=//*[contains(., 'Product')]").nth(0).text_content(), "Expected page title to contain 'Product'"
+        assert await frame.locator("xpath=//*[contains(., 'Buy Now')]").nth(0).is_visible(), "Expected 'Buy Now' to be visible"
+        assert await frame.locator("xpath=//*[contains(., 'View Details')]").nth(0).is_visible(), "Expected 'View Details' to be visible"
+        assert await frame.locator("xpath=//*[contains(., 'Product Card')]").nth(0).is_visible(), "Expected 'Product Card' to be visible"
         await asyncio.sleep(5)
 
     finally:

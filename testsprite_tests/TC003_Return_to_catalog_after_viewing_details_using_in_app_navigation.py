@@ -31,25 +31,33 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174", wait_until="commit", timeout=10000)
+        await page.goto("http://localhost:5174")
         
-        # -> Click on 'View Details' on the first visible product card (Wireless Headphones) - element index 245.
+        # -> Click on 'View Details' on the first visible product card (the 'View Details' link for 'Wireless Headphones').
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Click the on-page navigation control to return to the catalog (click the 'Catalog' link / site navigation).
+        # -> Click the on-page navigation control to return to the catalog. (Click the 'Catalog' link in the navbar.)
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[1]/header/div/a[2]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'Catalog' link in the navbar to return to the product catalog (use interactive element index=549).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        assert '/product/' in frame.url
-        assert '/' in frame.url
-        await expect(frame.locator('text=Buy Now').first).to_be_visible(timeout=3000)
+        current_url = await frame.evaluate("() => window.location.href")
+        assert '/product/' in current_url
+        current_url = await frame.evaluate("() => window.location.href")
+        assert '/' in current_url
+        assert await frame.locator("xpath=//*[contains(., 'Buy Now')]").nth(0).is_visible(), "Expected 'Buy Now' to be visible"
         await asyncio.sleep(5)
 
     finally:

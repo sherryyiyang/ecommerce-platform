@@ -31,19 +31,30 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174", wait_until="commit", timeout=10000)
+        await page.goto("http://localhost:5174")
         
-        # -> Click on the first product card's name/image (use the 'View Details' link) to open its details page.
+        # -> Click the first product's 'View Details' link (index 236) to open the product details page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        # -> Verify text "Buy" is visible
-        # The text "Buy" is not present in the provided available elements; report the issue and end the task.
-        assert False, "Text 'Buy' not found in available elements; feature missing — marking task as done."
+        frame = context.pages[-1]
+        # Check for the presence of the text "Buy" using the available xpaths
+        buy_found = False
+        for xpath in ['/html/body/div/header/div/a[1]', '/html/body/div/header/div/a[2]', '/html/body/div/header/div/a[3]']:
+            text = await frame.locator(f"xpath={xpath}").nth(0).text_content()
+            if text and 'Buy' in text:
+                buy_found = True
+                # Confirm the element containing 'Buy' is visible
+                assert 'Buy' in text, "Expected 'Buy' text to be present"
+                assert await frame.locator(f"xpath={xpath}").nth(0).is_visible(), "Expected element to be visible"
+                break
+        if not buy_found:
+            # Report missing feature and mark task as done as per test plan
+            raise AssertionError("Required feature missing: 'Buy' text not found using the available xpaths. Cannot proceed to product details assertions. Task done.")
         await asyncio.sleep(5)
 
     finally:

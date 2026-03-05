@@ -31,19 +31,20 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174", wait_until="commit", timeout=10000)
+        await page.goto("http://localhost:5174")
         
-        # -> Click the first product card's name or image (use the 'View Details' link) to open the product details page.
+        # -> Click the first product's 'View Details' link (index 528) to open the product details page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        assert '/product/' in frame.url
-        await expect(frame.locator('text=Buy Now').first).to_be_visible(timeout=3000)
-        await expect(frame.locator('xpath=//img[contains(@alt, "product")]').first).to_be_visible(timeout=3000)
+        current_url = await frame.evaluate("() => window.location.href")
+        assert '/product/' in current_url
+        assert await frame.locator("xpath=//*[contains(., 'Buy Now')]").nth(0).is_visible(), "Expected 'Buy Now' to be visible"
+        assert await frame.locator("xpath=//*[contains(., 'product image')]").nth(0).is_visible(), "Expected 'product image' to be visible"
         await asyncio.sleep(5)
 
     finally:
