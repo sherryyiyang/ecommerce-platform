@@ -2,6 +2,7 @@ import asyncio
 from playwright import async_api
 from playwright.async_api import expect
 
+
 async def run_test():
     pw = None
     browser = None
@@ -30,8 +31,14 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174")
+        # -> Navigate to https://ecommerce-platform-9p5itfqdi-sherrys-projects-d8ad7a21.vercel.app
+        await page.goto("https://ecommerce-platform-9p5itfqdi-sherrys-projects-d8ad7a21.vercel.app", wait_until="commit", timeout=10000)
+
+        # -> Click the 'Login' link to open the login page (use element index 36).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         await asyncio.sleep(5)
 
     finally:
@@ -42,5 +49,5 @@ async def run_test():
         if pw:
             await pw.stop()
 
+
 asyncio.run(run_test())
-    
