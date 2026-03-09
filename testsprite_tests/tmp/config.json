@@ -19,6 +19,6 @@
       "TS_TUNNEL_ENDPOINT": "nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com"
     }
   },
-  "serverPort": 51238,
-  "proxy": "http://508e9e85-227c-4c40-bbc6-999323cdc5c3:6scuCwaP1CVhMWBGXaACOuZzv9RL6O2I@nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com:8080"
+  "serverPort": 58372,
+  "proxy": "http://909adda2-adc0-47c9-bd05-035d22fcca1a:KE0fkX8pCTjO85ldTvwC6ygXDlBN5E4O@nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com:8080"
 }

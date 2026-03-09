@@ -33,13 +33,10 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Click the 'Login' link to open the login page (navigate to /login via the on-page link).
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to /login (use explicit navigate to http://localhost:3000/login).
+        await page.goto("http://localhost:3000/login")
         
-        # -> Type the username into the Email field (index 187).
+        # -> Type the provided email into the email field (index 177) and password into the password field (index 178), then click the Login button (index 181).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,7 +52,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Replace the email and password with the test account credentials shown on the page (example@gmail.com / 123456789) and click the Login button to sign in.
+        # -> Try logging in with the test account credentials shown on the page (example@gmail.com / 123456789) by filling the email and password inputs and clicking Login.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -71,7 +68,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Orders' navigation link (index 309) to open the Order History page and verify the empty state (URL contains '/order-history', 'No orders' text visible, 'order list' element visible).
+        # -> Click the 'Orders' link (index 333) to open the Order History page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
@@ -79,10 +76,12 @@ async def run_test():
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
+        frame = context.pages[-1]
         current_url = await frame.evaluate("() => window.location.href")
-        assert '/order-history' in current_url
-        assert await frame.locator("xpath=//*[contains(., 'No orders')]").nth(0).is_visible(), "Expected 'No orders' to be visible"
-        assert await frame.locator("xpath=//*[contains(., 'order list')]").nth(0).is_visible(), "Expected 'order list' to be visible"
+        assert "/order-history" in current_url, 'Expected URL to contain "/order-history"'
+        assert await frame.locator('xpath=/html/body/div[1]/header/div/a[3]').nth(0).is_visible(), "Expected element to be visible"
+        # The expected empty state elements ('No orders' text and an 'order list' element) are not present in the list of available xpaths for this page.
+        raise AssertionError('Feature missing: Order History empty state ("No orders") or "order list" element not found on the page')
         await asyncio.sleep(5)
 
     finally:

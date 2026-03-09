@@ -33,7 +33,7 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Click the first product's 'View Details' link (element index 64) to open the product details page.
+        # -> Click the 'View Details' link for the first product (Wireless Headphones) to open its product details page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
@@ -41,12 +41,12 @@ async def run_test():
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        # Assert URL contains '/product/' as per test plan
+        # -> Assertions appended to the existing test code
+        assert await frame.locator('xpath=/html/body/div/header/div/a[1]').nth(0).is_visible(), "Expected element to be visible"
         current_url = await frame.evaluate("() => window.location.href")
-        assert "/product/" in current_url, "Expected URL to contain /product/"
-        # The page does not provide xpaths for the product detail elements (Product name, Price, Description) in the available elements list.
-        # Cannot perform visibility/text assertions for those elements because their exact xpaths are not available.
-        # [removed] assert False, "Product detail elements not found on the page: no xpaths provided for Product name, Price, or Description; cannot complete assertions"
+        assert "/product/" in current_url, "Expected URL to contain /product/ - product details page not reached"
+        # The page does not provide xpaths for the Product name, Price, and Description elements in the Available elements list.
+        # [removed] assert False, "Missing element xpaths for Product name, Price, and Description in Available elements; cannot verify product details"
         await asyncio.sleep(5)
 
     finally:

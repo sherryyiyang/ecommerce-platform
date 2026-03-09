@@ -33,10 +33,10 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Navigate to /login
+        # -> Navigate to /login (use explicit navigate to http://localhost:3000/login as required by the test)
         await page.goto("http://localhost:3000/login")
         
-        # -> Type the username into the Email field, type the password into the Password field, then click the Login button.
+        # -> Type the username into the email field (element [179]), type the password into the password field (element [180]), then click the Login button (element [183]).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -52,13 +52,47 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
+        # -> Try logging in with the test account credentials shown on the page (example@gmail.com / 123456789) by filling the email ([179]) and password ([180]) inputs and clicking the Login button ([183]).
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'Admin' link in the top navigation (element [335]) to open the admin area.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'ADD PRODUCT' button (element [527]) to submit the add-product form with required fields missing, then verify that a validation message (e.g., 'required') appears.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
         # --> Assertions to verify final state
         frame = context.pages[-1]
+        # Assert that the current URL contains "/"
         current_url = await frame.evaluate("() => window.location.href")
-        assert '/' in current_url
+        assert "/" in current_url
+        
+        # Assert that the current URL contains "/admin" after navigating to Admin
         current_url = await frame.evaluate("() => window.location.href")
-        assert '/admin' in current_url
-        assert await frame.locator("xpath=//*[contains(., 'required')]").nth(0).is_visible(), "Expected 'required' to be visible"
+        assert "/admin" in current_url
+        
+        # Verify that a validation message 'required' is visible (feature may be missing if this fails)
+        text = await frame.locator('xpath=/html/body/div[1]/div/div/div/form/div[3]/label').nth(0).text_content()
+        assert 'required' in text
         await asyncio.sleep(5)
 
     finally:

@@ -33,7 +33,7 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Extract page content to confirm heading contains 'Product' and that 'View Details' text is visible, then click the first product's 'View Details' link.
+        # -> Click the 'View Details' link for the first product (index 64) to navigate to the product details page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
@@ -41,14 +41,14 @@ async def run_test():
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        # Verify header is visible
-        assert await frame.locator('xpath=/html/body/div/header/div/a[1]').nth(0).is_visible(), "Expected element to be visible"
-        # Verify page title contains 'Product'
-        text = await frame.locator('xpath=/html/body/div/header/div/a[1]').nth(0).text_content()
-        assert 'Product' in text, "Page title does not contain 'Product' - feature may be missing"
-        # Verify 'View Details' is visible (feature expected on product list) - not present in available elements
-        text_view = await frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0).text_content()
-        assert 'View Details' in text_view, "View Details not found on page - feature may be missing"
+        current_title = await frame.evaluate("() => document.title")
+        assert 'Product' in current_title
+        assert await frame.locator("xpath=//*[contains(., 'View Details')]").nth(0).is_visible(), "Expected 'View Details' to be visible"
+        current_url = await frame.evaluate("() => window.location.href")
+        assert '/product/' in current_url
+        assert await frame.locator("xpath=//*[contains(., 'Product details')]").nth(0).is_visible(), "Expected 'Product details' to be visible"
+        # Additional assertion from judge (semantic_match):
+        assert await frame.locator("xpath=//*[contains(., 'Wireless Headphones')]").nth(0).is_visible(), "Product name 'Wireless Headphones' should be visible"
         await asyncio.sleep(5)
 
     finally:

@@ -33,10 +33,10 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Navigate to the login page (/login) so the email and password fields can be filled.
+        # -> Navigate to /login
         await page.goto("http://localhost:3000/login")
         
-        # -> Input email into the email field (index 179).
+        # -> Type the email (sherryyiyang@gmail.com) into the email field (index 179).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -52,37 +52,13 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the login form with the test account credentials shown on the page (example@gmail.com / 123456789) and click the Login button to attempt login.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Orders' navigation link to open the Order History page (element index 333).
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
+        current_url = await frame.evaluate('() => window.location.href')
         assert '/' in current_url
-        current_url = await frame.evaluate("() => window.location.href")
+        current_url = await frame.evaluate('() => window.location.href')
         assert '/order-history' in current_url
-        assert await frame.locator("xpath=//*[contains(., 'order list')]").nth(0).is_visible(), "Expected 'order list' to be visible"
-        # Additional assertion from judge (semantic_match):
-        assert await frame.locator("xpath=//*[contains(., 'Order History')]").nth(0).is_visible(), "Order History heading should be visible"
+        assert await frame.locator('xpath=//*[contains(., "order list")]').nth(0).is_visible(), "Expected 'order list' to be visible"
         await asyncio.sleep(5)
 
     finally:

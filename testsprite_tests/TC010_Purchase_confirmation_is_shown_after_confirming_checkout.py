@@ -33,10 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Navigate to /login (explicit test step).
-        await page.goto("http://localhost:3000/login")
+        # -> Click the 'Login' link in the top navigation to go to the login page (use element index 8).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email and password fields with provided credentials and click the Login button (indices 179, 180, then 183). After login, verify the app redirects (check URL contains '/').
+        # -> Verify the page title contains 'Login' (assertion), then enter the provided email and password and submit the form.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -52,7 +55,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Input test account credentials (example@gmail.com / 123456789) into indices 179 and 180, then click the Login button (index 183).
+        # -> Try the on-page test account credentials shown in the login card: set Email to example@gmail.com and Password to 123456789, then click the Login button to proceed.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -68,19 +71,19 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click on a product in the catalog list to open its details page (use the 'View Details' link for the first product).
+        # -> Verify the catalog product's details page is opened by clicking the 'View Details' link for the first product (Wireless Headphones) so the 'Buy' action can be performed next.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Buy' button on the product details page (index 493) to attempt the simulated purchase and then verify a visible purchase confirmation appears.
+        # -> Click the 'Buy' button (element index 468) to perform the simulated checkout and then check for a visible purchase confirmation.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the Buy button (index 493) again, wait briefly for any confirmation UI, then extract visible page text and check for a purchase confirmation message. If none appears, report that the purchase confirmation feature is not present and finish the task.
+        # -> Click the 'Buy' button to perform the simulated checkout so the page can be checked for a purchase confirmation.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/button').nth(0)
@@ -91,6 +94,7 @@ async def run_test():
         assert await frame.locator("xpath=//*[contains(., 'Login')]").nth(0).is_visible(), "Expected 'Login' to be visible"
         current_url = await frame.evaluate("() => window.location.href")
         assert '/' in current_url
+        assert await frame.locator("xpath=//*[contains(., 'Purchase successful')]").nth(0).is_visible(), "Expected 'Purchase successful' to be visible"
         await asyncio.sleep(5)
 
     finally:

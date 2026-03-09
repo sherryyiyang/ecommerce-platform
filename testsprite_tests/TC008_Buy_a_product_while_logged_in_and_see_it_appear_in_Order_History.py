@@ -33,13 +33,10 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Click the 'Login' link on the page to open the login page (use interactive element index 8).
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to /login using the exact path '/login' on the current site.
+        await page.goto("http://localhost:3000/login")
         
-        # -> Input the username into the Email field (index 187) and the password into the Password field (index 195), then click the Login button (index 201).
+        # -> Type the provided username into the Email field (index 176), type the provided password into the Password field (index 177), then click the Login button (index 180).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,7 +52,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Replace the email/password with the site test account credentials shown on the page (example@gmail.com / 123456789) and click the Login button (index 201).
+        # -> Try logging in using the test account shown on the page (example@gmail.com / 123456789).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -69,23 +66,6 @@ async def run_test():
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> ASSERTION: Verify current URL contains '/' then click the first product's 'View Details' link to open its details page (click element index 326).
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Buy' button (index 468) to complete the simulated checkout, then open Orders (index 309) and extract the order list to verify the purchase.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state

@@ -35,10 +35,15 @@ async def run_test():
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
+        # Verify that a product item (product list) is visible (using the first product's "View Details" link)
         assert await frame.locator('xpath=/html/body/div/div/div/div/div/div[1]/div/div/a').nth(0).is_visible(), "Expected element to be visible"
+        
+        # Verify the "View Details" text is present on the first product item
         text = await frame.locator('xpath=/html/body/div/div/div/div/div/div[1]/div/div/a').nth(0).text_content()
-        assert 'View Details' in text, "Expected text 'View Details' to be visible"
-        # [removed] assert False, "Feature 'Buy' not found on the page"
+        assert 'View Details' in text, "Expected 'View Details' to be present"
+        
+        # Cannot verify "Buy" because no corresponding xpath for a 'Buy' element was provided in the available elements list
+        raise AssertionError("Element for 'Buy' not found in available elements; cannot verify 'Buy' visibility")
         await asyncio.sleep(5)
 
     finally:

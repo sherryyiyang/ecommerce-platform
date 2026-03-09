@@ -33,13 +33,10 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Click the 'Login' link in the top navigation to open the login page.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to /login
+        await page.goto("http://localhost:3000/login")
         
-        # -> Type the provided email into the Email field (index 187) then the password into the Password field (index 195), then click the Login button (index 201).
+        # -> Fill the email and password fields and submit the login form (type email, type password, click Login).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,7 +52,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Enter Email 'example@gmail.com' (index 187) and Password '123456789' (index 195), then click the Login button (index 201).
+        # -> Fill the email and password fields with the test account credentials (example@gmail.com / 123456789) and click the Login button to authenticate.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -71,7 +68,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Admin' link in the main navigation (index 311) to open the admin page.
+        # -> Click the 'Admin' link in the main navigation to open the admin products page (element index 335).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
@@ -83,7 +80,7 @@ async def run_test():
         assert '/' in current_url
         current_url = await frame.evaluate("() => window.location.href")
         assert '/admin' in current_url
-        assert not await frame.locator("xpath=//*[contains(., 'Unsaved Product')]"").nth(0).is_visible(), "Expected 'Unsaved Product' to be not visible"
+        assert not await frame.locator("xpath=//*[contains(., 'Unsaved Product')]").nth(0).is_visible(), "Expected 'Unsaved Product' to not be visible"
         await asyncio.sleep(5)
 
     finally:

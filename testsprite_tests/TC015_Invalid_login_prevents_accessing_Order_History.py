@@ -33,10 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Navigate to /login (http://localhost:3000/login).
-        await page.goto("http://localhost:3000/login")
+        # -> Click the 'Login' link (index 8) to open the login page.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Type 'not-a-user@example.com' into the Email field (index 179).
+        # -> Type the invalid email into the email field (index 187), type the invalid password into the password field (index 195), then click the Login button (index 201). After the page updates, verify the URL still contains '/login' and that the text 'Invalid' is visible.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,10 +58,10 @@ async def run_test():
         # --> Assertions to verify final state
         frame = context.pages[-1]
         current_url = await frame.evaluate("() => window.location.href")
-        assert "/login" in current_url
+        assert "/login" in current_url, f"Expected '/login' to be in URL, got: {current_url}"
         assert await frame.locator('xpath=/html/body/div[1]/div/div/div/div/div/form/div[3]/div[1]').nth(0).is_visible(), "Expected element to be visible"
         text = await frame.locator('xpath=/html/body/div[1]/div/div/div/div/div/form/div[3]/div[1]').nth(0).text_content()
-        assert 'Invalid credentials.' in text
+        assert "Invalid credentials." in text, f"Expected 'Invalid credentials.' in element text, got: {text}"
         await asyncio.sleep(5)
 
     finally:
