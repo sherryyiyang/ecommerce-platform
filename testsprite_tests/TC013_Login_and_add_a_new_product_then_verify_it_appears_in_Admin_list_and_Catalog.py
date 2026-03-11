@@ -30,8 +30,8 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174")
+        # -> Navigate to http://localhost:3000
+        await page.goto("http://localhost:3000")
         
         # -> Click the 'Login' link in the top navigation to open the login page.
         frame = context.pages[-1]
@@ -39,7 +39,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Type the test credentials into the Email and Password fields and submit the Login form (enter email, enter password, click Login).
+        # -> Enter the test credentials into the Email and Password fields and click the Login button to authenticate.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,64 +55,42 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill Email (index 696) with example@gmail.com, fill Password (index 697) with 123456789, then click the Login button (index 700).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Open the Login page (click the 'Login' link) so the user can (re-)authenticate and reveal the Admin link, then proceed to Admin after successful login.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Fill the Email and Password fields on this Login page and click the Login button (use input indexes 1910 and 1918, then click index 1924).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Fill the Email and Password fields using indexes 2548 and 2549 and click the Login button using index 2552.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Admin' link in the top navigation to open the Admin page (use element index 3137).
+        # -> Click on 'Admin' in the top navigation to open the Admin page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Fill the product form fields: Name='Test Product Alpha', Category='Test Category', Price='19.99', Image URL='https://example.com/test-product-alpha.jpg', Description='A test-only product created by E2E', then click the 'Add Product' button to save.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('Test Product Alpha')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('Test Category')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[3]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('19.99')
+        
+        # -> Fill Image URL and Description fields, then click the 'Add Product' button to save the new product.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[4]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('https://example.com/test-product-alpha.jpg')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[5]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('A test-only product created by E2E')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state

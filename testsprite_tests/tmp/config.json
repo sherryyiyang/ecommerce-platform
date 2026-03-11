@@ -2,7 +2,7 @@
   "status": "commited",
   "type": "frontend",
   "scope": "codebase",
-  "localEndpoint": "http://localhost:5174",
+  "localEndpoint": "http://localhost:3000",
   "loginUser": "example@gmail.com",
   "loginPassword": "123456789",
   "executionArgs": {
@@ -10,7 +10,7 @@
     "projectPath": "/Users/sherryyang/Projects/ecommerce-platform",
     "testIds": [],
     "additionalInstruction": "",
-    "serverMode": "development",
+    "serverMode": "production",
     "envs": {
       "API_URL": "https://api.testsprite.com:11443",
       "API_KEY": "sk-user-bsCyksRpL8NzmdpLD3DLuoSODrPSI-TcN_dthya8JflaEeyq-_n0SXG-P0JoH0bY-LoVCKAV08k86EiEjIxdw5zpayPSYjUH17L0Nh-Nc2gnLD1GAZa2JxsxPoTNWF_7IO4",
@@ -19,6 +19,6 @@
       "TS_TUNNEL_ENDPOINT": "nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com"
     }
   },
-  "serverPort": 61062,
-  "proxy": "http://507daed6-a698-4fa3-9f27-7e3b63cc3387:YpvcKMk6kq2PYC6nH4RHulKsMF225GlT@nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com:8080"
+  "serverPort": 49604,
+  "proxy": "http://fde940f0-e9a7-497e-8384-1b6821b507bb:0xjlWjqG6S4IWTtBJDlvk971WNK2CSCm@nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com:8080"
 }
