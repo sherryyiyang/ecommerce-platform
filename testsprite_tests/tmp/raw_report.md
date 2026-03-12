@@ -14,29 +14,57 @@
 
 #### Test TC001 Login succeeds with valid credentials and redirects to product catalog
 - **Test Code:** [TC001_Login_succeeds_with_valid_credentials_and_redirects_to_product_catalog.py](./TC001_Login_succeeds_with_valid_credentials_and_redirects_to_product_catalog.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/ddd54e88-570c-42a2-8ed6-919c1e146964
-- **Status:** ✅ Passed
+- **Test Error:** TEST FAILURE
+
+ASSERTIONS:
+- Login page not reachable - server returned ERR_EMPTY_RESPONSE for http://localhost:5174/login
+- Page displays browser error 'This page isn’t working' and no login form is present
+- Reload action did not recover the site and the page remains unavailable
+- Unable to perform login interactions because the target page is unreachable
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/1f4360fe-f9e2-49bd-bb79-7769bcf1eeba
+- **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC002 Login shows error for invalid email and password
 - **Test Code:** [TC002_Login_shows_error_for_invalid_email_and_password.py](./TC002_Login_shows_error_for_invalid_email_and_password.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/01cc50b6-b915-4b1c-a6a0-b576886d8c0f
-- **Status:** ✅ Passed
+- **Test Error:** TEST FAILURE
+
+ASSERTIONS:
+- Login page not reachable: server returned ERR_EMPTY_RESPONSE on http://localhost:5174/login.
+- Login form not found on the /login page; only a Reload button is present.
+- Cannot submit credentials because input fields (email, password) and Login button are not present.
+- Cannot verify presence of 'Invalid credentials' message because the login attempt cannot be performed.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/8a3e7d2b-39e1-4d3a-b651-18d32c841da9
+- **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC007 Browse catalog and open a product details page
 - **Test Code:** [TC007_Browse_catalog_and_open_a_product_details_page.py](./TC007_Browse_catalog_and_open_a_product_details_page.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/31d2826a-a0bc-4f16-b2a4-597463d416d5
-- **Status:** ✅ Passed
+- **Test Error:** TEST FAILURE
+
+ASSERTIONS:
+- ASSERTION: Page shows no interactive elements and appears blank (SPA likely not loaded).
+- ASSERTION: No product cards or navigation elements were found on the page, preventing catalog browsing.
+- ASSERTION: Two wait attempts (3s each) were performed and the SPA still did not render.
+- ASSERTION: Unable to verify product details (URL '/product/', product image, category, price) because the UI elements required for those checks are missing.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/4e5109e5-9d09-42fa-9eb7-4299833c5409
+- **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC008 Product details page displays description and pricing information
 - **Test Code:** [TC008_Product_details_page_displays_description_and_pricing_information.py](./TC008_Product_details_page_displays_description_and_pricing_information.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/c695f2cf-e6d5-4a29-8ba0-f13a9f261ced
-- **Status:** ✅ Passed
+- **Test Error:** TEST FAILURE
+
+ASSERTIONS:
+- ASSERTION: Current URL is http://localhost:5174/ but the page rendered blank and contains 0 interactive elements.
+- ASSERTION: 'View Details' buttons or product cards not found on the page, so product details cannot be opened via the UI.
+- ASSERTION: Unable to verify that the URL contains '/product/' because navigation to a product details page could not be performed.
+- ASSERTION: Product description, pricing ('$'), and product category visibility could not be verified because the details page was not reachable.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/e8c9c52c-2d52-4b63-bb7a-6d0d4a3687dc
+- **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
@@ -45,11 +73,11 @@
 - **Test Error:** TEST FAILURE
 
 ASSERTIONS:
-- Login failed: valid test credentials did not authenticate; 'Invalid credentials.' message displayed.
-- Buy button is disabled on the product details page for unauthenticated users, preventing the purchase action.
-- Order history verification is not possible because no purchase could be completed while unauthenticated.
-- Repeated login attempts produced stale or non-interactable element errors during the login flow.
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/05626551-d773-4fdd-aeea-ff2e7c5887d8
+- Application unreachable: http://localhost:5174 and http://localhost:5174/login returned ERR_EMPTY_RESPONSE (browser error page displayed).
+- Login form not present: the page shows a server error and only a Reload button, so credentials cannot be entered.
+- Cannot access product listing or details pages because the site endpoints are not responding.
+
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/0a1967fc-e840-4e83-99b5-cd732a5af846
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
@@ -59,11 +87,10 @@ ASSERTIONS:
 - **Test Error:** TEST FAILURE
 
 ASSERTIONS:
-- Login failed - error message 'Invalid credentials.' displayed after submitting the provided credentials.
-- Authentication could not be completed because the login button became non-interactable or the login flow did not complete after multiple attempts.
-- Buy action could not be executed because the user was not authenticated and product card Buy buttons are disabled for unauthenticated users.
-- Purchase confirmation UI could not be verified because no authenticated session was established and the purchase flow was not reachable.
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/ce6d3bb6-d736-4166-b94c-febb891e7b79
+- Login page not reachable - browser error 'ERR_EMPTY_RESPONSE' displayed
+- Login form and authentication input fields are not present on the page
+- Purchase flow cannot be executed because the application server did not respond and required UI elements are missing
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/b3b413af-4973-4ad5-8c07-ec5f7ee074b8
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
@@ -73,19 +100,26 @@ ASSERTIONS:
 - **Test Error:** TEST FAILURE
 
 ASSERTIONS:
-- Login failed - the application displays the message 'Invalid credentials.' after submitting credentials.
-- Test account credentials shown on the page (example@gmail.com / 123456789) do not authenticate; repeated login attempts (5) resulted in the same error.
-- Orders page and authenticated navigation items (e.g., 'Orders', 'Logout') are not available because the user remains unauthenticated.
-- The purchase flow cannot be executed or verified because authentication did not succeed and product-buy steps cannot be performed.
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/5bde7d68-9858-4524-a399-165bde5422a1
+- Local application at http://localhost:5174 is not responding; the page returns ERR_EMPTY_RESPONSE.
+- Login page could not be loaded and only a Reload button is available, so the login/purchase flow cannot be started.
+- Orders page and order verification cannot be reached because the SPA UI never became available.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/bb7276e7-9fc1-46e9-9b90-3ef1104637d1
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC013 Invalid product ID shows a Not Found message
 - **Test Code:** [TC013_Invalid_product_ID_shows_a_Not_Found_message.py](./TC013_Invalid_product_ID_shows_a_Not_Found_message.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/3733b5e1-9086-4ca9-8fb0-2344eacd651e
-- **Status:** ✅ Passed
+- **Test Error:** TEST FAILURE
+
+ASSERTIONS:
+- Product details page not reachable: browser returned ERR_EMPTY_RESPONSE for http://localhost:5174/product/9999
+- 'Not found' text not present because the application page did not load and a browser error page is shown
+- 'Product' text not present because the application page did not load and a browser error page is shown
+- No not-found message element visible; only a browser error page with a Reload button (index 74)
+- Unable to verify UI for non-existent product because the site on localhost did not respond
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/bb7e1c73-df30-473a-8247-303da8c8780b
+- **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
@@ -94,10 +128,11 @@ ASSERTIONS:
 - **Test Error:** TEST FAILURE
 
 ASSERTIONS:
-- Orders page did not display any order cards; page shows the message 'No orders found.'
-- No DOM elements representing an order card were present on the Orders page (expected at least one order entry).
-- Verification step 'Verify an order card is visible' failed because there are no orders for this user in the application state.
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/476d94e2-03ce-406d-8561-94c30f30790b
+- Server returned ERR_EMPTY_RESPONSE when loading http://localhost:5174/login, preventing access to the application.
+- Only the browser error page (ERR_EMPTY_RESPONSE) with a single 'Reload' button is present; no application UI or login form elements are available.
+- Clicking the 'Reload' button twice did not recover the application or expose the login UI.
+- Authentication and navigation to /orders could not be performed because the app is unreachable.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/719fde5d-004d-4dcb-9735-6782f030d36a
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
@@ -107,17 +142,24 @@ ASSERTIONS:
 - **Test Error:** TEST FAILURE
 
 ASSERTIONS:
-- Login failed - 'Invalid credentials.' message displayed after submitting provided credentials (test@example.com / 123456789).
-- Orders page not accessible because the user is not authenticated.
-- Multiple login attempts with the provided credentials resulted in authentication failure.
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/47fd198b-d725-47c8-a321-262631c2094f
+- Login page not reachable - browser shows 'ERR_EMPTY_RESPONSE' for http://localhost:5174/login.
+- Only the browser error page with a single 'Reload' button is present; no login form or authentication inputs are available to proceed.
+- Orders page cannot be tested because authentication cannot be performed while the site returns an empty response.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/e7cba37c-5e1f-4a8a-ad6c-49828d159cb5
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC020 Add a new product from Admin page and see it in the list
 - **Test Code:** [TC020_Add_a_new_product_from_Admin_page_and_see_it_in_the_list.py](./TC020_Add_a_new_product_from_Admin_page_and_see_it_in_the_list.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/943c4ad3-9066-49b4-90e4-d788ce8ba698
+- **Test Error:** TEST FAILURE
+
+ASSERTIONS:
+- ASSERTION: The application at http://localhost:5174 returned ERR_EMPTY_RESPONSE (no data sent) and the browser displays a generic error page.
+- ASSERTION: Only a browser-level 'Reload' button is present; the SPA did not render any interactive elements or the login form.
+- ASSERTION: Two reload attempts and a wait did not restore the application; the server remains unavailable.
+- ASSERTION: Because the app did not initialize, login and admin product creation steps cannot be executed and the test cannot continue.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/769b8212-0464-462c-b092-e10827136175
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
@@ -127,10 +169,12 @@ ASSERTIONS:
 - **Test Error:** TEST FAILURE
 
 ASSERTIONS:
-- Edit button not found on admin product management page
-- No products are displayed in the admin product list — cannot select a product to edit
-- Product edit/update functionality is not available on this page; cannot verify updated product name
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/84a64ae8-c521-4b64-98a7-011367f88930
+- Application not reachable at http://localhost:5174 - page returned ERR_EMPTY_RESPONSE
+- Login form not found on page; only a browser error page is displayed
+- Reload button available but clicking it twice did not load the application
+- Cannot perform authentication and admin product edit steps because the app is not serving content
+
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/8fd20706-4622-4ac7-a95c-0ba6872f556b
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
@@ -140,31 +184,47 @@ ASSERTIONS:
 - **Test Error:** TEST FAILURE
 
 ASSERTIONS:
-- Delete button not found on the Admin product management page.
-- No product entries are displayed in the admin product list, so there is nothing to delete to verify removal.
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/95d73f1a-f9cd-4cf9-a248-16dab7e99b8c
+- ASSERTION: Application at http://localhost:5174/login returned ERR_EMPTY_RESPONSE and failed to load any app content
+- ASSERTION: Login page cannot be reached, preventing authentication actions from being performed
+- ASSERTION: Admin product list cannot be accessed due to site unavailability
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/56439445-250a-4f5e-9897-da08502f947f
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC003 Login fails with correct email and wrong password
 - **Test Code:** [TC003_Login_fails_with_correct_email_and_wrong_password.py](./TC003_Login_fails_with_correct_email_and_wrong_password.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/b7801a7d-bc46-4f06-862b-a4093a3a3ea2
-- **Status:** ✅ Passed
+- **Test Error:** TEST FAILURE
+
+ASSERTIONS:
+- Login page not reachable: browser shows "ERR_EMPTY_RESPONSE" and an error page was displayed instead of the login form.
+- Login form fields (email/password) and Login button not found on page, preventing credential entry.
+- Unable to verify 'Invalid credentials' error because the application did not load.
+- Unable to verify URL contains '/login' because navigation to the page failed.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/b8b80e2e-2cac-4f45-9e86-26d20248315d
+- **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC004 Login fails with blank email
 - **Test Code:** [TC004_Login_fails_with_blank_email.py](./TC004_Login_fails_with_blank_email.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/f1231bd6-1267-492e-ad5d-5f5d6110bc8e/6c4de664-a260-42ba-a625-71c6557f1d6d
-- **Status:** ✅ Passed
+- **Test Error:** TEST FAILURE
+
+ASSERTIONS:
+- Login page not reachable; browser shows 'ERR_EMPTY_RESPONSE' for http://localhost:5174/login.
+- Login form elements (email, password, Login button) are not present on the page.
+- Reload action did not resolve the server error — page still displays the same error after reload.
+- Form submission and validation cannot be exercised because the site returned no data.
+- Navigation to /login produced an empty response from the server, preventing further test steps.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/205540d3-62e2-49f1-b657-8eacc9756199/2b0d0862-7e38-42fc-a9be-7399d5ef8d3d
+- **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 
 ## 3️⃣ Coverage & Matching Metrics
 
-- **46.67** of tests passed
+- **0.00** of tests passed
 
 | Requirement        | Total Tests | ✅ Passed | ❌ Failed  |
 |--------------------|-------------|-----------|------------|

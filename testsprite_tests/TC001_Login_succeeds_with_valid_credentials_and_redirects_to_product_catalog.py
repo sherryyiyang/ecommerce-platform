@@ -33,56 +33,21 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # -> Navigate to /login (explicit navigate to path as required)
+        # -> Navigate to /login (http://localhost:5174/login) to load the login page so the form can be interacted with.
         await page.goto("http://localhost:5174/login")
         
-        # -> Input email 'test@example.com' into the Email field (index 354), then input password and click Login.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('test@example.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
+        # -> Click the visible 'Reload' button (index 74) to retry loading the /login page, then check for the presence of the login form. ASSERTION: Prefer clicking the page's Reload button over using navigate to the same URL again.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div/div/div[2]/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Replace the email with the correct test account (example@gmail.com) in input index 354 and click the Login button (index 358). Then the page should redirect; next step will verify redirect and product catalog visibility.
+        # --> Assertions to verify final state
         frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Enter the known-good credentials (example@gmail.com / 123456789) into email (index 821) and password (index 822) fields and click the Login button (index 825) to attempt login and trigger redirect to the product catalog.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # --> Test passed — verified by AI agent
-        frame = context.pages[-1]
+        assert 'Login' in await frame.locator("xpath=//*[contains(., 'Login')]").nth(0).text_content()
         current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        assert '/' in current_url
+        assert await frame.locator("xpath=//*[contains(., 'Product Catalog')]").nth(0).is_visible(), "Expected 'Product Catalog' to be visible"
         await asyncio.sleep(5)
 
     finally:

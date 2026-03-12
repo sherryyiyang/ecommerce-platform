@@ -33,10 +33,14 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # --> Test passed — verified by AI agent
+        # --> Assertions to verify final state
         frame = context.pages[-1]
+        assert await frame.locator("xpath=//*[contains(., 'View Details')]").nth(0).is_visible(), "Expected 'View Details' to be visible"
         current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        assert '/product/' in current_url
+        assert await frame.locator("xpath=//*[contains(., 'Product Details')]").nth(0).is_visible(), "Expected 'Product Details' to be visible"
+        assert await frame.locator("xpath=//*[contains(., 'Category:')]").nth(0).is_visible(), "Expected 'Category:' to be visible"
+        assert await frame.locator("xpath=//*[contains(., '$')]").nth(0).is_visible(), "Expected '$' to be visible"
         await asyncio.sleep(5)
 
     finally:

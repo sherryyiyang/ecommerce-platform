@@ -33,32 +33,20 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # -> Click the 'Login' link (index 8) to open the login page.
+        # -> Navigate to /login (use exact path http://localhost:5174/login) as the test step specifies.
+        await page.goto("http://localhost:5174/login")
+        
+        # -> Click the Reload button to retry loading the login page (use element index 74).
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        elem = frame.locator('xpath=/html/body/div/div/div[2]/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Type an empty string into the Email field, type '123456789' into the Password field, then click the Login button.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # --> Test passed — verified by AI agent
+        # --> Assertions to verify final state
         frame = context.pages[-1]
         current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        assert '/login' in current_url
+        assert await frame.locator("xpath=//*[contains(., 'Invalid credentials')]").nth(0).is_visible(), "Expected 'Invalid credentials' to be visible"
         await asyncio.sleep(5)
 
     finally:

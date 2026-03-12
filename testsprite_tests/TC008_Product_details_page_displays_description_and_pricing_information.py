@@ -33,16 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # -> Click on 'View Details' for the Wireless Headphones product card (index 265) to open the product details page.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # --> Test passed — verified by AI agent
+        # --> Assertions to verify final state
         frame = context.pages[-1]
         current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        assert '/product/' in current_url
+        assert await frame.locator("xpath=//*[contains(., 'product description')]").nth(0).is_visible(), "Expected 'product description' to be visible"
+        assert await frame.locator("xpath=//*[contains(., '$')]").nth(0).is_visible(), "Expected '$' to be visible"
+        assert await frame.locator("xpath=//*[contains(., 'product category')]").nth(0).is_visible(), "Expected 'product category' to be visible"
         await asyncio.sleep(5)
 
     finally:
