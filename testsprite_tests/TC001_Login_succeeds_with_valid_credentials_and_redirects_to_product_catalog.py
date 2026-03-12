@@ -33,13 +33,10 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # -> Click the 'Login' link in the top navigation to go to the login page.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to /login (explicit navigate to path as required)
+        await page.goto("http://localhost:5174/login")
         
-        # -> Type 'test@example.com' into the email field, type '123456789' into the password field, then click the Login button.
+        # -> Input email 'test@example.com' into the Email field (index 354), then input password and click Login.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,7 +52,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email field with the on-page test account 'example@gmail.com' and click the Login button to attempt login.
+        # -> Replace the email with the correct test account (example@gmail.com) in input index 354 and click the Login button (index 358). Then the page should redirect; next step will verify redirect and product catalog visibility.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -66,7 +63,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email (index 896) and password (index 897) fields with the on-page test credentials and click the Login button (index 900) to attempt login.
+        # -> Enter the known-good credentials (example@gmail.com / 123456789) into email (index 821) and password (index 822) fields and click the Login button (index 825) to attempt login and trigger redirect to the product catalog.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)

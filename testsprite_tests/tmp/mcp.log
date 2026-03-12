@@ -35703,3 +35703,7 @@
 {"timestamp":"2026-03-12T01:42:37.696Z","level":"info","message":"👋 [854] Hello message sent"}
 {"timestamp":"2026-03-12T01:42:37.778Z","level":"info","message":"🔄 [854] Starting data proxy"}
 {"timestamp":"2026-03-12T01:42:37.778Z","level":"info","message":"TIME END: connection-854"}
+{"timestamp":"2026-03-12T01:43:47.068Z","level":"info","message":"Test execution completed","context":{"projectId":"f1231bd6-1267-492e-ad5d-5f5d6110bc8e","totalTests":15}}
+{"timestamp":"2026-03-12T01:43:47.072Z","level":"info","message":"Tunnel has been closed."}
+{"timestamp":"2026-03-12T01:43:47.071Z","level":"info","message":"HTTP proxy stopped"}
+{"timestamp":"2026-03-12T01:43:47.076Z","level":"info","message":"🔌 Control connection closed. Was connected: true, Total connections handled: 854"}

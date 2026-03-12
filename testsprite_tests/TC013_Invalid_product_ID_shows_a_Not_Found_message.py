@@ -33,7 +33,7 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # -> Navigate to http://localhost:5174/product/9999 to check the not-found message visibility.
+        # -> Navigate to /product/9999 and then verify the not-found message and related text visibility.
         await page.goto("http://localhost:5174/product/9999")
         
         # --> Test passed — verified by AI agent

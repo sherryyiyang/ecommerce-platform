@@ -33,10 +33,41 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # -> Navigate to /login by issuing a navigate action to http://localhost:5174/login (per explicit test step).
-        await page.goto("http://localhost:5174/login")
+        # -> Click the 'Login' link in the top navigation to open the login page (use element index 8).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email and password fields and submit the login form (input email into index 251, input password into index 252, then click Login at index 255).
+        # -> Fill the email and password fields with the test credentials and click the Login button to submit the form.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'Catalog' link (index 7) to show product cards so the first product can be opened.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'Login' link in the top navigation to open the login page (use element index 957).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Type the email into the email field (index 1354) as the immediate action.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -52,18 +83,23 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Replace the email with example@gmail.com (index 251) and submit the Login button (index 255) to retry authentication.
+        # -> Fill the email (index 1678) and password (index 1679) fields with the provided credentials and click the Login button (index 1682) to submit the form.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        await asyncio.sleep(3); await elem.fill('test@example.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email and password using the test account (example@gmail.com / 123456789) with the current input indexes and click the Login button (indexes 718, 719, 722).
+        # -> Fill email (index 1678) with example@gmail.com, fill password (index 1679) with 123456789, then click the Login button (index 1682).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -79,16 +115,20 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open the first product's details by clicking the 'View Details' link for the first product (index 1672).
+        # -> Fill the Email and Password fields on the visible Login form (indices 2200 and 2208) with the provided credentials and click the Login button (index 2214). Then continue with the purchase flow if login succeeds.
         frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('test@example.com')
         
-        # -> Return to the catalog/root so the Orders link in the top navigation is visible, then proceed to Orders. Immediate action: click the 'Catalog' link in the top navigation to navigate back to the catalog.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
+        
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state

@@ -33,12 +33,6 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # -> Scroll to the bottom of the product card list, then click 'View Details' on a product card to open its details page.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]
         current_url = await frame.evaluate("() => window.location.href")

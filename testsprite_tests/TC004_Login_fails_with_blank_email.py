@@ -33,10 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # -> Navigate to /login using the explicit navigate action to http://localhost:5174/login.
-        await page.goto("http://localhost:5174/login")
+        # -> Click the 'Login' link (index 8) to open the login page.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Type an empty string into the email field, enter '123456789' into the password field, then click the Login button.
+        # -> Type an empty string into the Email field, type '123456789' into the Password field, then click the Login button.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)

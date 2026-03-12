@@ -33,10 +33,10 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # -> Navigate to /login (use explicit navigate to http://localhost:5174/login as specified in the test step).
+        # -> Navigate to /login using the required navigate action (http://localhost:5174/login).
         await page.goto("http://localhost:5174/login")
         
-        # -> Type 'wrong@example.com' into the Email field (index 403). Then type 'wrong' into the Password field (index 404) and click the Login button (index 407).
+        # -> Type 'wrong@example.com' into the email field (index 408), type 'wrong' into the password field (index 409), then click the Login button (index 412).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)

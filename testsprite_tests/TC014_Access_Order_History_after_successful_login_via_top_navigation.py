@@ -33,13 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # -> Click the 'Login' link in the top navigation to open the login page (use element index 130).
+        # -> Click the 'Login' link in the top navigation to open the login page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email and password fields with provided credentials (test@example.com / 123456789) and click the Login button.
+        # -> Fill the email and password fields with provided test credentials and click the Login button (submit).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,7 +55,18 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email field with example@gmail.com (index 501), fill the password field with 123456789 (index 509), then click the Login button (index 515).
+        # -> Replace the email with the provided test account (example@gmail.com) and click the Login button to authenticate.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Fill the email (index 843) with 'example@gmail.com' and password (index 844) with '123456789', then click the Login button (index 847).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -71,114 +82,17 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill email (index 938) with example@gmail.com, fill password (index 939) with 123456789, then click the Login button (index 942).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Fill email (index 1283) with example@gmail.com, fill password (index 1284) with 123456789, then click the Login button (index 1287).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Orders' link in the top navigation (index 1716) to open the Orders page and then verify orders content.
+        # -> Click the 'Orders' link in the top navigation (element index 1276) to open the Orders page, then verify the URL contains '/orders' and that an order card is visible.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Login' link in the top navigation to open the login page (use element index 1997).
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Fill the email (index 2397) with test@example.com, fill the password (index 2405) with 123456789, then click the Login button (index 2411).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('test@example.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Fill the Email (index 3070) with example@gmail.com, fill the Password (index 3078) with 123456789, then click the Login button (index 3084).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        # -> Fill the email (index 3610) with example@gmail.com, fill the password (index 3618) with 123456789, then click the Login button (index 3624).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Fill the Email (index 4154) with the provided username (test@example.com), fill the Password (index 4162) with 123456789, then click the Login button (index 4168).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('test@example.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
         current_url = await frame.evaluate("() => window.location.href")
         assert '/orders' in current_url
-        assert await frame.locator("xpath=//*[contains(., 'Order History')]").nth(0).is_visible(), "Expected 'Order History' to be visible"
+        assert await frame.locator("xpath=//*[contains(., 'Orders')]").nth(0).is_visible(), "Expected 'Orders' to be visible"
         await asyncio.sleep(5)
 
     finally:
