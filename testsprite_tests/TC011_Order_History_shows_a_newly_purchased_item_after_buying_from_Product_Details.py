@@ -33,19 +33,32 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # -> Navigate to /login as the explicit test step (use navigate to http://localhost:5174/login).
-        await page.goto("http://localhost:5174/login")
-        
-        # -> Click the Reload button (index 74) to retry loading the application. ASSERTION: Reload button (index 74) is present and clickable.
+        # -> Click the 'Login' link to open the login page (use interactive element index 5). ASSERTION: Login link (index 5) is visible on the page.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div[2]/div/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the Reload button (index 202) to retry loading the application.
+        # -> Enter email into the email field (index 403), enter password into the password field (index 411), then click the Login button (index 417) to sign in.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
+        
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div[2]/div/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the first product's 'View Details' link (Wireless Headphones) to open its details page so the product can be purchased.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state

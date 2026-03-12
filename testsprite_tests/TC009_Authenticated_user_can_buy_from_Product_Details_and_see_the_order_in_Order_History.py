@@ -33,14 +33,42 @@ async def run_test():
         # -> Navigate to http://localhost:5174
         await page.goto("http://localhost:5174")
         
-        # -> Navigate to /login (http://localhost:5174/login) to reveal the login form or fail if page still has no interactive elements.
+        # -> Navigate to /login (explicit test step requires using navigate to '/login' on the current site).
         await page.goto("http://localhost:5174/login")
+        
+        # -> Type the email into the email field, type the password into the password field, then click the Login button.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the first product's 'View Details' link to open its details page (the 'Wireless Headphones' product).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the first product's 'View Details' button (use element index 1343) to open the product details page.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
         current_url = await frame.evaluate("() => window.location.href")
         assert '/' in current_url
-        assert await frame.locator("xpath=//*[contains(., 'product image')]").nth(0).is_visible(), "Expected 'product image' to be visible"
+        assert await frame.locator("xpath=//*[contains(., 'Wireless Headphones')]").nth(0).is_visible(), "Expected 'Wireless Headphones' to be visible"
         await asyncio.sleep(5)
 
     finally:
