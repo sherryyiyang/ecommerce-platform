@@ -1,47 +1,228 @@
 [
   {
     "id": "TC001",
-    "title": "Catalog loads and displays product cards",
-    "description": "Verifies the product catalog landing page shows a visible list of product cards.",
-    "category": "Browse Product Catalog",
+    "title": "Login succeeds with valid credentials and redirects to product catalog",
+    "description": "Verifies a user can log in with the hardcoded valid account and is redirected to the product catalog.",
+    "category": "User Login",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to /"
+        "description": "Navigate to /login"
       },
       {
         "type": "assertion",
-        "description": "Verify page title contains \"Product\""
+        "description": "Verify page title contains \"Login\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
       },
       {
         "type": "assertion",
-        "description": "Verify text \"Buy Now\" is visible"
+        "description": "Verify URL contains \"/\""
       },
       {
         "type": "assertion",
-        "description": "Verify text \"View Details\" is visible"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify element \"product card\" is visible"
+        "description": "Verify text \"Product Catalog\" is visible"
       }
     ]
   },
   {
     "id": "TC002",
-    "title": "Open product details from a product card",
-    "description": "Verifies a user can open a product details page from the catalog and see key product information.",
-    "category": "Browse Product Catalog",
+    "title": "Login shows error for invalid email and password",
+    "description": "Verifies invalid credentials are rejected and an error message is shown without navigating away.",
+    "category": "User Login",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to /"
+        "description": "Navigate to /login"
       },
       {
         "type": "action",
-        "description": "Click on \"View Details\" on the first visible product card"
+        "description": "Type \"wrong@example.com\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"wrong\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Invalid credentials\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Login fails with correct email and wrong password",
+    "description": "Verifies a wrong password for an otherwise valid-looking user shows an invalid credentials error.",
+    "category": "User Login",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"not_the_password\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Invalid credentials\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Login fails with blank email",
+    "description": "Verifies the login form prevents submission (or shows an error) when email is empty.",
+    "category": "User Login",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"123456789\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Invalid credentials\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Login fails with blank password",
+    "description": "Verifies the login form prevents submission (or shows an error) when password is empty.",
+    "category": "User Login",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"example@gmail.com\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Invalid credentials\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Login trims or rejects leading/trailing whitespace in credentials",
+    "description": "Verifies behavior when credentials include surrounding spaces (either successful trim or visible error with no redirect).",
+    "category": "User Login",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"  {{LOGIN_USER}}  \" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"  {{LOGIN_PASSWORD}}  \" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Product Catalog\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Browse catalog and open a product details page",
+    "description": "Verifies a visitor can browse the catalog, scroll the list, open a product's details, and see key product information.",
+    "category": "Catalog Browsing",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"product card\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"bottom of product card list\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"View Details\" on a product card"
       },
       {
         "type": "assertion",
@@ -50,10 +231,6 @@
       {
         "type": "assertion",
         "description": "Verify element \"product image\" is visible"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify element \"product name\" is visible"
       },
       {
         "type": "assertion",
@@ -66,10 +243,166 @@
     ]
   },
   {
-    "id": "TC003",
-    "title": "Return to catalog after viewing details using in-app navigation",
-    "description": "Verifies the user can get back to the catalog from the product details page using an on-page navigation control.",
-    "category": "Browse Product Catalog",
+    "id": "TC008",
+    "title": "Product details page displays description and pricing information",
+    "description": "Verifies that after opening details from the catalog, the product description and pricing information are visible on the details page.",
+    "category": "Catalog Browsing",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"View Details\" on a product card"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/product/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"product description\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"$\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"product category\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Authenticated user can buy from Product Details and see the order in Order History",
+    "description": "Verifies a logged-in user can purchase a product from its details page and then see the new order in order history.",
+    "category": "Product Details View",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the first product card \"View\" or product name to open its details page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"product image\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Buy\" button"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Purchase success message is shown after clicking Buy on Product Details (authenticated)",
+    "description": "Verifies the UI shows a visible purchase success confirmation after a successful Buy action while authenticated.",
+    "category": "Product Details View",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click on the first product card \"View\" or product name to open its details page"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Buy\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Purchase successful\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"success message\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Order History shows a newly purchased item after buying from Product Details",
+    "description": "Verifies navigation to Orders after purchase shows an order card for the newly purchased product.",
+    "category": "Product Details View",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click on the first product card \"View\" or product name to open its details page"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Buy\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Orders\" in the top navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/orders\""
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Product Details displays core product information for a valid product",
+    "description": "Verifies that product image and key metadata (category, price, description) are visible on a valid product details page.",
+    "category": "Product Details View",
     "priority": "Medium",
     "steps": [
       {
@@ -78,48 +411,7 @@
       },
       {
         "type": "action",
-        "description": "Click on \"View Details\" on the first visible product card"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify URL contains \"/product/\""
-      },
-      {
-        "type": "action",
-        "description": "Click on \"Back\""
-      },
-      {
-        "type": "assertion",
-        "description": "Verify URL contains \"/\""
-      },
-      {
-        "type": "assertion",
-        "description": "Verify text \"Buy Now\" is visible"
-      }
-    ]
-  },
-  {
-    "id": "TC004",
-    "title": "View product details shows image, name, category, and price",
-    "description": "Verifies a user can open a product details page from the catalog and see the primary product information.",
-    "category": "View Product Details",
-    "priority": "High",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to \"/\""
-      },
-      {
-        "type": "assertion",
-        "description": "Verify text \"Buy\" is visible"
-      },
-      {
-        "type": "action",
-        "description": "Click on the first product card's name or image to open its details page"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify URL contains \"/product/\""
+        "description": "Click on the first product card \"View\" or product name to open its details page"
       },
       {
         "type": "assertion",
@@ -127,53 +419,57 @@
       },
       {
         "type": "assertion",
-        "description": "Verify element \"product name\" is visible"
+        "description": "Verify text \"Category\" is visible"
       },
       {
         "type": "assertion",
-        "description": "Verify element \"category\" is visible"
+        "description": "Verify text \"Price\" is visible"
       },
       {
         "type": "assertion",
-        "description": "Verify element \"price\" is visible"
+        "description": "Verify text \"Description\" is visible"
       }
     ]
   },
   {
-    "id": "TC005",
-    "title": "Invalid product id shows product-not-found error",
-    "description": "Verifies navigating to a non-existent product id displays a clear product-not-found message.",
-    "category": "View Product Details",
+    "id": "TC013",
+    "title": "Invalid product ID shows a Not Found message",
+    "description": "Verifies that visiting a non-existent product details route shows a visible not-found message.",
+    "category": "Product Details View",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to \"/product/9999\""
+        "description": "Navigate to /product/9999"
       },
       {
         "type": "assertion",
-        "description": "Verify text \"Product not found\" is visible"
+        "description": "Verify text \"Not found\" is visible"
       },
       {
         "type": "assertion",
-        "description": "Verify text \"Buy Now\" is visible"
+        "description": "Verify text \"Product\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"not found message\" is visible"
       }
     ]
   },
   {
-    "id": "TC006",
-    "title": "Login and return to product details to view details successfully",
-    "description": "Verifies a user can log in and then open a product details page to view key product fields while authenticated.",
-    "category": "View Product Details",
-    "priority": "Medium",
+    "id": "TC014",
+    "title": "Access Order History after successful login via top navigation",
+    "description": "Verifies that an authenticated user can reach the Orders page from the top navigation and see order history content.",
+    "category": "Order History Access",
+    "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to \"/login\""
+        "description": "Navigate to /login"
       },
       {
         "type": "action",
-        "description": "Type \"{{LOGIN_USER}}\" into the username or email field"
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
       },
       {
         "type": "action",
@@ -181,93 +477,11 @@
       },
       {
         "type": "action",
-        "description": "Click on \"Login\""
+        "description": "Click the \"Login\" button"
       },
       {
         "type": "action",
-        "description": "Click on \"Home\" or \"Products\" to go to the product catalog"
-      },
-      {
-        "type": "action",
-        "description": "Click on the first product card's name or image to open its details page"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify element \"product name\" is visible"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify element \"price\" is visible"
-      }
-    ]
-  },
-  {
-    "id": "TC007",
-    "title": "Product details page shows stable content after scrolling",
-    "description": "Verifies product details content remains visible/accessible after scrolling the page.",
-    "category": "View Product Details",
-    "priority": "Low",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to \"/\""
-      },
-      {
-        "type": "action",
-        "description": "Click on the first product card's name or image to open its details page"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify URL contains \"/product/\""
-      },
-      {
-        "type": "action",
-        "description": "Scroll to the \"Buy Now\" section"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify text \"Buy Now\" is visible"
-      },
-      {
-        "type": "action",
-        "description": "Scroll to the top of the page"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify element \"product image\" is visible"
-      }
-    ]
-  },
-  {
-    "id": "TC008",
-    "title": "Login and access Orders page to view mock order list",
-    "description": "Verifies an authenticated user can reach the Orders page and see the mock order list details.",
-    "category": "View Order History",
-    "priority": "High",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /login"
-      },
-      {
-        "type": "action",
-        "description": "Type \"{{LOGIN_USER}}\" into the Email field"
-      },
-      {
-        "type": "action",
-        "description": "Type \"{{LOGIN_PASSWORD}}\" into the Password field"
-      },
-      {
-        "type": "action",
-        "description": "Click the Login button"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify URL contains \"/\""
-      },
-      {
-        "type": "action",
-        "description": "Click on \"Orders\" in the top navigation"
+        "description": "Click \"Orders\" in the top navigation"
       },
       {
         "type": "assertion",
@@ -275,15 +489,15 @@
       },
       {
         "type": "assertion",
-        "description": "Verify text \"Order History\" is visible"
+        "description": "Verify an order card is visible"
       }
     ]
   },
   {
-    "id": "TC009",
-    "title": "Orders page shows order list content for authenticated user",
-    "description": "Verifies the Orders page renders visible order list details (not an empty or broken page) after login.",
-    "category": "View Order History",
+    "id": "TC015",
+    "title": "Order History page shows expected order metadata fields",
+    "description": "Verifies that the Orders page displays visible order metadata on an order card for a logged-in user.",
+    "category": "Order History Access",
     "priority": "High",
     "steps": [
       {
@@ -292,27 +506,171 @@
       },
       {
         "type": "action",
-        "description": "Type \"{{LOGIN_USER}}\" into the Email field"
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
       },
       {
         "type": "action",
-        "description": "Type \"{{LOGIN_PASSWORD}}\" into the Password field"
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
       },
       {
         "type": "action",
-        "description": "Click the Login button"
+        "description": "Click the \"Login\" button"
       },
       {
         "type": "action",
-        "description": "Click on \"Orders\" in the top navigation"
+        "description": "Click \"Orders\" in the top navigation"
       },
       {
         "type": "assertion",
-        "description": "Verify text \"Order History\" is visible"
+        "description": "Verify text \"Order ID\" is visible"
       },
       {
         "type": "assertion",
-        "description": "Verify element \"order list\" is visible"
+        "description": "Verify text \"Total\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Date\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Order History renders multiple orders when available",
+    "description": "Verifies that the order history list can show more than one order card when mock data contains multiple orders.",
+    "category": "Order History Access",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Orders\" in the top navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least two order cards are visible"
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Direct access to /orders after login lands on Order History",
+    "description": "Verifies that a logged-in user can directly open the Orders route and see the order history content.",
+    "category": "Order History Access",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /orders"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/orders\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an order card is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Orders top navigation entry is usable after login",
+    "description": "Verifies that the Orders navigation item is visible and can be clicked after authentication.",
+    "category": "Order History Access",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Orders\" in the top navigation is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Orders\" in the top navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/orders\""
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Order History page remains readable without interacting with any order card",
+    "description": "Verifies that the Orders page content is immediately visible after navigation and does not require expanding or clicking cards to view basic metadata.",
+    "category": "Order History Access",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Orders\" in the top navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an order card is visible"
       },
       {
         "type": "assertion",
@@ -321,132 +679,9 @@
     ]
   },
   {
-    "id": "TC010",
-    "title": "Login required messaging is not shown on Orders page when authenticated",
-    "description": "Verifies that after successful login, the user is not prompted to log in again on the Orders page.",
-    "category": "View Order History",
-    "priority": "Medium",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /login"
-      },
-      {
-        "type": "action",
-        "description": "Type \"{{LOGIN_USER}}\" into the Email field"
-      },
-      {
-        "type": "action",
-        "description": "Type \"{{LOGIN_PASSWORD}}\" into the Password field"
-      },
-      {
-        "type": "action",
-        "description": "Click the Login button"
-      },
-      {
-        "type": "action",
-        "description": "Click on \"Orders\" in the top navigation"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify URL contains \"/orders\""
-      },
-      {
-        "type": "assertion",
-        "description": "Verify text \"Login\" is not visible"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify text \"Order History\" is visible"
-      }
-    ]
-  },
-  {
-    "id": "TC011",
-    "title": "Orders page loads without UI errors after login",
-    "description": "Verifies the Orders page main UI elements are present and readable after authentication.",
-    "category": "View Order History",
-    "priority": "Medium",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /login"
-      },
-      {
-        "type": "action",
-        "description": "Type \"{{LOGIN_USER}}\" into the Email field"
-      },
-      {
-        "type": "action",
-        "description": "Type \"{{LOGIN_PASSWORD}}\" into the Password field"
-      },
-      {
-        "type": "action",
-        "description": "Click the Login button"
-      },
-      {
-        "type": "action",
-        "description": "Click on \"Orders\" in the top navigation"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify text \"Order History\" is visible"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify element \"orders table or list container\" is visible"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify element \"top navigation\" is visible"
-      }
-    ]
-  },
-  {
-    "id": "TC012",
-    "title": "Order History view remains visible when revisiting Orders from navigation in same session",
-    "description": "Verifies that within the same logged-in session, navigating to Orders again still shows the order history UI.",
-    "category": "View Order History",
-    "priority": "Low",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /login"
-      },
-      {
-        "type": "action",
-        "description": "Type \"{{LOGIN_USER}}\" into the Email field"
-      },
-      {
-        "type": "action",
-        "description": "Type \"{{LOGIN_PASSWORD}}\" into the Password field"
-      },
-      {
-        "type": "action",
-        "description": "Click the Login button"
-      },
-      {
-        "type": "action",
-        "description": "Click on \"Orders\" in the top navigation"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify text \"Order History\" is visible"
-      },
-      {
-        "type": "action",
-        "description": "Click on \"Home\" in the top navigation"
-      },
-      {
-        "type": "action",
-        "description": "Click on \"Orders\" in the top navigation"
-      }
-    ]
-  },
-  {
-    "id": "TC013",
-    "title": "Login and add a new product, then verify it appears in Admin list and Catalog",
-    "description": "Verifies an authenticated user can add a product in Admin and see it listed in both Admin and the main catalog within the same session.",
+    "id": "TC020",
+    "title": "Add a new product from Admin page and see it in the list",
+    "description": "Verifies an authenticated admin can add a product and see it appear in the admin product list.",
     "category": "Admin Product Management",
     "priority": "High",
     "steps": [
@@ -456,23 +691,19 @@
       },
       {
         "type": "action",
-        "description": "Type \"{{LOGIN_USER}}\" into the Email field"
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
       },
       {
         "type": "action",
-        "description": "Type \"{{LOGIN_PASSWORD}}\" into the Password field"
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
       },
       {
         "type": "action",
-        "description": "Click the Login button"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify URL contains \"/\""
+        "description": "Click the \"Login\" button"
       },
       {
         "type": "action",
-        "description": "Click on \"Admin\" in the top navigation"
+        "description": "Click \"Admin\" in the top navigation"
       },
       {
         "type": "assertion",
@@ -480,50 +711,104 @@
       },
       {
         "type": "action",
-        "description": "Click the \"Add Product\" button"
-      },
-      {
-        "type": "action",
-        "description": "Type \"Test Product Alpha\" into the product name field"
-      },
-      {
-        "type": "action",
-        "description": "Type \"A test-only product created by E2E\" into the description field"
-      },
-      {
-        "type": "action",
-        "description": "Type \"19.99\" into the price field"
-      },
-      {
-        "type": "action",
-        "description": "Type \"Test Category\" into the category field"
-      },
-      {
-        "type": "action",
-        "description": "Click the \"Save\" button"
+        "description": "Fill the add product form fields with valid values and submit the form"
       },
       {
         "type": "assertion",
-        "description": "Verify text \"Test Product Alpha\" is visible"
-      },
-      {
-        "type": "action",
-        "description": "Click on \"Catalog\" (or \"Home\") in the top navigation"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify URL contains \"/\""
-      },
-      {
-        "type": "assertion",
-        "description": "Verify text \"Test Product Alpha\" is visible"
+        "description": "Verify text \"Test Product\" is visible"
       }
     ]
   },
   {
-    "id": "TC014",
-    "title": "Try to save a new product with missing required fields and verify it is not added",
-    "description": "Verifies the Admin add product flow prevents saving when required inputs are missing and does not add a new product to the list.",
+    "id": "TC021",
+    "title": "Edit an existing product and update it successfully",
+    "description": "Verifies an authenticated admin can edit a product and see the updated value reflected in the list.",
+    "category": "Admin Product Management",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Admin\" in the top navigation"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Edit\" on the first product in the admin product list"
+      },
+      {
+        "type": "action",
+        "description": "Update the product name field to \"Updated Product Name\""
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Update\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Updated Product Name\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC022",
+    "title": "Delete a product removes it from the admin product list",
+    "description": "Verifies an authenticated admin can delete a product and it disappears from the list.",
+    "category": "Admin Product Management",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Admin\" in the top navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Delete\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Delete\" on the first product in the admin product list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"No products\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC023",
+    "title": "Refresh after adding a product resets the admin list (local state not persisted)",
+    "description": "Verifies that products added in the admin UI disappear after a page refresh due to non-persistent local state.",
     "category": "Admin Product Management",
     "priority": "Medium",
     "steps": [
@@ -533,96 +818,35 @@
       },
       {
         "type": "action",
-        "description": "Type \"{{LOGIN_USER}}\" into the Email field"
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
       },
       {
         "type": "action",
-        "description": "Type \"{{LOGIN_PASSWORD}}\" into the Password field"
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
       },
       {
         "type": "action",
-        "description": "Click the Login button"
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Admin\" in the top navigation"
+      },
+      {
+        "type": "action",
+        "description": "Fill the add product form fields with valid values and submit the form"
       },
       {
         "type": "assertion",
-        "description": "Verify URL contains \"/\""
+        "description": "Verify text \"Test Product\" is visible"
       },
-      {
-        "type": "action",
-        "description": "Click on \"Admin\" in the top navigation"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify URL contains \"/admin\""
-      },
-      {
-        "type": "action",
-        "description": "Click the \"Add Product\" button"
-      },
-      {
-        "type": "action",
-        "description": "Type \"Incomplete Product\" into the product name field"
-      },
-      {
-        "type": "action",
-        "description": "Click the \"Save\" button"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify text \"Incomplete Product\" is not visible"
-      }
-    ]
-  },
-  {
-    "id": "TC015",
-    "title": "Cancel out of Add Product and verify no new product appears in the Admin list",
-    "description": "Verifies canceling the add product flow does not create a product entry.",
-    "category": "Admin Product Management",
-    "priority": "Low",
-    "steps": [
       {
         "type": "action",
         "description": "Navigate to /login"
       },
       {
-        "type": "action",
-        "description": "Type \"{{LOGIN_USER}}\" into the Email field"
-      },
-      {
-        "type": "action",
-        "description": "Type \"{{LOGIN_PASSWORD}}\" into the Password field"
-      },
-      {
-        "type": "action",
-        "description": "Click the Login button"
-      },
-      {
         "type": "assertion",
-        "description": "Verify URL contains \"/\""
-      },
-      {
-        "type": "action",
-        "description": "Click on \"Admin\" in the top navigation"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify URL contains \"/admin\""
-      },
-      {
-        "type": "action",
-        "description": "Click the \"Add Product\" button"
-      },
-      {
-        "type": "action",
-        "description": "Type \"Canceled Product\" into the product name field"
-      },
-      {
-        "type": "action",
-        "description": "Click the \"Cancel\" button"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify text \"Canceled Product\" is not visible"
+        "description": "Verify URL contains \"/login\""
       }
     ]
   }

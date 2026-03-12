@@ -2,105 +2,108 @@ version: "2"
 type: frontend
 tech_stack:
   - TypeScript
-  - React 19 + React Router
-  - Material UI (MUI)
+  - React
+  - Material UI
   - Vite
+  - React Router
 routes:
   - path: /
     file: src/pages/ProductCatalog.tsx
     auth_required: false
-    description: Product catalog landing page with product cards and buy action
+    description: Product catalog landing page with cards and buy/view actions
   - path: /login
     file: src/pages/Login.tsx
     auth_required: false
-    description: Login page using hardcoded test credentials
+    description: Login form that validates test credentials and authenticates the session
   - path: /product/:id
     file: src/pages/ProductDetails.tsx
     auth_required: false
-    description: Product details page with buy action for selected product
+    description: Product details page with image, metadata, and buy action
   - path: /orders
     file: src/pages/OrderHistory.tsx
     auth_required: true
-    description: Auth-protected order history page
+    description: Protected order history page showing mock order cards
   - path: /admin
     file: src/pages/AdminPage.tsx
     auth_required: true
-    description: Auth-protected admin product management page
+    description: Protected admin product management page for add/edit/delete in local UI state
 features:
   - name: User Login
-    description: Authenticate with email and password and redirect to catalog on success
+    description: Authenticate with email and password and redirect to catalog
     files:
       - src/pages/Login.tsx
       - src/App.tsx
     entry_route: /login
     user_interactions:
-      - Enter email in Email field
-      - Enter password in Password field
+      - Enter email
+      - Enter password
       - Click Login button
-      - Observe invalid credentials error for wrong input
+      - Observe redirect to catalog on valid credentials
+      - Observe invalid credentials error message on wrong credentials
     api_calls: []
     auth_required: false
-  - name: Browse Product Catalog
-    description: View mocked product list, open details, and trigger purchase flow
+  - name: Catalog Browsing
+    description: View product cards and navigate to product details
     files:
       - src/pages/ProductCatalog.tsx
       - src/mockData.ts
     entry_route: /
     user_interactions:
-      - View list of product cards
-      - Click View Details to navigate to product page
-      - Click Buy Now to purchase or redirect to login if unauthenticated
-      - Observe success snackbar after mock purchase
+      - Open catalog page
+      - Scroll product card list
+      - Click View Details on a product card
+      - Click Buy (when authenticated)
     api_calls: []
     auth_required: false
-  - name: View Product Details
-    description: Open a product detail page and perform mock buy action
+  - name: Product Details View
+    description: View selected product details and buy action behavior
     files:
       - src/pages/ProductDetails.tsx
       - src/mockData.ts
     entry_route: /product/:id
     user_interactions:
-      - Open a product details route by product id
-      - View product image, name, category, and price
-      - Click Buy Now to purchase or redirect to login if unauthenticated
-      - Observe product-not-found error for invalid id
+      - Open a valid product details URL
+      - Review image, category, price, and description
+      - Attempt to buy product
+      - Open invalid product URL and see not found message
     api_calls: []
     auth_required: false
-  - name: View Order History
-    description: Access historical orders after authentication
+  - name: Order History Access
+    description: View protected order history list after login
     files:
       - src/pages/OrderHistory.tsx
       - src/App.tsx
+      - src/mockData.ts
     entry_route: /orders
     user_interactions:
-      - Login with valid credentials
-      - Navigate to Orders from top navigation
-      - View mock order list details
+      - Log in with valid credentials
+      - Click Orders in top navigation
+      - Review order cards and order metadata
     api_calls: []
     auth_required: true
   - name: Admin Product Management
-    description: Manage products in the admin UI after authentication
+    description: Manage product list in protected admin page using local state
     files:
       - src/pages/AdminPage.tsx
       - src/App.tsx
       - src/mockData.ts
     entry_route: /admin
     user_interactions:
-      - Login with valid credentials
-      - Navigate to Admin from top navigation
-      - Add, edit, and delete products in the UI
+      - Log in with valid credentials
+      - Click Admin in top navigation
+      - Fill add product form and submit
+      - Click Edit and Update existing product
+      - Click Delete on a product
+      - Click Cancel while editing
     api_calls: []
     auth_required: true
 known_limitations:
-  - issue: Authentication is in-memory only and resets on page refresh
+  - issue: Authentication is client-side only and not persisted across refreshes.
     location: src/App.tsx
-    impact: Sessions are not persistent across reloads
-  - issue: Login uses hardcoded credentials instead of backend auth
-    location: src/pages/Login.tsx
-    impact: No real user management or secure authentication flow
-  - issue: Product, order, and purchase data are mock-data driven with artificial delays
+    impact: Session resets on page reload; no real backend auth.
+  - issue: Product and order data are mock in-memory values without backend persistence.
     location: src/mockData.ts
-    impact: No real backend integration or persisted transactions
-  - issue: Admin CRUD operations are UI-only and not persisted to a backend
+    impact: Changes are temporary and not shared across sessions.
+  - issue: Admin CRUD operations update local component state only.
     location: src/pages/AdminPage.tsx
-    impact: Changes exist only in client state during the current session
+    impact: Added/edited/deleted products are not saved to a backend database.

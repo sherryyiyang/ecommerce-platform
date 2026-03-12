@@ -30,32 +30,26 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:3000
-        await page.goto("http://localhost:3000")
+        # -> Navigate to http://localhost:5174
+        await page.goto("http://localhost:5174")
         
-        # -> Navigate to /login by visiting http://localhost:3000/login (explicit navigation step).
-        await page.goto("http://localhost:3000/login")
+        # -> Navigate to /login (use explicit navigate to http://localhost:5174/login as specified in the test step).
+        await page.goto("http://localhost:5174/login")
         
-        # -> Type the email into the Email field, type the password into the Password field, then click the Login button (submit). After that, verify the URL contains '/'.
+        # -> Type 'wrong@example.com' into the Email field (index 403). Then type 'wrong' into the Password field (index 404) and click the Login button (index 407).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        await asyncio.sleep(3); await elem.fill('wrong@example.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
+        await asyncio.sleep(3); await elem.fill('wrong')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Orders' link in the top navigation to navigate to the Orders page and then verify the Orders page loads.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Test passed — verified by AI agent

@@ -30,11 +30,14 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:3000
-        await page.goto("http://localhost:3000")
+        # -> Navigate to http://localhost:5174
+        await page.goto("http://localhost:5174")
         
-        # -> Navigate to '/product/9999' (http://localhost:3000/product/9999) to check behavior for non-existent product id.
-        await page.goto("http://localhost:3000/product/9999")
+        # -> Scroll to the bottom of the product card list, then click 'View Details' on a product card to open its details page.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]

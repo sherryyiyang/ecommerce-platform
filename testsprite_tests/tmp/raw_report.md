@@ -12,134 +12,153 @@
 
 ## 2️⃣ Requirement Validation Summary
 
-#### Test TC001 Catalog loads and displays product cards
-- **Test Code:** [TC001_Catalog_loads_and_displays_product_cards.py](./TC001_Catalog_loads_and_displays_product_cards.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/a01f9825-15a0-434e-a930-087d80af53c9
+#### Test TC001 Login succeeds with valid credentials and redirects to product catalog
+- **Test Code:** [TC001_Login_succeeds_with_valid_credentials_and_redirects_to_product_catalog.py](./TC001_Login_succeeds_with_valid_credentials_and_redirects_to_product_catalog.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/18b64634-23b7-49c8-b5a4-565176208562
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC002 Open product details from a product card
-- **Test Code:** [TC002_Open_product_details_from_a_product_card.py](./TC002_Open_product_details_from_a_product_card.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/537e2afd-e5ec-45e4-b84f-2858ad728fbf
+#### Test TC002 Login shows error for invalid email and password
+- **Test Code:** [TC002_Login_shows_error_for_invalid_email_and_password.py](./TC002_Login_shows_error_for_invalid_email_and_password.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/046e4240-90a7-4946-b263-5bf055d62c4a
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC003 Return to catalog after viewing details using in-app navigation
-- **Test Code:** [TC003_Return_to_catalog_after_viewing_details_using_in_app_navigation.py](./TC003_Return_to_catalog_after_viewing_details_using_in_app_navigation.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/e35f1dce-6ca7-449c-86e4-40cca481e31c
+#### Test TC007 Browse catalog and open a product details page
+- **Test Code:** [TC007_Browse_catalog_and_open_a_product_details_page.py](./TC007_Browse_catalog_and_open_a_product_details_page.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/082e5ca0-5881-4207-9522-2832e06d92cb
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC004 View product details shows image, name, category, and price
-- **Test Code:** [TC004_View_product_details_shows_image_name_category_and_price.py](./TC004_View_product_details_shows_image_name_category_and_price.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/1100df7f-96b2-4a42-98c3-8fd3c9d16caf
+#### Test TC008 Product details page displays description and pricing information
+- **Test Code:** [TC008_Product_details_page_displays_description_and_pricing_information.py](./TC008_Product_details_page_displays_description_and_pricing_information.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/6398808b-1f31-4928-9ce8-68fd3e7c26d6
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC005 Invalid product id shows product-not-found error
-- **Test Code:** [TC005_Invalid_product_id_shows_product_not_found_error.py](./TC005_Invalid_product_id_shows_product_not_found_error.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/1adef019-0309-4bdf-93d8-5f9672b72c87
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC006 Login and return to product details to view details successfully
-- **Test Code:** [TC006_Login_and_return_to_product_details_to_view_details_successfully.py](./TC006_Login_and_return_to_product_details_to_view_details_successfully.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/9048067c-eef6-4b5d-8772-6d3ea91656fc
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC007 Product details page shows stable content after scrolling
-- **Test Code:** [TC007_Product_details_page_shows_stable_content_after_scrolling.py](./TC007_Product_details_page_shows_stable_content_after_scrolling.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/21a84a97-8a57-4af5-b9cb-fd5c79e072b5
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC008 Login and access Orders page to view mock order list
-- **Test Code:** [TC008_Login_and_access_Orders_page_to_view_mock_order_list.py](./TC008_Login_and_access_Orders_page_to_view_mock_order_list.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/3e44a580-6855-41d9-a218-7f720c897ecd
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC009 Orders page shows order list content for authenticated user
-- **Test Code:** [TC009_Orders_page_shows_order_list_content_for_authenticated_user.py](./TC009_Orders_page_shows_order_list_content_for_authenticated_user.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/e2fa6558-6c12-4ad6-9427-8fff4a4c503c
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC010 Login required messaging is not shown on Orders page when authenticated
-- **Test Code:** [TC010_Login_required_messaging_is_not_shown_on_Orders_page_when_authenticated.py](./TC010_Login_required_messaging_is_not_shown_on_Orders_page_when_authenticated.py)
+#### Test TC009 Authenticated user can buy from Product Details and see the order in Order History
+- **Test Code:** [TC009_Authenticated_user_can_buy_from_Product_Details_and_see_the_order_in_Order_History.py](./TC009_Authenticated_user_can_buy_from_Product_Details_and_see_the_order_in_Order_History.py)
 - **Test Error:** TEST FAILURE
 
 ASSERTIONS:
-- Orders link not found in top navigation on the site (no clickable element to reach /orders).
-- Could not navigate to the Orders page because no navigation element labeled 'Orders' is present on the current pages.
-- Unable to verify that the user is not prompted to log in on the Orders page because the Orders page does not exist or is not reachable.
-- Login form is present, but the required Orders page prerequisite is missing, so the test cannot be completed.
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/ed4c7aba-3088-4605-a120-7ef8ace0c80a
+- Buy button not found or not interactive on the product details page, preventing the purchase action.
+- Orders link not present in the header, preventing verification of the new order in order history.
+- User appears logged out (Login link visible in the header), preventing the purchase flow from proceeding.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/2c6df90b-bdc4-4d34-849c-1fa75e88bff6
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC011 Orders page loads without UI errors after login
-- **Test Code:** [TC011_Orders_page_loads_without_UI_errors_after_login.py](./TC011_Orders_page_loads_without_UI_errors_after_login.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/92bf4029-c394-4aa2-88c5-77c21bf84f29
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC012 Order History view remains visible when revisiting Orders from navigation in same session
-- **Test Code:** [TC012_Order_History_view_remains_visible_when_revisiting_Orders_from_navigation_in_same_session.py](./TC012_Order_History_view_remains_visible_when_revisiting_Orders_from_navigation_in_same_session.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/0c2a51a4-bbfa-4bd2-a772-e55b16d95b56
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC013 Login and add a new product, then verify it appears in Admin list and Catalog
-- **Test Code:** [TC013_Login_and_add_a_new_product_then_verify_it_appears_in_Admin_list_and_Catalog.py](./TC013_Login_and_add_a_new_product_then_verify_it_appears_in_Admin_list_and_Catalog.py)
+#### Test TC010 Purchase success message is shown after clicking Buy on Product Details (authenticated)
+- **Test Code:** [TC010_Purchase_success_message_is_shown_after_clicking_Buy_on_Product_Details_authenticated.py](./TC010_Purchase_success_message_is_shown_after_clicking_Buy_on_Product_Details_authenticated.py)
 - **Test Error:** TEST FAILURE
 
 ASSERTIONS:
-- Admin page became blank/white with 0 interactive elements after clicking 'Add Product', preventing verification of product presence.
-- After clicking 'Add Product' and waiting, the SPA did not render Admin content; no UI evidence that the product was saved is present.
-- Recovery attempts (waiting 2s and navigating back) did not restore the Admin or Catalog UI, so the product cannot be validated in this session.
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/e27fc7a9-8b68-402c-b0de-381cda145d3c
+- Buy button not present as an interactive/clickable element on the product details page, preventing the purchase action from being executed.
+- No 'Purchase successful' confirmation text is displayed on the page because the purchase could not be initiated.
+- The visible Buy control appears disabled (grayed out) in the UI and is not available to trigger a purchase.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/5bfc3cba-db7e-4cb3-8b4f-f1a150cfa4b9
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC014 Try to save a new product with missing required fields and verify it is not added
-- **Test Code:** [TC014_Try_to_save_a_new_product_with_missing_required_fields_and_verify_it_is_not_added.py](./TC014_Try_to_save_a_new_product_with_missing_required_fields_and_verify_it_is_not_added.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/18b1c45c-40fe-4fec-bc4e-6913d6116c83
+#### Test TC011 Order History shows a newly purchased item after buying from Product Details
+- **Test Code:** [TC011_Order_History_shows_a_newly_purchased_item_after_buying_from_Product_Details.py](./TC011_Order_History_shows_a_newly_purchased_item_after_buying_from_Product_Details.py)
+- **Test Error:** TEST FAILURE
+
+ASSERTIONS:
+- Orders link not found in the top navigation, preventing navigation to the Orders page.
+- Buy button on the product page was disabled or not present, preventing creation of an order.
+- No order could have been created for the product because the purchase action could not be completed.
+- Orders verification cannot proceed because the UI does not expose the Orders page or purchase functionality in its current state.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/c580b4f6-6b8d-445f-933a-a0c7de58653d
+- **Status:** ❌ Failed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC013 Invalid product ID shows a Not Found message
+- **Test Code:** [TC013_Invalid_product_ID_shows_a_Not_Found_message.py](./TC013_Invalid_product_ID_shows_a_Not_Found_message.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/4e2a6c08-40b9-4af6-af7f-a2f6ff023c92
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC015 Cancel out of Add Product and verify no new product appears in the Admin list
-- **Test Code:** [TC015_Cancel_out_of_Add_Product_and_verify_no_new_product_appears_in_the_Admin_list.py](./TC015_Cancel_out_of_Add_Product_and_verify_no_new_product_appears_in_the_Admin_list.py)
+#### Test TC014 Access Order History after successful login via top navigation
+- **Test Code:** [TC014_Access_Order_History_after_successful_login_via_top_navigation.py](./TC014_Access_Order_History_after_successful_login_via_top_navigation.py)
 - **Test Error:** TEST FAILURE
 
 ASSERTIONS:
-- Admin link not found in top navigation; admin area inaccessible.
-- 'Add Product' button not present on product catalog page or accessible via navigation.
-- Unable to perform add-product cancel flow because required admin navigation and controls are missing.
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/126b9d83-f094-48c0-b5e0-b413b2146caa/befbeb8a-635d-486c-b443-f58ea5e9ca17
+- Login failed - 'Invalid credentials.' message displayed after submitting provided credentials (test@example.com / 123456789).
+- Orders page could not be reached because authentication did not succeed and there is no persistent authenticated session.
+- No authenticated user interface was observed (user remains on the Login page with email/password inputs visible).
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/34b7a82c-ff72-4cc2-b878-bc7e5a11ff6a
 - **Status:** ❌ Failed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC015 Order History page shows expected order metadata fields
+- **Test Code:** [TC015_Order_History_page_shows_expected_order_metadata_fields.py](./TC015_Order_History_page_shows_expected_order_metadata_fields.py)
+- **Test Error:** TEST FAILURE
+
+ASSERTIONS:
+- Login failed - 'Invalid credentials.' error displayed after submitting test credentials.
+- Orders link not present in top navigation while user is not authenticated, preventing access to Orders page.
+- Automated test could not authenticate with available test credentials, blocking verification of order metadata.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/900cbfa3-373c-45fd-b46b-1fe5ea3f3f85
+- **Status:** ❌ Failed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC020 Add a new product from Admin page and see it in the list
+- **Test Code:** [TC020_Add_a_new_product_from_Admin_page_and_see_it_in_the_list.py](./TC020_Add_a_new_product_from_Admin_page_and_see_it_in_the_list.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/21f81e08-b35e-4f4c-83e5-1231d2af8272
+- **Status:** ✅ Passed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC021 Edit an existing product and update it successfully
+- **Test Code:** [TC021_Edit_an_existing_product_and_update_it_successfully.py](./TC021_Edit_an_existing_product_and_update_it_successfully.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/031f3f30-5ec9-4fa7-8829-44ab42554f3e
+- **Status:** ✅ Passed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC022 Delete a product removes it from the admin product list
+- **Test Code:** [TC022_Delete_a_product_removes_it_from_the_admin_product_list.py](./TC022_Delete_a_product_removes_it_from_the_admin_product_list.py)
+- **Test Error:** TEST FAILURE
+
+ASSERTIONS:
+- Delete button not found on the Admin - Product Management page.
+- No products are listed in the product management area (no product rows or delete controls present).
+- Unable to perform delete action because there is no product available to delete.
+- Admin UI only displays the Add Product form and does not show any existing product entries.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/54798d70-b8e2-495e-98f6-f34f96c0bca8
+- **Status:** ❌ Failed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC003 Login fails with correct email and wrong password
+- **Test Code:** [TC003_Login_fails_with_correct_email_and_wrong_password.py](./TC003_Login_fails_with_correct_email_and_wrong_password.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/9689963a-4ff5-4a38-8ec2-f915a3660f11
+- **Status:** ✅ Passed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC004 Login fails with blank email
+- **Test Code:** [TC004_Login_fails_with_blank_email.py](./TC004_Login_fails_with_blank_email.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/afcd99b1-b601-4f4f-8f3f-7085e33c3e8e/24697bdc-466d-4c55-992c-b0b07b15352e
+- **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 
 ## 3️⃣ Coverage & Matching Metrics
 
-- **80.00** of tests passed
+- **60.00** of tests passed
 
 | Requirement        | Total Tests | ✅ Passed | ❌ Failed  |
 |--------------------|-------------|-----------|------------|
