@@ -1,8 +1,8 @@
 {
-  "status": "commited",
+  "status": "init",
   "type": "frontend",
   "scope": "codebase",
-  "localEndpoint": "http://localhost:5174",
+  "localEndpoint": "http://localhost:5173/",
   "loginUser": "example@gmail.com",
   "loginPassword": "123456789",
   "executionArgs": {
@@ -15,6 +15,6 @@
       "API_KEY": "sk-user-Pae0DVO78Eip2Af8ukiu0KZRs1zpQuHThK8cG2JVfc35iksBVk6iCqlmZxv0HANvb1lo15Z74rl49-5KBlIbx9EqUT2sWX96hfRYaOJOQUm6bfTB932vbbF4Tfmnh3GE0kE"
     }
   },
-  "serverPort": 54136,
+  "serverPort": 63770,
   "proxy": "http://c74fcc5b-0370-4150-9b90-5555069fc5fc:Z0CLJtGr6ETTCKXXIcJwWhTUa2wfmuI8@tun.testsprite.com:8080"
 }
