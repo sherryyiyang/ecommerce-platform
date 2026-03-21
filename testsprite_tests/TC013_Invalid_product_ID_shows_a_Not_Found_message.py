@@ -30,11 +30,11 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174")
+        # -> Navigate to http://localhost:5173
+        await page.goto("http://localhost:5173")
         
-        # -> Navigate to /product/9999 and verify the 'Not found' message and 'Product' text are visible, and that the not-found message element is visible.
-        await page.goto("http://localhost:5174/product/9999")
+        # -> Navigate to /product/9999 (http://localhost:5173/product/9999) to verify the not-found message is shown.
+        await page.goto("http://localhost:5173/product/9999")
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]

@@ -30,13 +30,16 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174")
+        # -> Navigate to http://localhost:5173
+        await page.goto("http://localhost:5173")
         
-        # -> Navigate to /login (use explicit navigation to the path /login on the current site)
-        await page.goto("http://localhost:5174/login")
+        # -> Click the 'Login' link (index 8) to open the login page.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Type 'wrong@example.com' into the email field, type 'wrong' into the password field, then click the Login button to trigger validation.
+        # -> Type 'wrong@example.com' into the email field (index 406), then type 'wrong' into the password field (index 414), then click the Login button (index 420).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)

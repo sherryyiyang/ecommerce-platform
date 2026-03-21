@@ -30,13 +30,16 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174")
+        # -> Navigate to http://localhost:5173
+        await page.goto("http://localhost:5173")
         
-        # -> Navigate to /login (exact path: /login) and load the login page.
-        await page.goto("http://localhost:5174/login")
+        # -> Click the 'Login' link to open the login page.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Type the provided credentials into the email and password fields and click the Login button (input email at index 354, input password at index 355, click Login at index 358).
+        # -> Type the email into the email field, type the password into the password field, then click the Login button to authenticate (these actions will likely change the page state).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -50,18 +53,6 @@ async def run_test():
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the first product's 'Buy' button to perform the purchase and observe whether a 'Purchase successful' confirmation appears.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the first product's 'View Details' link (index 1343) to open its details page so the Buy action can be attempted from the product detail view.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state

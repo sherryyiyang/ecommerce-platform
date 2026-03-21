@@ -30,16 +30,13 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174")
+        # -> Navigate to http://localhost:5173
+        await page.goto("http://localhost:5173")
         
-        # -> Click the 'Login' link to open the login page (use interactive element index 5). ASSERTION: Login link (index 5) is visible on the page.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to /login (http://localhost:5173/login).
+        await page.goto("http://localhost:5173/login")
         
-        # -> Enter email into the email field (index 403), enter password into the password field (index 411), then click the Login button (index 417) to sign in.
+        # -> Input the email into the Email field (index 359) as the immediate action.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,7 +52,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the first product's 'View Details' link (Wireless Headphones) to open its details page so the product can be purchased.
+        # -> Click 'View Details' on the first product using the currently available interactive element (index 1184).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)

@@ -30,10 +30,10 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174")
+        # -> Navigate to http://localhost:5173
+        await page.goto("http://localhost:5173")
         
-        # -> Click on 'View Details' for the first product card (Wireless Headphones) to open the product details page (use element index 238).
+        # -> Click on 'View Details' for the first product (Wireless Headphones) to open its details page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)

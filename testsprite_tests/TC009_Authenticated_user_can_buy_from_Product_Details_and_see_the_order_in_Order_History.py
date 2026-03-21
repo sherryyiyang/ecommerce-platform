@@ -30,13 +30,16 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174")
+        # -> Navigate to http://localhost:5173
+        await page.goto("http://localhost:5173")
         
-        # -> Navigate to /login (explicit test step requires using navigate to '/login' on the current site).
-        await page.goto("http://localhost:5174/login")
+        # -> Click the 'Login' link in the header to open the login page (use element index 8).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Type the email into the email field, type the password into the password field, then click the Login button.
+        # -> Type the test credentials into the email and password fields, then click the Login button (email input index 406, password input index 414, login button index 420).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -52,13 +55,13 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the first product's 'View Details' link to open its details page (the 'Wireless Headphones' product).
+        # -> Click the first product's 'View Details' link to open the product details page (element index 829).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the first product's 'View Details' button (use element index 1343) to open the product details page.
+        # -> Click the first product's 'View Details' link using the visible interactive element index 1194 to open the product details page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
@@ -68,7 +71,7 @@ async def run_test():
         frame = context.pages[-1]
         current_url = await frame.evaluate("() => window.location.href")
         assert '/' in current_url
-        assert await frame.locator("xpath=//*[contains(., 'Wireless Headphones')]").nth(0).is_visible(), "Expected 'Wireless Headphones' to be visible"
+        assert await frame.locator("xpath=//*[contains(., 'product image')]").nth(0).is_visible(), "Expected 'product image' to be visible"
         await asyncio.sleep(5)
 
     finally:

@@ -30,16 +30,13 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174")
+        # -> Navigate to http://localhost:5173
+        await page.goto("http://localhost:5173")
         
-        # -> Click the 'Login' link in the top navigation to open the login page.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to /login (explicit navigation required by test).
+        await page.goto("http://localhost:5173/login")
         
-        # -> Type the test account email into the Email field (index 403).
+        # -> Input the email into the email field (index 357), then the password (index 358), then click the Login button (index 361).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -53,6 +50,12 @@ async def run_test():
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click 'Admin' in the top navigation to open the admin product list (element index 794).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state

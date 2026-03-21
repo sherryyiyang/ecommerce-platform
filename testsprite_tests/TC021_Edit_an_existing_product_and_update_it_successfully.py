@@ -30,8 +30,8 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:5174
-        await page.goto("http://localhost:5174")
+        # -> Navigate to http://localhost:5173
+        await page.goto("http://localhost:5173")
         
         # -> Click the 'Login' link in the top navigation to open the login page.
         frame = context.pages[-1]
@@ -39,7 +39,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the Email and Password fields with the provided credentials and click the Login button to authenticate.
+        # -> Fill the email field with 'example@gmail.com', fill the password field with '123456789', then click the Login button.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,13 +55,35 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Login' link in the top navigation to open the login page.
+        # -> Click 'Admin' in the top navigation to open the admin product list.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Fill the email field with 'example@gmail.com', fill the password field with '123456789', then click the Login button.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'Login' link (index 2193) to open the login page so credentials can be entered and the admin flow retried.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the Email and Password fields with the provided credentials and click the Login button.
+        # -> Fill the email and password fields and click the Login button to authenticate (perform steps 1-3).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -77,29 +99,13 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the Email and Password fields with the provided credentials and click the Login button to authenticate.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Login' link in the top navigation (interactive element [2461]) to open the login page so credentials can be submitted.
+        # -> Click the 'Login' link to open the login page so credentials can be entered and the admin flow retried.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Type the email into the Email field (index 2957) and the password into the Password field (index 2965), then click the Login button (index 2971).
+        # -> Fill the email and password fields and click the Login button (input into index 3736, input into index 3744, click index 3750).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -115,13 +121,35 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Login' link in the top navigation to open the login page so credentials can be submitted (use interactive element index 3508).
+        # -> Click 'Admin' in the top navigation to open the admin product list (use element index 4144).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Fill the email field with example@gmail.com, fill the password field with 123456789, then click the Login button to authenticate (use inputs index=4809, 4810 and button index=4813).
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'Login' link in the top navigation to open the login page so credentials can be entered (use element index 5523).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Type the email into the Email field (index 4004), type the password into the Password field (index 4012), then click the Login button (index 4018).
+        # -> Fill the email field (index=6019) with example@gmail.com, fill the password field (index=6027) with 123456789, then click the Login button (index=6033).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -137,29 +165,13 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Type the email into input index 4297, type the password into input index 4298, then click the Login button at index 4301.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Open the login page by clicking the 'Login' link in the top navigation (interactive element [5015]) so credentials can be submitted.
+        # -> Click the 'Login' link in the top navigation to open the login page so the admin can authenticate (use fresh interactive state).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Type the email into input index 5510, type the password into input index 5518, then click the Login button at index 5525.
+        # -> Fill the email field (index=7065) with example@gmail.com, fill the password field (index=7073) with 123456789, then click the Login button (index=7079).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -175,7 +187,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Type the email into input index 5806, type the password into input index 5807, then click the Login button at index 5810.
+        # -> Fill the Email field (index=7388) with example@gmail.com, fill the Password field (index=7389) with 123456789, then click the Login button (index=7392).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -191,13 +203,13 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Login' link (interactive element [6522]) to open the login page so credentials can be submitted.
+        # -> Click the 'Login' link in the top navigation to open the Login page so credentials can be (re)entered (use element index 8104).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Type email into input index 7018, type password into input index 7026, then click the Login button at index 7032.
+        # -> Immediate: fill email (index=8599), fill password (index=8608), and click the Login button (index=8614). After that, obtain fresh interactive state and click 'Admin' then edit the first product.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -213,7 +225,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the Email and Password fields (indices 7450 and 7458) and click the Login button (index 7464) to authenticate.
+        # -> Fill the email (index=9032) with example@gmail.com, fill the password (index=9040) with 123456789, then click the Login button (index=9046).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -229,13 +241,13 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Login' link in the top navigation (interactive element [8285]) to open the login page so the credentials can be submitted and the admin flow retried.
+        # -> Open the Login page (click the 'Login' link) to obtain fresh interactive elements before attempting the admin/edit flow.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the Email and Password fields and click the Login button (submit credentials) so the admin flow can be attempted.
+        # -> Fill the email and password fields on the Login page and click the Login button. After the page updates, obtain fresh interactive state and then click 'Admin' in the top navigation using the fresh index.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
