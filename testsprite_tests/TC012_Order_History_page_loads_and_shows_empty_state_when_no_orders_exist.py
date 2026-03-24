@@ -30,13 +30,13 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:3000
-        await page.goto("http://localhost:3000")
+        # -> Navigate to http://localhost:5173
+        await page.goto("http://localhost:5173")
         
-        # -> Navigate to /login (use explicit navigate to http://localhost:3000/login).
-        await page.goto("http://localhost:3000/login")
+        # -> Navigate to /login using the explicit navigate action (per test instruction).
+        await page.goto("http://localhost:5173/login")
         
-        # -> Type the provided email into the email field (index 177) and password into the password field (index 178), then click the Login button (index 181).
+        # -> Fill the Email and Password fields and click the Login button.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -52,36 +52,12 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Try logging in with the test account credentials shown on the page (example@gmail.com / 123456789) by filling the email and password inputs and clicking Login.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Orders' link (index 333) to open the Order History page.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        frame = context.pages[-1]
         current_url = await frame.evaluate("() => window.location.href")
-        assert "/order-history" in current_url, 'Expected URL to contain "/order-history"'
-        assert await frame.locator('xpath=/html/body/div[1]/header/div/a[3]').nth(0).is_visible(), "Expected element to be visible"
-        # The expected empty state elements ('No orders' text and an 'order list' element) are not present in the list of available xpaths for this page.
-        raise AssertionError('Feature missing: Order History empty state ("No orders") or "order list" element not found on the page')
+        assert '/order-history' in current_url
+        assert await frame.locator("xpath=//*[contains(., 'No orders')]").nth(0).is_visible(), "Expected 'No orders' to be visible"
+        assert await frame.locator("xpath=//*[contains(., 'order list')]").nth(0).is_visible(), "Expected 'order list' to be visible"
         await asyncio.sleep(5)
 
     finally:

@@ -30,18 +30,19 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:3000
-        await page.goto("http://localhost:3000")
+        # -> Navigate to http://localhost:5173
+        await page.goto("http://localhost:5173")
         
-        # -> Navigate to /login using the exact path '/login' on the current site.
-        await page.goto("http://localhost:3000/login")
+        # -> Navigate to /login by using the required explicit navigate action to http://localhost:5173/login.
+        await page.goto("http://localhost:5173/login")
         
-        # -> Type the provided username into the Email field (index 176), type the provided password into the Password field (index 177), then click the Login button (index 180).
+        # -> Type the username into the Email field (index 253) and then proceed to fill the password field next.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
         await asyncio.sleep(3); await elem.fill('sherryyiyang@gmail.com')
         
+        # -> Type the password into the Password field (index 254) and then click the Login button (index 257).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
@@ -52,7 +53,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Try logging in using the test account shown on the page (example@gmail.com / 123456789).
+        # -> Input the test account email and password shown on the page (example@gmail.com / 123456789) and click Login (second login attempt).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -66,6 +67,30 @@ async def run_test():
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Try refreshing/reloading the catalog by clicking the Catalog navigation link (index 541) to see if product items become interactive; if no products are clickable after that, report missing feature and finish the task.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'View Details' link for the first product (Wireless Headphones, index 771) to open its product details page.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'Buy' button on the product page to perform the simulated checkout (index 1089).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'Orders' link (index 748) to open the order history page and check for the purchased item.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state

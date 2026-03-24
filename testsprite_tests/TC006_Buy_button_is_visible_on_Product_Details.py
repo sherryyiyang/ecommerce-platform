@@ -30,22 +30,15 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:3000
-        await page.goto("http://localhost:3000")
-        
-        # -> Click on a product item in the catalog (click the first product's "View Details").
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to http://localhost:5173
+        await page.goto("http://localhost:5173")
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        # Verify URL contains "/product/"
         current_url = await frame.evaluate("() => window.location.href")
-        assert "/product/" in current_url, "Expected URL to contain /product/"
-        # The 'Buy' CTA element is not present in the provided Available elements list; report the issue and stop
-        # [removed] assert False, "Feature missing: 'Buy' element not available in available elements; cannot verify Buy CTA"
+        assert '/product/' in current_url
+        assert await frame.locator("xpath=//*[contains(., 'Buy')]").nth(0).is_visible(), "Expected 'Buy' to be visible"
+        assert await frame.locator("xpath=//*[contains(., 'Buy')]").nth(0).is_visible(), "Expected 'Buy' to be visible"
         await asyncio.sleep(5)
 
     finally:

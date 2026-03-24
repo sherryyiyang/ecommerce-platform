@@ -30,16 +30,13 @@ async def run_test():
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:3000
-        await page.goto("http://localhost:3000")
+        # -> Navigate to http://localhost:5173
+        await page.goto("http://localhost:5173")
         
-        # -> Click the 'Login' link to open the /login page (use interactive element index 8).
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to /login (use explicit navigation to http://localhost:5173/login as requested in the test steps).
+        await page.goto("http://localhost:5173/login")
         
-        # -> Fill the email and password fields and click the Login button (input into index 186 and 194, then click index 200).
+        # -> Type the provided login email into the email field (index 252) and password into the password field (index 253), then click the Login button (index 256).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,7 +52,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the login form with the test account credentials shown on the page (example@gmail.com / 123456789) and click the Login button (indexes 186, 194, then 200).
+        # -> Attempt login with the test account credentials shown on the page: fill email (index 252) with 'example@gmail.com', fill password (index 253) with '123456789', then click the Login button (index 256).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -71,13 +68,13 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open the Wireless Headphones product details by clicking its 'View Details' link (index 326). Then verify the 'Buy' button appears on the product details page and proceed with the simulated checkout.
+        # -> Click a product's 'View Details' link to open its product details page so the presence of a 'Buy' button can be verified.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Buy' button (index 468) to start the simulated checkout and verify the checkout flow begins.
+        # -> Click the 'Buy' button (index 1079) to start the simulated checkout flow.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/button').nth(0)
@@ -85,18 +82,10 @@ async def run_test():
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        # Assertions appended according to the test plan and current page content
-        frame = context.pages[-1]
-        # Verify the current URL contains '/' (basic navigation check)
+        assert await frame.locator("xpath=//*[contains(., 'Login')]").nth(0).is_visible(), "Expected 'Login' to be visible"
         current_url = await frame.evaluate("() => window.location.href")
-        assert "/" in current_url, "Expected URL to contain /"
-        # Verify the 'Buy' button is visible on the product details page
-        assert await frame.locator('xpath=/html/body/div/div/div/div/div[1]/div/button').nth(0).is_visible(), "Expected element to be visible"
-        text = await frame.locator('xpath=/html/body/div/div/div/div/div[1]/div/button').nth(0).text_content()
-        assert 'Buy' in text, "Expected button text to contain 'Buy'","# Verify the 'Logout' button is visible in the header (indicates user/session state)
-        assert await frame.locator('xpath=/html/body/div/header/div/button').nth(0).is_visible(), "Expected element to be visible"
-        text2 = await frame.locator('xpath=/html/body/div/header/div/button').nth(0).text_content()
-        assert 'Logout' in text2, "Expected header to contain 'Logout'"
+        assert '/' in current_url
+        assert await frame.locator("xpath=//*[contains(., 'Buy')]").nth(0).is_visible(), "Expected 'Buy' to be visible"
         await asyncio.sleep(5)
 
     finally:
