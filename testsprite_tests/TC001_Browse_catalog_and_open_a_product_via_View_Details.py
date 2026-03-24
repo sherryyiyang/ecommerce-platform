@@ -31,18 +31,27 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5173
-        await page.goto("http://localhost:5173")
+        await page.goto("http://localhost:5173", wait_until="commit", timeout=10000)
         
-        # -> Extract the page heading and check for the word 'Product' and presence of 'View Details' links, then click the first 'View Details' link (index 80).
+        # -> Click the 'View Details' link for the first product (Wireless Headphones).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # --> Test passed — verified by AI agent
+        # --> Assertions to verify final state
         frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        # Verify page title contains "Product"
+        title = await page.title()
+        assert "Product" in title, f'Page title does not contain "Product": {title}'
+        
+        # Verify a known available element is visible (use exact xpath from available elements)
+        elem = frame.locator('xpath=/html/body/div/header/div/a[1]')
+        assert await elem.is_visible(), 'Header link "E-commerce Platform" is not visible'
+        
+        # The test plan requires verifying the presence of a "View Details" action and navigating to a product details page.
+        # That element/xpath is NOT present in the provided available elements. Report the issue and stop the test as instructed.
+        raise AssertionError("Element with text 'View Details' not found in the provided available elements. Feature missing; marking task as done.")
         await asyncio.sleep(5)
 
     finally:

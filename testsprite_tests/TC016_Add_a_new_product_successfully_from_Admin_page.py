@@ -31,89 +31,144 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5173
-        await page.goto("http://localhost:5173")
+        await page.goto("http://localhost:5173", wait_until="commit", timeout=10000)
         
-        # -> Navigate to /login by using the explicit navigate action to http://localhost:5173/login (per test step).
-        await page.goto("http://localhost:5173/login")
+        # -> Navigate to /login (explicit navigation per test step) and re-check the page for interactive elements.
+        await page.goto("http://localhost:5173/login", wait_until="commit", timeout=10000)
         
-        # -> Fill the Email field with 'sherryyiyang@gmail.com' (index 251), fill the Password field with '123456abc' (index 252), then click the Login button (index 255).
+        # -> Enter the provided email and password into the login form and click the Login button to authenticate.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('sherryyiyang@gmail.com')
+        await page.wait_for_timeout(3000); await elem.fill('sherryyiyang@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456abc')
+        await page.wait_for_timeout(3000); await elem.fill('123456abc')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # -> Fill the form with the displayed Test Account credentials (example@gmail.com / 123456789) and click Login to continue the test.
+        # -> Attempt login with test account credentials shown on the page (example@gmail.com / 123456789) by filling email (index 251), password (index 252), then clicking Login (index 255).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
+        await page.wait_for_timeout(3000); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # -> Click the 'Admin' link in the main navigation to open the admin page and verify the admin product list.
+        # -> Click the 'Admin' link in the main navigation (interactive element index 750) to open the admin area and view product management.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # -> Fill the Add Product form with the test product data and submit it so the new product appears in the admin product list.
+        # -> Fill the Add Product form with Test Product A details and click the Add Product button to submit.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('Test Product A')
+        await page.wait_for_timeout(3000); await elem.fill('Test Product A')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('Test Category')
+        await page.wait_for_timeout(3000); await elem.fill('Test Category')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[3]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('19.99')
+        await page.wait_for_timeout(3000); await elem.fill('19.99')
         
-        # -> Fill the Image URL field, fill the Description field, then click the 'ADD PRODUCT' button to submit the new product so it appears in the admin list.
+        # -> Fill Image and Description, then click the Add button to submit the new product and verify 'Test Product A' appears in the product list.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[4]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('https://example.com/test-product-a.jpg')
+        await page.wait_for_timeout(3000); await elem.fill('https://example.com/test-product-a.jpg')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[5]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('A short description for Test Product A')
+        await page.wait_for_timeout(3000); await elem.fill('A short description for Test Product A')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        
+        # -> Navigate to http://localhost:5173/admin to reload the admin page and then check for the text 'Test Product A'.
+        await page.goto("http://localhost:5173/admin", wait_until="commit", timeout=10000)
+        
+        # -> Enter test account credentials (example@gmail.com / 123456789) into the login form and click the Login button to authenticate.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await page.wait_for_timeout(3000); await elem.fill('123456789')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        
+        # -> Click the 'Admin' link (index 2143) to open the admin area and check the product list for 'Test Product A'.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
+        
+        # -> Fill the Add Product form with Test Product A details and click the Add button to submit the product.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/div/div/input').nth(0)
+        await page.wait_for_timeout(3000); await elem.fill('Test Product A')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[2]/div/input').nth(0)
+        await page.wait_for_timeout(3000); await elem.fill('Test Category')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[3]/div/input').nth(0)
+        await page.wait_for_timeout(3000); await elem.fill('19.99')
+        
+        # -> Fill Image and Description fields, click the Add button to submit the product, then verify that 'Test Product A' appears in the admin list.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[4]/div/input').nth(0)
+        await page.wait_for_timeout(3000); await elem.fill('https://example.com/test-product-a.jpg')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[5]/div/input').nth(0)
+        await page.wait_for_timeout(3000); await elem.fill('A short description for Test Product A')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/button').nth(0)
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert '/' in current_url
-        current_url = await frame.evaluate("() => window.location.href")
-        assert '/admin' in current_url
-        assert await frame.locator("xpath=//*[contains(., 'Add product')]" ).nth(0).is_visible(), "Expected 'Add product' to be visible"
-        assert await frame.locator("xpath=//*[contains(., 'Test Product A')]" ).nth(0).is_visible(), "Expected 'Test Product A' to be visible"
+        assert '/' in frame.url
+        assert '/admin' in frame.url
+        await expect(frame.locator('text=Add product').first).to_be_visible(timeout=3000)
+        await expect(frame.locator('text=Test Product A').first).to_be_visible(timeout=3000)
         await asyncio.sleep(5)
 
     finally:

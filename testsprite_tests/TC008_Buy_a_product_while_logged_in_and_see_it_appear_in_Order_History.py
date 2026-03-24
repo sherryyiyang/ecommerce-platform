@@ -31,75 +31,66 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5173
-        await page.goto("http://localhost:5173")
+        await page.goto("http://localhost:5173", wait_until="commit", timeout=10000)
         
-        # -> Navigate to /login by using the required explicit navigate action to http://localhost:5173/login.
-        await page.goto("http://localhost:5173/login")
+        # -> Navigate to /login (use explicit navigate to http://localhost:5173/login as the test step requires).
+        await page.goto("http://localhost:5173/login", wait_until="commit", timeout=10000)
         
-        # -> Type the username into the Email field (index 253) and then proceed to fill the password field next.
+        # -> Type the username into the Email field (index 251), type the password into the Password field (index 252), then click the Login button (index 255).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('sherryyiyang@gmail.com')
-        
-        # -> Type the password into the Password field (index 254) and then click the Login button (index 257).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456abc')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Input the test account email and password shown on the page (example@gmail.com / 123456789) and click Login (second login attempt).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        await page.wait_for_timeout(3000); await elem.fill('sherryyiyang@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
+        await page.wait_for_timeout(3000); await elem.fill('123456abc')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # -> Try refreshing/reloading the catalog by clicking the Catalog navigation link (index 541) to see if product items become interactive; if no products are clickable after that, report missing feature and finish the task.
+        # -> Fill Email with example@gmail.com and Password with 123456789, then click the Login button to attempt login again.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await page.wait_for_timeout(3000); await elem.fill('123456789')
+        
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # -> Click the 'View Details' link for the first product (Wireless Headphones, index 771) to open its product details page.
+        # -> Click the 'View Details' link for 'Wireless Headphones' (index 771) to open its product details page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # -> Click the 'Buy' button on the product page to perform the simulated checkout (index 1089).
+        # -> Click the 'Buy' button on the product page to complete the simulated checkout (index 1078). After the page updates, inspect Orders to verify the purchase appears.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # -> Click the 'Orders' link (index 748) to open the order history page and check for the purchased item.
+        # -> Click the 'Orders' link (index 748) to open order history and verify the purchase appears.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        assert await frame.locator("xpath=//*[contains(., 'Login')]").nth(0).is_visible(), "Expected 'Login' to be visible"
-        current_url = await frame.evaluate("() => window.location.href")
-        assert '/' in current_url
-        current_url = await frame.evaluate("() => window.location.href")
-        assert '/product/' in current_url
+        await expect(frame.locator('text=Login').first).to_be_visible(timeout=3000)
+        assert '/' in frame.url
+        assert '/product/' in frame.url
         await asyncio.sleep(5)
 
     finally:

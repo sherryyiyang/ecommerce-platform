@@ -31,12 +31,22 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5173
-        await page.goto("http://localhost:5173")
+        await page.goto("http://localhost:5173", wait_until="commit", timeout=10000)
         
-        # --> Test passed — verified by AI agent
+        # --> Assertions to verify final state
         frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        # Verify we are on the root/catalog page
+        assert "/" in frame.url, f"Expected '/' in frame.url, got: {frame.url}"
+        
+        # Check product list existence by asserting a product item's "View Details" link is visible
+        locator = frame.locator('xpath=/html/body/div/div/div/div/div/div[1]/div/div/a')
+        assert await locator.is_visible(), "Product list is not visible: no product items found."
+        
+        # Verify "View Details" text is visible (using the first product's link)
+        assert await frame.locator('xpath=/html/body/div/div/div/div/div/div[1]/div/div/a').is_visible(), '"View Details" is not visible.'
+        
+        # The "Buy" element/text is not present in the available elements list -> report issue and stop
+        raise AssertionError('Feature "Buy" not found on page; cannot verify "Buy" is visible.')
         await asyncio.sleep(5)
 
     finally:

@@ -31,33 +31,32 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5173
-        await page.goto("http://localhost:5173")
+        await page.goto("http://localhost:5173", wait_until="commit", timeout=10000)
         
-        # -> Navigate to /login using the explicit navigate action (per test instruction).
-        await page.goto("http://localhost:5173/login")
+        # -> Navigate to /login (use navigate action to http://localhost:5173/login) and load the login page.
+        await page.goto("http://localhost:5173/login", wait_until="commit", timeout=10000)
         
-        # -> Fill the Email and Password fields and click the Login button.
+        # -> Type the provided email into the Email field, type the password into the Password field, then click the Login button.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('sherryyiyang@gmail.com')
+        await page.wait_for_timeout(3000); await elem.fill('sherryyiyang@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456abc')
+        await page.wait_for_timeout(3000); await elem.fill('123456abc')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert '/order-history' in current_url
-        assert await frame.locator("xpath=//*[contains(., 'No orders')]").nth(0).is_visible(), "Expected 'No orders' to be visible"
-        assert await frame.locator("xpath=//*[contains(., 'order list')]").nth(0).is_visible(), "Expected 'order list' to be visible"
+        assert '/order-history' in frame.url
+        await expect(frame.locator('text=No orders').first).to_be_visible(timeout=3000)
+        await expect(frame.locator('xpath=//div[@data-testid=\'order-list\']').first).to_be_visible(timeout=3000)
         await asyncio.sleep(5)
 
     finally:

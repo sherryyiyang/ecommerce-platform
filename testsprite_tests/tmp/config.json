@@ -5,7 +5,7 @@
   "localEndpoint": "http://localhost:5173",
   "loginUser": "sherryyiyang@gmail.com",
   "loginPassword": "123456abc",
-  "serverPort": 49474,
+  "serverPort": 53264,
   "executionArgs": {
     "projectName": "ecommerce-platform",
     "projectPath": "/Users/sherry/Projects/ecommerce-platform",

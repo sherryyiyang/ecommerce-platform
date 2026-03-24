@@ -31,47 +31,47 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5173
-        await page.goto("http://localhost:5173")
+        await page.goto("http://localhost:5173", wait_until="commit", timeout=10000)
         
-        # -> Navigate to /login (explicit test step)
-        await page.goto("http://localhost:5173/login")
+        # -> Navigate to /login (http://localhost:5173/login) as required by the test step.
+        await page.goto("http://localhost:5173/login", wait_until="commit", timeout=10000)
         
-        # -> Fill the email field with the provided username (index 251).
+        # -> Fill the email and password fields with the provided credentials and click the Login button.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('sherryyiyang@gmail.com')
+        await page.wait_for_timeout(3000); await elem.fill('sherryyiyang@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456abc')
+        await page.wait_for_timeout(3000); await elem.fill('123456abc')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # -> Attempt to log in with the test account credentials shown on the page (email: example@gmail.com, password: 123456789) and submit the form.
+        # -> Attempt login again using the test account credentials shown on the page (Email: example@gmail.com, Password: 123456789). Fill email and password fields and click Login.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
+        await page.wait_for_timeout(3000); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # --> Test passed — verified by AI agent
+        # --> Assertions to verify final state
         frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        assert '/' in frame.url
+        assert '/product/' in frame.url
         await asyncio.sleep(5)
 
     finally:

@@ -31,31 +31,35 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5173
-        await page.goto("http://localhost:5173")
+        await page.goto("http://localhost:5173", wait_until="commit", timeout=10000)
         
-        # -> Navigate to /login by using navigate action to http://localhost:5173/login
-        await page.goto("http://localhost:5173/login")
+        # -> Navigate to /login (use explicit navigate to http://localhost:5173/login as required by the test step).
+        await page.goto("http://localhost:5173/login", wait_until="commit", timeout=10000)
         
-        # -> Type 'not-a-user@example.com' into the email field (index 254).
+        # -> Type 'not-a-user@example.com' into the Email field (input index 253) as the immediate action.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('not-a-user@example.com')
+        await page.wait_for_timeout(3000); await elem.fill('not-a-user@example.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('wrong-password')
+        await page.wait_for_timeout(3000); await elem.fill('wrong-password')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # --> Test passed — verified by AI agent
+        # --> Assertions to verify final state
         frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        # -> Assertions
+        assert "/login" in frame.url
+        locator = frame.locator('xpath=/html/body/div[1]/div/div/div/div/div/form/div[3]/div[1]')
+        await locator.wait_for(state='visible', timeout=5000)
+        text = await locator.inner_text()
+        assert 'Invalid' in text, f"Expected 'Invalid' to be visible in element text, got: {text!r}"
         await asyncio.sleep(5)
 
     finally:

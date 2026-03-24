@@ -31,18 +31,22 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5173
-        await page.goto("http://localhost:5173")
+        await page.goto("http://localhost:5173", wait_until="commit", timeout=10000)
         
-        # -> Click the 'View Details' link for the first product (Wireless Headphones) at element index 80 to open the product details page, then verify the product detail fields.
+        # -> Click the 'View Details' link for the first product (Wireless Headphones) using element index 80 to open the product details view. ASSERTION: Clicking index 80 should navigate to the product details page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # --> Test passed — verified by AI agent
+        # --> Assertions to verify final state
         frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        assert '/product/' in frame.url
+        await expect(frame.locator('text=Wireless Headphones').first).to_be_visible(timeout=3000)
+        await expect(frame.locator('text=Description').first).to_be_visible(timeout=3000)
+        await expect(frame.locator('text=Price').first).to_be_visible(timeout=3000)
+        await expect(frame.locator('text=Category').first).to_be_visible(timeout=3000)
+        await expect(frame.locator("xpath=//img[contains(@alt,'Wireless Headphones') or contains(@class,'product-image') or contains(@src,'/images/')]").first).to_be_visible(timeout=3000)
         await asyncio.sleep(5)
 
     finally:

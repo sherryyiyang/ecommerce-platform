@@ -31,61 +31,48 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5173
-        await page.goto("http://localhost:5173")
+        await page.goto("http://localhost:5173", wait_until="commit", timeout=10000)
         
-        # -> Navigate to /login (use explicit navigation to http://localhost:5173/login as requested in the test steps).
-        await page.goto("http://localhost:5173/login")
+        # -> Navigate to /login (http://localhost:5173/login) as the next explicit test action.
+        await page.goto("http://localhost:5173/login", wait_until="commit", timeout=10000)
         
-        # -> Type the provided login email into the email field (index 252) and password into the password field (index 253), then click the Login button (index 256).
+        # -> Fill the Email and Password fields with provided credentials and click the Login button.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('sherryyiyang@gmail.com')
+        await page.wait_for_timeout(3000); await elem.fill('sherryyiyang@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456abc')
+        await page.wait_for_timeout(3000); await elem.fill('123456abc')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
-        # -> Attempt login with the test account credentials shown on the page: fill email (index 252) with 'example@gmail.com', fill password (index 253) with '123456789', then click the Login button (index 256).
+        # -> Fill the login form with the Test Account credentials shown on the page (example@gmail.com / 123456789) and click the Login button.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        await page.wait_for_timeout(3000); await elem.fill('example@gmail.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
+        await page.wait_for_timeout(3000); await elem.fill('123456789')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click a product's 'View Details' link to open its product details page so the presence of a 'Buy' button can be verified.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Buy' button (index 1079) to start the simulated checkout flow.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        await page.wait_for_timeout(3000); await elem.click(timeout=5000)
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        assert await frame.locator("xpath=//*[contains(., 'Login')]").nth(0).is_visible(), "Expected 'Login' to be visible"
-        current_url = await frame.evaluate("() => window.location.href")
-        assert '/' in current_url
-        assert await frame.locator("xpath=//*[contains(., 'Buy')]").nth(0).is_visible(), "Expected 'Buy' to be visible"
+        await expect(frame.locator('text=Login').first).to_be_visible(timeout=3000)
+        assert '/' in frame.url
+        await expect(frame.locator('text=Buy').first).to_be_visible(timeout=3000)
         await asyncio.sleep(5)
 
     finally:
