@@ -33,10 +33,10 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Navigate to /login (http://localhost:5173/login) as the next immediate action.
+        # -> Navigate to /login (use explicit navigate to http://localhost:5173/login).
         await page.goto("http://localhost:5173/login")
         
-        # -> Type the test email into the email field, type the test password into the password field, then click the Login button to submit the form.
+        # -> Type the email into the Email input (index 256) and the password into the Password input (index 257), then click the Login button (index 260).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -52,10 +52,15 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # --> Test passed — verified by AI agent
+        # -> Click the 'View Details' link for the 'Wireless Headphones' product to open its details page (use element index 712).
         frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # --> Assertions to verify final state
+        frame = context.pages[-1]
+        assert await frame.locator("xpath=//*[contains(., 'Purchase successful')]").nth(0).is_visible(), "Expected 'Purchase successful' to be visible"
         await asyncio.sleep(5)
 
     finally:

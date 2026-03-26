@@ -33,13 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click the 'Login' link in the top navigation to open the login page.
+        # -> Click the 'Login' link in the header to navigate to the login page (use element index 133).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email and password fields and click the Login button to authenticate.
+        # -> Type the test credentials into the Email (index 504) and Password (index 512) fields, then submit the form by clicking the Login button (index 518).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,17 +55,21 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Orders' link in the top navigation to open the Orders page, then verify that an order card displays 'Order ID', 'Total', and 'Date'.
+        # -> Click the 'Buy' button for any visible product in the catalog (using element index 928).
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click 'View Details' for the first product to open its product page so the Buy action can be performed there (click element index 1292).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        assert await frame.locator("xpath=//*[contains(., 'Order ID')]").nth(0).is_visible(), "Expected 'Order ID' to be visible"
-        assert await frame.locator("xpath=//*[contains(., 'Total')]").nth(0).is_visible(), "Expected 'Total' to be visible"
-        assert await frame.locator("xpath=//*[contains(., 'Date')]").nth(0).is_visible(), "Expected 'Date' to be visible"
+        assert await frame.locator("xpath=//*[contains(., 'Purchase successful')]").nth(0).is_visible(), "Expected 'Purchase successful' to be visible"
         await asyncio.sleep(5)
 
     finally:

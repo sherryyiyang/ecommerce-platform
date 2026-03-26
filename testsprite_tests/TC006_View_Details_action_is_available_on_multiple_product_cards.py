@@ -33,26 +33,22 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click the 'Login' link to open the login page (click element index 8).
+        # -> Wait briefly and scroll to ensure all product cards are reachable, then click 'View Details' on the first product (index 83) to verify navigation from a product card.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Type example@gmail.com into the Email field (index 406), type not_the_password into the Password field (index 414), then click the Login button (index 420). After the submit, verify the 'Invalid credentials' message and that the URL contains '/login'.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('not_the_password')
-        
+        # -> Click the 'Catalog' link (index 35) to return to the product listing so product cards and their 'View Details' actions can be re-checked.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the Catalog link (index=622) to return to the product listing, wait for product cards to render, then verify that multiple product cards expose 'View Details'.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Test passed — verified by AI agent

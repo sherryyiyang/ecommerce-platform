@@ -3,107 +3,120 @@ type: frontend
 tech_stack:
   - TypeScript
   - React
+  - React Router
   - Material UI
   - Vite
-  - React Router
 routes:
-  - path: /
-    file: src/pages/ProductCatalog.tsx
-    auth_required: false
-    description: Product catalog landing page with cards and buy/view actions
   - path: /login
     file: src/pages/Login.tsx
     auth_required: false
-    description: Login form that validates test credentials and authenticates the session
+    description: Login page for local credential-based sign-in
+  - path: /
+    file: src/pages/ProductCatalog.tsx
+    auth_required: false
+    description: Product listing with view details and buy actions
   - path: /product/:id
     file: src/pages/ProductDetails.tsx
     auth_required: false
-    description: Product details page with image, metadata, and buy action
+    description: Product detail view by id
   - path: /orders
     file: src/pages/OrderHistory.tsx
     auth_required: true
-    description: Protected order history page showing mock order cards
+    description: Auth-protected order history page
   - path: /admin
     file: src/pages/AdminPage.tsx
     auth_required: true
-    description: Protected admin product management page for add/edit/delete in local UI state
+    description: Auth-protected admin product management page
 features:
   - name: User Login
-    description: Authenticate with email and password and redirect to catalog
+    description: User logs in with fixed local test credentials and is redirected to catalog
     files:
       - src/pages/Login.tsx
       - src/App.tsx
     entry_route: /login
     user_interactions:
-      - Enter email
-      - Enter password
+      - Enter email in the Email input
+      - Enter password in the Password input
       - Click Login button
-      - Observe redirect to catalog on valid credentials
-      - Observe invalid credentials error message on wrong credentials
+      - Observe redirect to catalog on success
+      - Observe Invalid credentials message on failure
     api_calls: []
     auth_required: false
-  - name: Catalog Browsing
-    description: View product cards and navigate to product details
+  - name: Browse Product Catalog
+    description: View product cards loaded from mock data and navigate to details
     files:
       - src/pages/ProductCatalog.tsx
       - src/mockData.ts
     entry_route: /
     user_interactions:
-      - Open catalog page
-      - Scroll product card list
+      - Open catalog route
+      - Wait for products to load
       - Click View Details on a product card
-      - Click Buy (when authenticated)
+      - Navigate to selected product details
     api_calls: []
     auth_required: false
-  - name: Product Details View
-    description: View selected product details and buy action behavior
+  - name: View Product Details
+    description: View a single product by route param and see error when not found
     files:
       - src/pages/ProductDetails.tsx
       - src/mockData.ts
     entry_route: /product/:id
     user_interactions:
-      - Open a valid product details URL
-      - Review image, category, price, and description
-      - Attempt to buy product
-      - Open invalid product URL and see not found message
+      - Open product detail URL with a valid id
+      - Read product image, metadata, and description
+      - Open detail URL with invalid id and observe not found state
+    api_calls: []
+    auth_required: false
+  - name: Purchase Flow Simulation
+    description: Mock buy action redirects unauthenticated users to login and shows success snackbar when authenticated
+    files:
+      - src/pages/ProductCatalog.tsx
+      - src/pages/ProductDetails.tsx
+      - src/App.tsx
+    entry_route: /
+    user_interactions:
+      - Click Buy while logged out and observe redirect to login
+      - Log in using test credentials
+      - Return to catalog or product details
+      - Click Buy and observe Purchase successful snackbar
     api_calls: []
     auth_required: false
   - name: Order History Access
-    description: View protected order history list after login
+    description: Access order history entries after authentication
     files:
       - src/pages/OrderHistory.tsx
       - src/App.tsx
       - src/mockData.ts
     entry_route: /orders
     user_interactions:
-      - Log in with valid credentials
-      - Click Orders in top navigation
-      - Review order cards and order metadata
+      - Navigate to /orders while logged out and observe redirect to login
+      - Log in successfully
+      - Navigate to /orders and view order cards
     api_calls: []
     auth_required: true
-  - name: Admin Product Management
-    description: Manage product list in protected admin page using local state
+  - name: Admin Product Management (UI Only)
+    description: Add, edit, and delete products in local component state only
     files:
       - src/pages/AdminPage.tsx
       - src/App.tsx
       - src/mockData.ts
     entry_route: /admin
     user_interactions:
-      - Log in with valid credentials
-      - Click Admin in top navigation
-      - Fill add product form and submit
-      - Click Edit and Update existing product
-      - Click Delete on a product
-      - Click Cancel while editing
+      - Navigate to /admin while logged out and observe redirect to login
+      - Log in and open admin page
+      - Fill product form and submit to add item
+      - Click Edit to update product and submit
+      - Click Delete to remove product
+      - Observe snackbar confirmations
     api_calls: []
     auth_required: true
 known_limitations:
-  - issue: Authentication is client-side only and not persisted across refreshes.
-    location: src/App.tsx
-    impact: Session resets on page reload; no real backend auth.
-  - issue: Product and order data are mock in-memory values without backend persistence.
+  - issue: All data is mock/local and there is no backend persistence
     location: src/mockData.ts
-    impact: Changes are temporary and not shared across sessions.
-  - issue: Admin CRUD operations update local component state only.
-    location: src/pages/AdminPage.tsx
-    impact: Added/edited/deleted products are not saved to a backend database.
+    impact: State resets on page reload and changes are not durable
+  - issue: Authentication is in-memory only and uses hardcoded test credentials
+    location: src/pages/Login.tsx
+    impact: No real user accounts, sessions, or secure auth
+  - issue: Buy action and admin CRUD are simulated with snackbar feedback only
+    location: src/pages/ProductCatalog.tsx
+    impact: No real order creation or product updates in a backend

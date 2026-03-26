@@ -32,33 +32,33 @@ async def run_test():
         # Interact with the page elements to simulate user flow
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
-        
-        # -> Click the 'Login' link (index 8) to open the login page.
+
+        # -> Click the 'Login' link (interactive to open the Login page
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
-        
-        # -> Type 'wrong@example.com' into the email field (index 406), then type 'wrong' into the password field (index 414), then click the Login button (index 420).
+
+        # -> User manual correction
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('wrong@example.com')
-        
+        await asyncio.sleep(3); await elem.fill('invalid3.user@example.com')
+ 
+        # -> Enter an incorrect password into the Password field and click the Login button to attempt sign-in (this should trigger the invalid-credentials behaviour).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('wrong')
-        
+        await asyncio.sleep(3); await elem.fill('wrongpassword')
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
-        
-        # --> Test passed — verified by AI agent
+        # --> Assertions to verify final state
         frame = context.pages[-1]
         current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        assert '/login' in current_url
+        assert await frame.locator("xpath=//*[contains(., 'Invalid credentials')]").nth(0).is_visible(), "Expected 'Invalid credentials' to be visible"
         await asyncio.sleep(5)
 
     finally:

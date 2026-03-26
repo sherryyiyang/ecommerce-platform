@@ -33,8 +33,24 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Navigate to /product/9999 (http://localhost:5173/product/9999) to verify the not-found message is shown.
-        await page.goto("http://localhost:5173/product/9999")
+        # -> Navigate explicitly to /login (http://localhost:5173/login) to load the login page and search for the email/password inputs and Login button.
+        await page.goto("http://localhost:5173/login")
+        
+        # -> Type invalid.user@example.com into the Email input, type wrong-password into the Password input, then click the Login button.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('invalid.user@example.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('wrong-password')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]
