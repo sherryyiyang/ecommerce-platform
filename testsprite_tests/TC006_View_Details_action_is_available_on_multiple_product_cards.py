@@ -33,22 +33,22 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Wait briefly and scroll to ensure all product cards are reachable, then click 'View Details' on the first product (index 83) to verify navigation from a product card.
+        # -> Click the 'View Details' link for the first product (index 242) to verify navigation to the product detail page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Catalog' link (index 35) to return to the product listing so product cards and their 'View Details' actions can be re-checked.
+        # -> Return to the catalog (click 'Catalog' link index 4), wait for product cards to load, then verify 'View Details' links are visible and click a different product's 'View Details' to confirm navigation from another item.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the Catalog link (index=622) to return to the product listing, wait for product cards to render, then verify that multiple product cards expose 'View Details'.
+        # -> Click a different product's 'View Details' link (Smart Watch) at index 571 to confirm navigation from another item.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div[2]/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Test passed — verified by AI agent

@@ -33,7 +33,7 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click on 'View Details' for the first product card (use interactive element index 83).
+        # -> Click 'View Details' on the first visible product card to open its product detail page, then wait for the page to load.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)

@@ -33,13 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click the 'Login' navigation link to open the login page.
+        # -> Open the Login page by clicking the 'Login' link in the top navigation.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the Email and Password fields with the provided credentials and click the Login button to submit the form.
+        # -> Enter the email into the Email field (index 403), enter the password into the Password field (index 411), then click the Login button (index 417).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,7 +55,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Verify current URL contains '/' (root) and then click the 'Admin' navigation link to open the admin page (element index 870).
+        # -> Click the 'Admin' navigation link to open the admin product management page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)

@@ -12,9 +12,13 @@
     "additionalInstruction": "",
     "serverMode": "development",
     "envs": {
-      "API_KEY": "sk-user-Pae0DVO78Eip2Af8ukiu0KZRs1zpQuHThK8cG2JVfc35iksBVk6iCqlmZxv0HANvb1lo15Z74rl49-5KBlIbx9EqUT2sWX96hfRYaOJOQUm6bfTB932vbbF4Tfmnh3GE0kE"
+      "API_URL": "https://api.testsprite.com:11443",
+      "API_KEY": "sk-user-bsCyksRpL8NzmdpLD3DLuoSODrPSI-TcN_dthya8JflaEeyq-_n0SXG-P0JoH0bY-LoVCKAV08k86EiEjIxdw5zpayPSYjUH17L0Nh-Nc2gnLD1GAZa2JxsxPoTNWF_7IO4",
+      "TESTSPRITE_URL": "https://dev.d3jiomw0rrav5x.amplifyapp.com",
+      "TS_API_ENDPOINT": "https://api.testsprite.com:11443/api",
+      "TS_TUNNEL_ENDPOINT": "nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com"
     }
   },
-  "serverPort": 50367,
-  "proxy": "http://14701d86-8e3c-4821-9687-ab0e58ae9281:SjmkwSHOCrdOJIMGYKrhK7wVzefbtP3L@tun.testsprite.com:8080"
+  "serverPort": 64643,
+  "proxy": "http://baef7f07-1836-4c34-bb48-5824116c1ede:iTq5QSHGLATXPEEmF04CuVp3rOyfk3cD@nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com:8080"
 }

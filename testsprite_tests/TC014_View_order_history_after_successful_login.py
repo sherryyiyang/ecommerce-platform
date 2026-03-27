@@ -33,10 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Navigate to /login (explicit test step).
-        await page.goto("http://localhost:5173/login")
+        # -> Click the 'Login' link in the site navigation to open the login page (use element index 5).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Type the test email into the Email input (index 254) and then fill password and click Login.
+        # -> Fill the Email and Password fields using the test credentials and submit the login form.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -52,7 +55,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Orders' link in the top navigation to navigate to the Orders page and then verify the Orders page load and order card visibility.
+        # -> Click the 'Orders' link in the navigation to open the Orders page and verify order cards are visible.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)

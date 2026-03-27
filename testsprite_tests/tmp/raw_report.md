@@ -5,7 +5,7 @@
 
 ## 1️⃣ Document Metadata
 - **Project Name:** ecommerce-platform
-- **Date:** 2026-03-25
+- **Date:** 2026-03-26
 - **Prepared by:** TestSprite AI Team
 
 ---
@@ -14,28 +14,28 @@
 
 #### Test TC001 Catalog loads and displays product cards
 - **Test Code:** [TC001_Catalog_loads_and_displays_product_cards.py](./TC001_Catalog_loads_and_displays_product_cards.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/0998bf00-8388-41c4-8d16-5e7fa3f16a05
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/e67bc5ea-e46e-4e1a-9289-12c05445721a
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC002 Open product details from a product card
 - **Test Code:** [TC002_Open_product_details_from_a_product_card.py](./TC002_Open_product_details_from_a_product_card.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/cbe79151-3bd5-46bf-81b7-2aba0b8e8725
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/661f225a-f293-49ca-9ef6-b3d224ed1809
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC007 Open product details from catalog and verify key product content is displayed
 - **Test Code:** [TC007_Open_product_details_from_catalog_and_verify_key_product_content_is_displayed.py](./TC007_Open_product_details_from_catalog_and_verify_key_product_content_is_displayed.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/fba95854-cd9f-4824-9fa0-2c24ba210dfa
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/63301f4c-8f82-4b16-96fe-92a221486f55
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC008 Verify product price and description are visible on a product details page
 - **Test Code:** [TC008_Verify_product_price_and_description_are_visible_on_a_product_details_page.py](./TC008_Verify_product_price_and_description_are_visible_on_a_product_details_page.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/ade240cd-c0a6-4415-b0c2-a32d4ddbf9c1
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/2db7f4de-6a4c-4c08-8eb4-806415810383
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
@@ -44,12 +44,13 @@
 - **Test Code:** [TC010_Direct_login_then_buy_from_catalog_shows_success_snackbar.py](./TC010_Direct_login_then_buy_from_catalog_shows_success_snackbar.py)
 - **Test Error:** TEST FAILURE
 
-ASSERTIONS:
-- Buy button on product page is disabled and not clickable, preventing the purchase flow.
-- No interactive 'Buy' element index is present in the page's interactive elements, so the automated test cannot click it.
-- Previous attempt to click 'Buy' in the product catalog failed with an interactability/stale-element error.
-- The 'Purchase successful' snackbar did not appear because the purchase action could not be performed.
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/01386aaa-c88a-44cb-87b5-77306cf152bf
+Clicking the Buy button did not show the expected confirmation message 'Purchase successful'.
+
+Observations:
+- The catalog shows Buy buttons and they are clickable while the user is authenticated (Logout is visible).
+- Clicking Buy multiple times did not display the exact text 'Purchase successful'.
+- The page stayed on the catalog and no snackbar with the exact text 'Purchase successful' appeared.
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/dba62acd-5f6c-422e-bac1-348f17b48a9a
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
@@ -58,73 +59,101 @@ ASSERTIONS:
 - **Test Code:** [TC011_Direct_login_then_buy_from_product_details_shows_success_snackbar.py](./TC011_Direct_login_then_buy_from_product_details_shows_success_snackbar.py)
 - **Test Error:** TEST FAILURE
 
-ASSERTIONS:
-- Buy button not found as a clickable/interactive element on the product details page (the product's Buy action is disabled or missing).
-- Purchase could not be initiated, so the 'Purchase successful' snackbar could not be verified.
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/4ce54397-ba40-4927-8bbc-02bc7803de39
+Clicking the Buy button did not show the purchase confirmation snackbar.
+
+Observations:
+- The product details page displays the Buy button and the top navigation shows 'Logout' (user is authenticated).
+- The Buy button was clicked multiple times (5 attempts) and no 'Purchase successful' message appeared.
+- Searching the page after clicks returned no success text or surrounding message.
+
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/af3f1861-5d95-4bae-b7a9-548eda7bd4bc
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC014 View order history after successful login
 - **Test Code:** [TC014_View_order_history_after_successful_login.py](./TC014_View_order_history_after_successful_login.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/b40d648d-0177-4679-8958-338c2ee03b41
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/6df4c732-9e59-4fa5-845e-0428a93db484
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC019 Login fails with invalid credentials and does not reach Orders
 - **Test Code:** [TC019_Login_fails_with_invalid_credentials_and_does_not_reach_Orders.py](./TC019_Login_fails_with_invalid_credentials_and_does_not_reach_Orders.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/400f3760-d13a-4e6f-8a88-41ed6b1a8d50
-- **Status:** ❌ Failed
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/92839c18-b5a3-4d94-8986-bca35e859a60
+- **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC021 Log in successfully and open Admin page
 - **Test Code:** [TC021_Log_in_successfully_and_open_Admin_page.py](./TC021_Log_in_successfully_and_open_Admin_page.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/7709f510-56aa-4820-8587-1260cec447c7
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/8bd47d84-7baa-497f-803d-daf964fd2eef
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC022 Add a new product from Admin and see snackbar confirmation
 - **Test Code:** [TC022_Add_a_new_product_from_Admin_and_see_snackbar_confirmation.py](./TC022_Add_a_new_product_from_Admin_and_see_snackbar_confirmation.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/b4227881-8a4a-4f67-93a6-8c8194b6d9dc
-- **Status:** ✅ Passed
+- **Test Error:** TEST BLOCKED
+
+The feature could not be reached because the web application at http://localhost:5173 is not responding.
+
+Observations:
+- The browser shows 'This page isn’t working' with the error code ERR_EMPTY_RESPONSE.
+- The page only contains a 'Reload' button and no Admin or product form UI is available to verify the snackbar.
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/41cf25b4-d021-461e-b531-4eb847ca0118
+- **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC003 Product details page shows core product information after navigation
 - **Test Code:** [TC003_Product_details_page_shows_core_product_information_after_navigation.py](./TC003_Product_details_page_shows_core_product_information_after_navigation.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/cb7b6814-2a68-4769-988f-b35bb80d3376
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/1409d765-493b-4f12-ab96-0999c808e1c4
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC004 Catalog page still renders when returning from details using in-app navigation
 - **Test Code:** [TC004_Catalog_page_still_renders_when_returning_from_details_using_in_app_navigation.py](./TC004_Catalog_page_still_renders_when_returning_from_details_using_in_app_navigation.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/f6d97463-ee56-4cca-b15c-cb72a862df89
-- **Status:** ✅ Passed
+- **Test Error:** TEST BLOCKED
+
+The feature could not be reliably verified because the product catalog did not consistently render after returning via in-app navigation.
+
+Observations:
+- After navigating back to the catalog, the page often shows 'Loading product...' or only the 'Product Catalog' heading without any product cards or 'View Details' links.
+- Repeated cycles of navigating away (Login or product detail) and back to Catalog did not produce product cards in the interactive elements.
+- The current page shows only header links (Catalog, Login) and no product card elements, so the return-and-render flow cannot be confirmed.
+
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/3901420d-f17a-404f-8ae5-98f006ccffa8
+- **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC006 View Details action is available on multiple product cards
 - **Test Code:** [TC006_View_Details_action_is_available_on_multiple_product_cards.py](./TC006_View_Details_action_is_available_on_multiple_product_cards.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/bacf5d67-3325-43da-aa0f-1182ea17812a
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/db30e5ec-0c4b-47db-ae11-db1be30c77fd
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC009 Verify product metadata section is visible on product details page
 - **Test Code:** [TC009_Verify_product_metadata_section_is_visible_on_product_details_page.py](./TC009_Verify_product_metadata_section_is_visible_on_product_details_page.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/5a3f19cb-e0ca-4a43-aabc-bcbc0674aac0
-- **Status:** ✅ Passed
+- **Test Error:** TEST FAILURE
+
+The product details page could not be reached because the product list or links to individual product pages are missing.
+
+Observations:
+- The catalog page displays only the site header and the 'Product Catalog' heading.
+- No product cards, product images, or 'View Details' buttons/links are visible on the page.
+- The only interactive elements are the top navigation links (site title, Catalog, Login).
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/32f8d597-c86d-4637-897c-ade2af804aa6
+- **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 #### Test TC012 Login form rejects invalid credentials and does not proceed to purchase flow
 - **Test Code:** [TC012_Login_form_rejects_invalid_credentials_and_does_not_proceed_to_purchase_flow.py](./TC012_Login_form_rejects_invalid_credentials_and_does_not_proceed_to_purchase_flow.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/e9cb2d7e-d189-4a35-85ed-d6a36fdd5385/d68d5568-ef5d-468a-a101-8719462973ab
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/eed427c1-06ca-41a1-a5b0-3c248991a221/58cee2db-f3b6-42a1-b4c0-222dd56cd5c6
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
@@ -132,7 +161,7 @@ ASSERTIONS:
 
 ## 3️⃣ Coverage & Matching Metrics
 
-- **80.00** of tests passed
+- **66.67** of tests passed
 
 | Requirement        | Total Tests | ✅ Passed | ❌ Failed  |
 |--------------------|-------------|-----------|------------|
