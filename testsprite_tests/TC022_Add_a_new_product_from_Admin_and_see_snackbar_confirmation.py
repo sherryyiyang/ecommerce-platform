@@ -33,13 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click the 'Login' link to open the login page.
+        # -> Click the Login link in the top navigation to reach the login page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Enter the email into the Email field (index 501) and submit the login form.
+        # -> Enter the login email and password, then click the Login button.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,79 +55,13 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Admin' navigation link to open the admin form.
+        # -> Click Admin navigation to reach the admin form.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Enter email and password into the login form and submit (click Login).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Admin' navigation link to open the admin product form and continue to add 'Test Product A'.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Log in by entering credentials and submitting the login form so we can open Admin and add the product.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Admin' navigation link to open the Admin product form (index 3581).
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Enter email into element index 4477, enter password into element index 4485, then click the Login button at index 4491.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Admin' navigation link to open the Admin product form so we can add 'Test Product A'.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Fill all required fields with the product data (Name='Test Product A', Category='Test Category', Price='9.99', Image URL='https://example.com/image.jpg', Description='Sample product description') and click the Add button to submit the product. After submission, check for a visible snackbar containing the text 'added'.
+        # -> Fill the admin product form with 'Test Product A', submit, then verify the snackbar confirmation contains 'added'.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/form/div/div/input').nth(0)
@@ -141,30 +75,33 @@ async def run_test():
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[3]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('9.99')
+        await asyncio.sleep(3); await elem.fill('10')
         
-        # -> Fill the Image URL and Description fields, then click the Add button to submit the product and trigger the snackbar confirmation.
+        # -> Fill any required missing fields if prompted, then click Add Product and verify the snackbar confirmation includes 'added'.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Fill required missing fields (Image URL and Description) to allow adding the product, then submit and verify the snackbar contains 'added'.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[4]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('https://example.com/image.jpg')
+        await asyncio.sleep(3); await elem.fill('https://via.placeholder.com/300')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/form/div[5]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('Sample product description')
+        await asyncio.sleep(3); await elem.fill('Test description for Test Product A')
         
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Recover the app view by navigating to the homepage, wait for the SPA to render, then check for a visible snackbar containing the text 'added'.
-        await page.goto("http://localhost:5173")
-        
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        assert await frame.locator("xpath=//*[contains(., 'added')]").nth(0).is_visible(), "The snackbar should display 'added' confirming the product was added after submitting the admin form."
+        assert await frame.locator("xpath=//*[contains(., 'added')]").nth(0).is_visible(), "The admin form should show a visible snackbar confirmation containing 'added' after submitting the new product."
         await asyncio.sleep(5)
 
     finally:

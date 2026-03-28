@@ -33,7 +33,7 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click the first visible 'View Details' link for the first product (Wireless Headphones) to open its product details page and then verify URL and content.
+        # -> Open the first product's details page by clicking the first visible 'View Details' link.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)

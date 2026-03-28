@@ -33,16 +33,18 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click 'View Details' on the first visible product card to open its product detail page, then wait for the page to load.
+        # -> Click the 'View Details' link on the first visible product card (Wireless Headphones). Then verify the product detail page elements and URL.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # --> Test passed — verified by AI agent
+        # --> Assertions to verify final state
         frame = context.pages[-1]
         current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        assert '/product/' in current_url, "The page URL should contain '/product/' after clicking View Details on the first product card"
+        assert await frame.locator("xpath=//*[contains(., 'Product Details')]").nth(0).is_visible(), "The product detail page should show the 'Product Details' section"
+        assert await frame.locator("xpath=//*[contains(., 'Add to Cart')]").nth(0).is_visible(), "The product detail page should include an 'Add to Cart' button"
         await asyncio.sleep(5)
 
     finally:
