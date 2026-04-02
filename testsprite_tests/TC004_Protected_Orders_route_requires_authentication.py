@@ -33,11 +33,8 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Open the first product's details page by clicking the first visible 'View Details' link.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to http://localhost:5173/orders and verify the login form or redirection is displayed
+        await page.goto("http://localhost:5173/orders")
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]

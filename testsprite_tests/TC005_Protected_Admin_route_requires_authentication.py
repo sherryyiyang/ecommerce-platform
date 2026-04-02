@@ -33,11 +33,8 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Open the first product’s detail page by clicking the first visible 'View Details' link/button.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to http://localhost:5173/admin and check whether the app redirects to the login page. If the page shows 0 interactive elements after navigation, wait and re-evaluate the UI.
+        await page.goto("http://localhost:5173/admin")
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]

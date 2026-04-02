@@ -5,8 +5,6 @@
   "localEndpoint": "http://localhost:5173",
   "loginUser": "example@gmail.com",
   "loginPassword": "123456789",
-  "serverPort": 62842,
-  "proxy": "http://ea8953d4-f8f1-4f9a-9571-56e67f3a6ca3:R1SGshoEfIeW8dGeO314AdXlmF69beRp@nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com:8080",
   "executionArgs": {
     "projectName": "ecommerce-platform",
     "projectPath": "/Users/sherryyang/Projects/ecommerce-platform",
@@ -22,7 +20,9 @@
       "TSEMCP_TUNNEL_CONTROL_URL": "wss://control-tun-dev.tsedev.com/ws",
       "TSEMCP_TUNNEL_DATA_ADDRESS": "data-tun-dev.tsedev.com:7400",
       "TSEMCP_TUNNEL_PROXY_URL": "http://proxy-tun-dev.tsedev.com:9090",
-      "TSEMCP_TUNNEL_VERSION": "2"
+      "TSEMCP_TUNNEL_VERSION": 1
     }
-  }
+  },
+  "serverPort": 61662,
+  "proxy": "http://0b4e99da-f6fd-40e0-8ba6-f9389dab902c:9BlPGbrvaphi2pyXWgbkxzmSWMujWWy3@nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com:8080"
 }

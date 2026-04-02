@@ -33,19 +33,19 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click “View Details” on the first visible product card to reach a /product/ page.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to http://localhost:5173/login to locate the login form and interactive elements.
+        await page.goto("http://localhost:5173/login")
         
-        # -> Use in-app navigation (Back/Catalog) to return to the catalog page, then confirm the product catalog cards are visible.
+        # -> Navigate to /catalog to look for the product catalog or any visible UI that allows signing in or initiating a purchase.
+        await page.goto("http://localhost:5173/catalog")
+        
+        # -> Open the login page by clicking the 'Login' link in the header so we can authenticate
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Log in using the provided test credentials so we can return to the product details page and then verify the in-app navigation back to the catalog works and the catalog cards render.
+        # -> Fill the email and password fields with example@gmail.com / 123456789 and submit the login form.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -61,45 +61,15 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open the first product’s “View Details”, confirm we are on a /product/ page, then use visible in-app Back navigation to return to the catalog and confirm product cards render again.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Navigate back to the Catalog using the visible in-app navigation and confirm the catalog (product cards) renders.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Find and click 'View Details' for the first product card to reach a /product/ page, then return to the catalog using visible in-app navigation and confirm product cards render.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click 'View Details' on the first product card to reach a /product/ page.
+        # -> Click the 'View Details' link for the first product (Wireless Headphones) to open its product page and then attempt to click the Buy button there.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Return to the catalog using the visible in-app navigation link, then verify the product cards are visible.
+        # --> Assertions to verify final state
         frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # --> Test passed — verified by AI agent
-        frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        assert await frame.locator("xpath=//*[contains(., 'Purchase successful')]").nth(0).is_visible(), "The page should show a purchase success confirmation after buying a product."
         await asyncio.sleep(5)
 
     finally:

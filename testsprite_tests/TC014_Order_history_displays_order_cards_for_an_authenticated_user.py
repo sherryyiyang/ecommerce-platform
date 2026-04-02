@@ -33,13 +33,10 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Open the login page using the Login link.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to the login page at /login to find the login form and proceed with authentication.
+        await page.goto("http://localhost:5173/login")
         
-        # -> Fill in the email and password fields and submit the login form.
+        # -> Fill the login form with the test account credentials and submit the form.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,28 +52,16 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open a product details page from the catalog.
+        # -> Navigate to the Orders page by clicking the 'Orders' link and then verify order cards are displayed with product, price, and date.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a').nth(0)
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open a product details page from the catalog to access the product-specific Buy flow.
+        # --> Assertions to verify final state
         frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Buy' button and verify the purchase success snackbar text appears.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # --> Test passed — verified by AI agent
-        frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        assert await frame.locator("xpath=//*[contains(., 'Orders')]").nth(0).is_visible(), "The Orders page should display the Orders heading after navigation"
+        assert 'Product' in await frame.locator("xpath=//*[contains(., 'Price')]").nth(0).text_content() and 'Price' in await frame.locator("xpath=//*[contains(., 'Price')]").nth(0).text_content() and 'Date' in await frame.locator("xpath=//*[contains(., 'Price')]").nth(0).text_content(), "Each order card should show a product, a price, and a date"
         await asyncio.sleep(5)
 
     finally:
