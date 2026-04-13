@@ -33,7 +33,7 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Open Wireless Headphones product details page via View Details.
+        # -> Click the 'View Details' link for the first product to open its product details page and then verify the buy action is disabled.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)

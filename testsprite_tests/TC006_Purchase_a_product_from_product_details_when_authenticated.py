@@ -33,13 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click Login and authenticate with the provided credentials.
+        # -> Click the Login link to navigate to the login page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the login form with the provided credentials and submit.
+        # -> Fill the email field (index 499) with example@gmail.com, fill the password field (index 507) with 123456789, then click the Login button (index 513) to submit.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,9 +55,21 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
+        # -> Click the 'View Details' action for the first product (Wireless Headphones) to open its detail page.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the Buy button (index 1044), wait for the UI to update, and verify the snackbar message 'Purchase successful!' appears.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        assert await frame.locator("xpath=//*[contains(., 'Purchase successful!')]").nth(0).is_visible(), "The purchase successful snackbar should be visible after buying the product"
+        assert await frame.locator("xpath=//*[contains(., 'Purchase successful!')]").nth(0).is_visible(), "The snackbar should display 'Purchase successful!' after buying the product."
         await asyncio.sleep(5)
 
     finally:

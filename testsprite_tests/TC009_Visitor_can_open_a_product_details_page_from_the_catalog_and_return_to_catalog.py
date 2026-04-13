@@ -33,13 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click a product's View Details link to open its details page.
+        # -> Click the 'View Details' control for the first product (Wireless Headphones).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the Catalog link to return to the product catalog, then verify product cards are visible and finish.
+        # -> Click the control to return to the product catalog (Catalog link) and then wait for the catalog to load so I can verify product cards are displayed.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
