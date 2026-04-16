@@ -3,16 +3,22 @@
   "type": "frontend",
   "scope": "codebase",
   "localEndpoint": "http://localhost:5173",
-  "loginUser": "test@example.com",
-  "loginPassword": "123456abc.",
+  "loginUser": "example@gmail.com",
+  "loginPassword": "123456789",
   "executionArgs": {
     "projectName": "ecommerce-platform",
-    "projectPath": "/Users/sherry/Projects/ecommerce-platform",
+    "projectPath": "/Users/sherryyang/Projects/ecommerce-platform",
     "testIds": [],
     "additionalInstruction": "",
+    "serverMode": "development",
     "envs": {
-      "API_KEY": "sk-user-hm3ugh-1AcoL5NHq20I1IYOXtH3uSCvavIRYWDrfMTZVH7nYkXFpai_hj7mf8whaPttwGsRPRdKzz0e871OETqmnOL6Hd6yTXSSUNhAHGwZLv0FigAaXT2qsESGshbv5Ku8"
+      "API_URL": "https://api.testsprite.com:11443",
+      "API_KEY": "sk-user-bsCyksRpL8NzmdpLD3DLuoSODrPSI-TcN_dthya8JflaEeyq-_n0SXG-P0JoH0bY-LoVCKAV08k86EiEjIxdw5zpayPSYjUH17L0Nh-Nc2gnLD1GAZa2JxsxPoTNWF_7IO4",
+      "TESTSPRITE_URL": "https://dev.d3jiomw0rrav5x.amplifyapp.com",
+      "TS_API_ENDPOINT": "https://api.testsprite.com:11443/api",
+      "TS_TUNNEL_ENDPOINT": "nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com"
     }
   },
-  "proxy": "http://e5f439c5-4da8-43f6-a1d0-ebc1b78a70d2:M3muTw4pXEB7rqMckuuMIU7gBAQRYbb6@tun.testsprite.com:8080"
+  "serverPort": 59079,
+  "proxy": "http://01aafe4e-d8fa-4045-a2f6-e4dd5e95aee5:S5wuMbTqctkiJJbFAFR5wn5879Jh0ajJ@nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com:8080"
 }

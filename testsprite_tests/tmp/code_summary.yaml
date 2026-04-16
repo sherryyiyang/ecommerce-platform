@@ -1,0 +1,109 @@
+version: "2"
+type: frontend
+tech_stack:
+  - TypeScript
+  - React
+  - React Router DOM
+  - Material UI (MUI)
+  - Vite
+routes:
+  - path: /
+    file: src/pages/ProductCatalog.tsx
+    auth_required: false
+    description: Product catalog page showing product cards with view-details and buy actions
+  - path: /login
+    file: src/pages/Login.tsx
+    auth_required: false
+    description: Login form that validates hard-coded test credentials
+  - path: /product/:id
+    file: src/pages/ProductDetails.tsx
+    auth_required: false
+    description: Product detail page for a selected catalog item
+  - path: /orders
+    file: src/pages/OrderHistory.tsx
+    auth_required: true
+    description: Protected page showing order history cards from mock data
+  - path: /admin
+    file: src/pages/AdminPage.tsx
+    auth_required: true
+    description: Protected admin product management page for UI-level CRUD
+features:
+  - name: Authentication Gate
+    description: Local in-memory auth context with login/logout and protected routes
+    files:
+      - src/App.tsx
+      - src/pages/Login.tsx
+    entry_route: /login
+    user_interactions:
+      - Open Login page
+      - Enter email and password
+      - Submit login form
+      - Access protected Orders/Admin links after successful login
+      - Click Logout to return to unauthenticated state
+    api_calls: []
+    auth_required: false
+  - name: Product Catalog Browsing
+    description: View products loaded from mock data and navigate to product details
+    files:
+      - src/pages/ProductCatalog.tsx
+      - src/mockData.ts
+    entry_route: /
+    user_interactions:
+      - Open catalog page
+      - Browse product cards and metadata
+      - Click View Details on a product card
+      - Click Buy button when authenticated
+    api_calls: []
+    auth_required: false
+  - name: Product Details and Purchase Feedback
+    description: View product details by route param and trigger purchase success snackbar when authenticated
+    files:
+      - src/pages/ProductDetails.tsx
+      - src/mockData.ts
+    entry_route: /product/:id
+    user_interactions:
+      - Navigate to a product details page
+      - View product image, category, price, and description
+      - Click Buy to trigger purchase flow
+      - Observe success snackbar message
+    api_calls: []
+    auth_required: false
+  - name: Order History View
+    description: Display mock order history after passing route authentication
+    files:
+      - src/pages/OrderHistory.tsx
+      - src/mockData.ts
+    entry_route: /orders
+    user_interactions:
+      - Log in with valid credentials
+      - Navigate to Orders page
+      - View order cards with product, price, and date
+    api_calls: []
+    auth_required: true
+  - name: Admin Product Management
+    description: Add, edit, and delete products in local component state with snackbar notifications
+    files:
+      - src/pages/AdminPage.tsx
+      - src/mockData.ts
+    entry_route: /admin
+    user_interactions:
+      - Log in and navigate to Admin page
+      - Fill product form and submit to add a product
+      - Edit an existing product and save changes
+      - Delete an existing product
+      - Observe CRUD snackbar messages
+    api_calls: []
+    auth_required: true
+known_limitations:
+  - issue: No backend API integration; all data operations use local mock data with simulated delay
+    location: src/mockData.ts
+    impact: Data is not persisted and resets on refresh
+  - issue: Authentication is in-memory only and uses hard-coded credentials
+    location: src/pages/Login.tsx
+    impact: Session does not persist across reloads and is not secure for production
+  - issue: Buy action is disabled when unauthenticated even though handlers include login redirect logic
+    location: src/pages/ProductCatalog.tsx
+    impact: Redirect path in buy handler is effectively unreachable from disabled button state
+  - issue: Admin CRUD updates only local UI state
+    location: src/pages/AdminPage.tsx
+    impact: Product changes do not propagate to catalog data source or persistent storage
