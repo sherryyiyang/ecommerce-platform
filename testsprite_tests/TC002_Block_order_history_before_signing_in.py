@@ -33,8 +33,8 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Navigate to http://localhost:5173/admin and check whether the app redirects to the login page. If the page shows 0 interactive elements after navigation, wait and re-evaluate the UI.
-        await page.goto("http://localhost:5173/admin")
+        # -> Navigate to http://localhost:5173/orders and wait for the page to render so I can verify the sign-in gate and that order history is not displayed.
+        await page.goto("http://localhost:5173/orders")
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]

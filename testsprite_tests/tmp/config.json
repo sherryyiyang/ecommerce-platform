@@ -16,13 +16,9 @@
       "API_KEY": "sk-user-bsCyksRpL8NzmdpLD3DLuoSODrPSI-TcN_dthya8JflaEeyq-_n0SXG-P0JoH0bY-LoVCKAV08k86EiEjIxdw5zpayPSYjUH17L0Nh-Nc2gnLD1GAZa2JxsxPoTNWF_7IO4",
       "TESTSPRITE_URL": "https://dev.d3jiomw0rrav5x.amplifyapp.com",
       "TS_API_ENDPOINT": "https://api.testsprite.com:11443/api",
-      "TS_TUNNEL_ENDPOINT": "nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com",
-      "TSEMCP_TUNNEL_CONTROL_URL": "wss://control-tun-dev.tsedev.com/ws",
-      "TSEMCP_TUNNEL_DATA_ADDRESS": "data-tun-dev.tsedev.com:7400",
-      "TSEMCP_TUNNEL_PROXY_URL": "http://proxy-tun-dev.tsedev.com:9090",
-      "TSEMCP_TUNNEL_VERSION": 1
+      "TS_TUNNEL_ENDPOINT": "nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com"
     }
   },
-  "serverPort": 61662,
-  "proxy": "http://0b4e99da-f6fd-40e0-8ba6-f9389dab902c:9BlPGbrvaphi2pyXWgbkxzmSWMujWWy3@nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com:8080"
+  "serverPort": 59079,
+  "proxy": "http://01aafe4e-d8fa-4045-a2f6-e4dd5e95aee5:S5wuMbTqctkiJJbFAFR5wn5879Jh0ajJ@nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com:8080"
 }

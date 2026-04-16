@@ -33,32 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Navigate to /login to reach the login page (explicit path provided in test steps).
-        await page.goto("http://localhost:5173/login")
-        
-        # -> Fill the email field (index 65) with example@gmail.com, fill the password field (index 73) with 123456789, submit the login form, then navigate to /admin to check for the product management UI.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Login' link in the top navigation to open the login form so we can authenticate and then access the Admin page.
+        # -> Open the login page by clicking the 'Login' link so the login form appears.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email and password fields and submit the Login form to authenticate, then proceed to /admin to verify the admin UI.
+        # -> Fill email and password fields with the provided test credentials and submit the login form.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -74,13 +55,13 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open the Login page by clicking the 'Login' link in the top navigation so we can authenticate.
+        # -> Open the login page so I can authenticate as admin.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email field with example@gmail.com (the immediate action).
+        # -> Fill the email and password fields with example@gmail.com / 123456789 and submit the login form (click the Login button).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -96,60 +77,120 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open the Login page by clicking the 'Login' link in the top navigation so we can authenticate.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Fill the email and password fields and submit the login form (use example@gmail.com / 123456789)
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the Login link, fill credentials (example@gmail.com / 123456789), submit the form, then navigate to /admin to verify the admin product management UI and products list.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Fill the email and password fields on the Login page and submit the Login form (input indexes: email=4924, password=4932, submit button=4938).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Admin' link in the top navigation to open the Admin page and verify the product management UI and products list.
+        # -> Open the Admin page (click the 'ADMIN' link) to access the product management UI.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # --> Test passed — verified by AI agent
+        # -> Click the 'Login' link to open the login form so we can authenticate as admin.
         frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Fill email and password fields with example@gmail.com / 123456789 and click the Login button to authenticate.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Open the Login page so the login form appears (click the 'Login' link).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Authenticate as admin by filling the email and password fields and clicking the Login button.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Fill the email and password fields and submit the login form by clicking the Login button.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Fill the email and password fields with example@gmail.com / 123456789 and click the Login button to authenticate.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Open the Admin page by clicking the 'ADMIN' link to access product management UI.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Fill the login form and submit it to authenticate as admin.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('123456789')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'ADMIN' link to open the product management UI so we can select and delete a product.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[4]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # --> Assertions to verify final state
+        frame = context.pages[-1]
+        assert await frame.locator("xpath=//*[contains(., 'No products found')]").nth(0).is_visible(), "The managed products list should show 'No products found' after removing the product.",
+        assert await frame.locator("xpath=//*[contains(., 'Product deleted successfully')]").nth(0).is_visible(), "A success confirmation stating 'Product deleted successfully' should be visible after deleting the product."
         await asyncio.sleep(5)
 
     finally:

@@ -5,146 +5,130 @@
 
 ## 1️⃣ Document Metadata
 - **Project Name:** ecommerce-platform
-- **Date:** 2026-04-01
+- **Date:** 2026-04-03
 - **Prepared by:** TestSprite AI Team
 
 ---
 
 ## 2️⃣ Requirement Validation Summary
 
-#### Test TC001 Login and access protected order history
-- **Test Code:** [TC001_Login_and_access_protected_order_history.py](./TC001_Login_and_access_protected_order_history.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/a0fc8b54-1ad4-4290-8b73-48488b8fdc70
+#### Test TC001 Log in with valid credentials and reach protected areas
+- **Test Code:** [TC001_Log_in_with_valid_credentials_and_reach_protected_areas.py](./TC001_Log_in_with_valid_credentials_and_reach_protected_areas.py)
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/65451fb0-f824-4087-bb70-e217c83dfdd3
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC002 Invalid login shows authentication error and does not authenticate
-- **Test Code:** [TC002_Invalid_login_shows_authentication_error_and_does_not_authenticate.py](./TC002_Invalid_login_shows_authentication_error_and_does_not_authenticate.py)
-- **Test Error:** TEST BLOCKED
-
-The login page could not be reached — the single-page app did not render, so I cannot interact with the login form to verify authentication behavior.
-
-Observations:
-- The page is blank with no interactive elements present.
-- The browser tab title shows 'Vite + React + TS' but no UI has rendered.
-- Navigating directly to /login produced the same blank page.
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/92d2e5dc-1e8e-48d2-99db-9ea4334b90a0
-- **Status:** BLOCKED
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC003 Logout returns user to unauthenticated state
-- **Test Code:** [TC003_Logout_returns_user_to_unauthenticated_state.py](./TC003_Logout_returns_user_to_unauthenticated_state.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/08c1d96e-d282-43ed-8351-e8feeb6a34cd
+#### Test TC002 Block order history before signing in
+- **Test Code:** [TC002_Block_order_history_before_signing_in.py](./TC002_Block_order_history_before_signing_in.py)
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/c63db892-95e4-418e-bdd0-12454f1f9d1c
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC004 Protected Orders route requires authentication
-- **Test Code:** [TC004_Protected_Orders_route_requires_authentication.py](./TC004_Protected_Orders_route_requires_authentication.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/2e399ee6-f856-4b48-b574-87ab711ca31f
+#### Test TC003 Browse product catalog cards and open a product detail page
+- **Test Code:** [TC003_Browse_product_catalog_cards_and_open_a_product_detail_page.py](./TC003_Browse_product_catalog_cards_and_open_a_product_detail_page.py)
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/c724e7b2-c91b-45c0-b6d8-0c58432e99d5
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC005 Protected Admin route requires authentication
-- **Test Code:** [TC005_Protected_Admin_route_requires_authentication.py](./TC005_Protected_Admin_route_requires_authentication.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/559e3590-36e4-4e38-a127-cbf44d6211b6
+#### Test TC004 Log out and lose access to protected pages
+- **Test Code:** [TC004_Log_out_and_lose_access_to_protected_pages.py](./TC004_Log_out_and_lose_access_to_protected_pages.py)
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/2a1bb721-3e65-4860-a6c0-115e5e9aacea
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC007 Catalog page loads and displays product cards
-- **Test Code:** [TC007_Catalog_page_loads_and_displays_product_cards.py](./TC007_Catalog_page_loads_and_displays_product_cards.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/fedfd6bc-0a12-4ef4-84bd-fd3805ba1f1b
+#### Test TC005 Protect order history after logout
+- **Test Code:** [TC005_Protect_order_history_after_logout.py](./TC005_Protect_order_history_after_logout.py)
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/65600281-c61d-42b5-a011-e5c6598ce38d
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC008 Open product details from catalog
-- **Test Code:** [TC008_Open_product_details_from_catalog.py](./TC008_Open_product_details_from_catalog.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/817d0d4c-b7aa-417a-adce-372869e6d7fd
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC009 Unauthenticated purchase initiation is prevented from catalog
-- **Test Code:** [TC009_Unauthenticated_purchase_initiation_is_prevented_from_catalog.py](./TC009_Unauthenticated_purchase_initiation_is_prevented_from_catalog.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/8ad9f899-6971-4244-bca0-7bd9fa3ce455
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC010 Authenticated user can buy from catalog and see success feedback
-- **Test Code:** [TC010_Authenticated_user_can_buy_from_catalog_and_see_success_feedback.py](./TC010_Authenticated_user_can_buy_from_catalog_and_see_success_feedback.py)
-- **Test Error:** TEST FAILURE
-
-Authenticated purchase could not be initiated — the Buy action is not available.
-
-Observations:
-- The product details page shows a disabled 'Buy' button.
-- The page header displays a 'Login' link, indicating the user is not currently signed in.
-
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/63fca1f5-f162-48cb-b2e6-17e1be39d6fd
+#### Test TC006 Protect the admin area after logout
+- **Test Code:** [TC006_Protect_the_admin_area_after_logout.py](./TC006_Protect_the_admin_area_after_logout.py)
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/2dd3aff8-2e38-4fb6-a3bf-4bbef3bba942
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC011 Authenticated purchase from product details shows success and appears in order history
-- **Test Code:** [TC011_Authenticated_purchase_from_product_details_shows_success_and_appears_in_order_history.py](./TC011_Authenticated_purchase_from_product_details_shows_success_and_appears_in_order_history.py)
-- **Test Error:** TEST BLOCKED
-
-The product details page did not load and the purchase flow cannot be tested.
-
-Observations:
-- The product details view shows "Loading product..." and no product information is displayed.
-- There is no 'Buy' button or purchase controls present on the page.
-- The interactive elements present are only header links (Catalog, Orders, Admin) and Logout.
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/a3944c23-8223-4f55-9ae8-8c939b33b065
-- **Status:** BLOCKED
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC012 Unauthenticated purchase is prevented from product details
-- **Test Code:** [TC012_Unauthenticated_purchase_is_prevented_from_product_details.py](./TC012_Unauthenticated_purchase_is_prevented_from_product_details.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/3bd37006-4326-430f-9ff9-484f222668de
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC013 Product details page displays primary product information
-- **Test Code:** [TC013_Product_details_page_displays_primary_product_information.py](./TC013_Product_details_page_displays_primary_product_information.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/1e37476e-9a53-4e0a-8904-39dc0ea29203
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC014 Order history displays order cards for an authenticated user
-- **Test Code:** [TC014_Order_history_displays_order_cards_for_an_authenticated_user.py](./TC014_Order_history_displays_order_cards_for_an_authenticated_user.py)
+#### Test TC007 View order history after signing in
+- **Test Code:** [TC007_View_order_history_after_signing_in.py](./TC007_View_order_history_after_signing_in.py)
 - **Test Error:** TEST FAILURE
 
-The Orders page did not show any order entries for the logged-in user.
+Customer sign-in succeeded but the Orders page does not show any order history cards with product, price, and date information.
 
 Observations:
-- The Orders page loaded and the navbar shows the user is logged in (Logout visible).
-- The page displays the message 'No orders found.'
-- There are no order cards visible showing product, price, or date.
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/874a0fb4-b760-4054-95d8-1e6a83479fd7
+- The Orders page displays the message 'No orders found.'
+- No order cards or product/price/date details are present on the page.
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/d39705b5-82c5-4541-ac3c-a851ecf6880d
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC015 Unauthenticated access to Orders redirects to login
-- **Test Code:** [TC015_Unauthenticated_access_to_Orders_redirects_to_login.py](./TC015_Unauthenticated_access_to_Orders_redirects_to_login.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/b15f20b8-7c76-46df-b403-092847a29044
+#### Test TC008 View past orders after signing in
+- **Test Code:** [TC008_View_past_orders_after_signing_in.py](./TC008_View_past_orders_after_signing_in.py)
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/8849d84d-42ea-4424-bfea-3b74d622c9e8
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC016 Admin page loads for authenticated user
-- **Test Code:** [TC016_Admin_page_loads_for_authenticated_user.py](./TC016_Admin_page_loads_for_authenticated_user.py)
-- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/2edd9601-26f3-482d-acdc-5c32318cdb04/b4dea0f5-c0c8-45a7-a92f-da46aa6a79b1
+#### Test TC009 Buy a product from its detail page after signing in
+- **Test Code:** [TC009_Buy_a_product_from_its_detail_page_after_signing_in.py](./TC009_Buy_a_product_from_its_detail_page_after_signing_in.py)
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/a5473aec-0d9a-41ae-864f-de3408d451a7
+- **Status:** ❌ Failed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC010 View complete product information on a product detail page
+- **Test Code:** [TC010_View_complete_product_information_on_a_product_detail_page.py](./TC010_View_complete_product_information_on_a_product_detail_page.py)
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/6b55ce68-fc03-443e-afa6-03d3bec0498b
+- **Status:** ✅ Passed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC011 Add a product in the admin area
+- **Test Code:** [TC011_Add_a_product_in_the_admin_area.py](./TC011_Add_a_product_in_the_admin_area.py)
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/c2d24f14-304a-4bf1-9128-c364bbd41587
+- **Status:** ✅ Passed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC012 Edit an existing product in the admin area
+- **Test Code:** [TC012_Edit_an_existing_product_in_the_admin_area.py](./TC012_Edit_an_existing_product_in_the_admin_area.py)
+- **Test Error:** Clicked button "Login"
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/d0f5fd3b-0d53-42f9-a485-d3e83bb8d423
+- **Status:** ❌ Failed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC013 Add, edit, and delete a product in the admin page
+- **Test Code:** [TC013_Add_edit_and_delete_a_product_in_the_admin_page.py](./TC013_Add_edit_and_delete_a_product_in_the_admin_page.py)
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/bdc41bef-5b57-41f9-b9be-849bf758d3b2
+- **Status:** ✅ Passed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC014 Delete a product in the admin area
+- **Test Code:** [TC014_Delete_a_product_in_the_admin_area.py](./TC014_Delete_a_product_in_the_admin_area.py)
+- **Test Error:** TEST FAILURE
+
+The Admin Product Management page does not provide controls to remove an existing product, so an admin cannot delete a product through the visible UI.
+
+Observations:
+- The page shows only the Add Product form (Name, Category, Price, Image URL, Description, and Add button).
+- No product list, product cards, or Delete buttons are present on the Admin page.
+- The interactive elements list contains only inputs and the Add button and no delete controls.
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/889c4057-abdb-4264-85a7-9307273a18f8
+- **Status:** ❌ Failed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC015 See buying unavailable before signing in
+- **Test Code:** [TC015_See_buying_unavailable_before_signing_in.py](./TC015_See_buying_unavailable_before_signing_in.py)
+- **Test Visualization and Result:** https://dev.d3jiomw0rrav5x.amplifyapp.com/dashboard/mcp/tests/7688fe20-a0cb-4406-b5b5-ae21a4b31a5f/8b6360dc-1c61-4fef-b6db-2d841317a671
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
@@ -152,7 +136,7 @@ Observations:
 
 ## 3️⃣ Coverage & Matching Metrics
 
-- **73.33** of tests passed
+- **66.67** of tests passed
 
 | Requirement        | Total Tests | ✅ Passed | ❌ Failed  |
 |--------------------|-------------|-----------|------------|

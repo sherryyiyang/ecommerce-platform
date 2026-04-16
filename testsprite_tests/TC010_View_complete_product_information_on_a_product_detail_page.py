@@ -33,11 +33,11 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Wait for the SPA to finish loading; if still empty, navigate directly to /catalog to find the buy action UI.
-        await page.goto("http://localhost:5173/catalog")
-        
-        # -> Reload the app (navigate to the root) to force the SPA to render. After the page loads, find the catalog buy action and verify whether it is disabled or prompts for login for unauthenticated users.
-        await page.goto("http://localhost:5173/")
+        # -> Click the 'View Details' link for the first product (Wireless Headphones) to open its product page and then verify the image, category, price, and description are displayed.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]

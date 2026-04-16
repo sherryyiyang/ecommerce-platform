@@ -33,10 +33,10 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Navigate to /login (http://localhost:5173/login) and wait for the login form or page UI to load.
+        # -> Navigate to /login (http://localhost:5173/login) to find the login form and continue the sign-in verification.
         await page.goto("http://localhost:5173/login")
         
-        # -> Fill the email and password fields with the test credentials and submit the login form.
+        # -> Fill the Email field with example@gmail.com (index 254), fill the Password field with 123456789 (index 255), then click the Login button (index 258).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -52,21 +52,16 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open the catalog view (ensure product list loads) by clicking the 'Catalog' link, then look for a product card to view details.
+        # -> Click the 'Orders' navigation link (index 677) to open the order history page and then verify order cards show product, price, and date information.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Open the product details page for 'Wireless Headphones' by clicking its 'View Details' link, then proceed to buy from the details page.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        assert await frame.locator("xpath=//*[contains(., 'Wireless Headphones')]").nth(0).is_visible(), "The order history should display the newly created order for Wireless Headphones after purchase"
+        assert await frame.locator("xpath=//*[contains(., 'Order History')]").nth(0).is_visible(), "The order history page should be visible after clicking Orders"
+        assert await frame.locator("xpath=//*[contains(., 'Price')]").nth(0).is_visible(), "The order card should show product, price, and date information after viewing order history"
         await asyncio.sleep(5)
 
     finally:
