@@ -33,7 +33,7 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Navigate directly to http://localhost:5173/admin and observe whether the app redirects to the login page (check URL and visible login UI).
+        # -> Navigate to http://localhost:5173/admin and verify that the unauthenticated visitor is redirected to the login page.
         await page.goto("http://localhost:5173/admin")
         
         # --> Test passed — verified by AI agent

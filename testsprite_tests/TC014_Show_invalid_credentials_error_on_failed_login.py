@@ -33,10 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Navigate to /login and wait for the page to load, then observe the login form fields
-        await page.goto("http://localhost:5173/login")
+        # -> Click the 'Login' link to open the login form.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Enter invalid@example.com into the Email field (index 251), enter wrongpass into the Password field (index 252), then click the Login button (index 255) and verify the exact text 'Invalid credentials.' appears.
+        # -> Fill the Email field with invalid@example.com (input index 401) as the immediate next action.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)

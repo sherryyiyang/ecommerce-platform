@@ -33,10 +33,10 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Navigate directly to /orders to trigger redirect to login (per test steps).
+        # -> Navigate to /orders (explicit navigation per test step)
         await page.goto("http://localhost:5173/orders")
         
-        # -> Fill the login form (email then password) and submit the login form.
+        # -> Fill the email field with example@gmail.com
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -52,7 +52,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Orders' navigation item to open the Order History page and verify the page heading reads 'Order History'.
+        # -> Click the 'Orders' navigation link to open the orders page and then verify the page heading is 'Order History'.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)

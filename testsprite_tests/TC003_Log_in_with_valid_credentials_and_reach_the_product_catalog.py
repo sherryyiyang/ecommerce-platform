@@ -33,13 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click the 'Login' link to open the login form, then fill and submit the login credentials.
+        # -> Click the Login link to open the login page (use element index 130).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email and password fields with the provided test credentials and submit the login form (first login attempt). After submitting, verify the product catalog displays product cards.
+        # -> Fill the email field with example@gmail.com, fill the password field with 123456789, then submit the form (click the Login button). After that, verify product cards are displayed on the product catalog page.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)

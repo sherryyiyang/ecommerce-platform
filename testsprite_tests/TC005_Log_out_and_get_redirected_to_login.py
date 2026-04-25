@@ -33,10 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Navigate to /login (http://localhost:5173/login) to reach the login form and continue the logout verification.
-        await page.goto("http://localhost:5173/login")
+        # -> Click the 'Login' link in the app bar to reach the login page.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email field with example@gmail.com (immediate action).
+        # -> Fill the email and password fields and submit the login form by clicking the Login button.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -52,7 +55,7 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the Logout button in the app bar to trigger logout and verify the app redirects to the login page.
+        # -> Click the Logout button in the app bar to sign out (use element index 894). After clicking, verify the page shows the login form (Email, Password inputs and Login button).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/button').nth(0)

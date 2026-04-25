@@ -12,9 +12,16 @@
     "additionalInstruction": "",
     "serverMode": "development",
     "envs": {
-      "API_KEY": "sk-user-hm3ugh-1AcoL5NHq20I1IYOXtH3uSCvavIRYWDrfMTZVH7nYkXFpai_hj7mf8whaPttwGsRPRdKzz0e871OETqmnOL6Hd6yTXSSUNhAHGwZLv0FigAaXT2qsESGshbv5Ku8",
+      "API_URL": "http://localhost:3000",
+      "API_KEY": "sk-user-bsCyksRpL8NzmdpLD3DLuoSODrPSI-TcN_dthya8JflaEeyq-_n0SXG-P0JoH0bY-LoVCKAV08k86EiEjIxdw5zpayPSYjUH17L0Nh-Nc2gnLD1GAZa2JxsxPoTNWF_7IO4",
+      "TESTSPRITE_URL": "https://dev.d3jiomw0rrav5x.amplifyapp.com",
+      "TS_API_ENDPOINT": "http://localhost:3000/api",
+      "TS_TUNNEL_ENDPOINT": "nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com",
+      "TSEMCP_TUNNEL_CONTROL_URL": "wss://control-tun-dev.tsedev.com/ws",
+      "TSEMCP_TUNNEL_DATA_ADDRESS": "data-tun-dev.tsedev.com:7400",
+      "TSEMCP_TUNNEL_PROXY_URL": "http://proxy-tun-dev.tsedev.com:9090",
       "TSEMCP_TUNNEL_VERSION": "2"
     }
   },
-  "serverPort": 51788
+  "serverPort": 51394
 }

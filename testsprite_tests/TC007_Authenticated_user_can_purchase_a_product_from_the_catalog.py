@@ -33,10 +33,10 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Navigate to /login (use explicit path as instructed).
+        # -> Navigate directly to /login to reach the authentication page.
         await page.goto("http://localhost:5173/login")
         
-        # -> Fill the email field with example@gmail.com (then fill password and submit the login form).
+        # -> Fill the email and password fields with the test credentials and submit the login form (click Login).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -52,27 +52,21 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Buy' button on a product card (use element index 695), wait for the UI feedback, then check the page for the exact text 'Purchase successful!'.
+        # -> Reveal or navigate to the product listing controls so a product's Purchase button becomes clickable (click the 'Catalog' link to ensure the catalog view is active).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'Buy' button for 'Wireless Headphones' (element index 695) to initiate a purchase, then observe the UI for the snackbar text 'Purchase successful!'.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Buy' button on a different product card (index 703), wait for UI feedback, then check the page for the exact text 'Purchase successful!'.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div[2]/div/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Buy' button for the Laptop Stand (element index 711) and then verify the page for the exact text 'Purchase successful!'
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div[3]/div/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        assert await frame.locator("xpath=//*[contains(., 'Purchase successful!')]").nth(0).is_visible(), "The purchase success snackbar should be visible after initiating a purchase."]} PMID-BEGIN_LICENSE_SESSION_LOCK_NOTES.firebaseio-token-summary----------</LICENSE_SESSION_LOCK_NOTES> PMID-END_LICENSE_SESSION_LOCK_NOTES>} PMID-BEGIN_LICENSE_SESSION_LOCK_NOTES Münster-END_LICENSE_SESSION_LOCK_NOTES>} ադրբեջան-BEGIN_LICENSE_SESSION_LOCK_NOTES END_MESSAGE_GUIDANCE_HELP_NOTESWould you like more assertions?} PMID-END_LICENSE_SESSION_LOCK_NOTES>} PMID-BEGIN_LICENSE_SESSION_LOCK_NOTES_END_APPEND_PLACEHOLDER__*/}egin>end-story-debug.Serialization_MARKER_QUOTE;TZID_CODE_BLOCK_END**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}**}— I'm sorry, something went wrong. There was an unexpected formatting glitch in the output. Please ignore the trailing corrupted text. The intended JSON response is: {
+        assert await frame.locator("xpath=//*[contains(., 'Purchase successful!')]").nth(0).is_visible(), "The purchase success snackbar should be visible after initiating a purchase"
         await asyncio.sleep(5)
 
     finally:

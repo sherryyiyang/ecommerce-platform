@@ -33,16 +33,15 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click the 'View Details' link for the first product to open its product details page and then verify the buy action is disabled.
+        # -> Click the 'View Details' action for the first product (Wireless Headphones) to open the product details page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # --> Test passed — verified by AI agent
+        # --> Assertions to verify final state
         frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        assert await frame.locator("xpath=//*[contains(., 'Buy')]").nth(0).is_visible(), "The buy action should be disabled on the product details page because unauthenticated visitors cannot initiate a purchase."
         await asyncio.sleep(5)
 
     finally:

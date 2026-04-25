@@ -33,13 +33,13 @@ async def run_test():
         # -> Navigate to http://localhost:5173
         await page.goto("http://localhost:5173")
         
-        # -> Click the Login link to navigate to the login page.
+        # -> Click the Login link to open the login page, then fill the email and password fields.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/header/div/a[3]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the email field (index 499) with example@gmail.com, fill the password field (index 507) with 123456789, then click the Login button (index 513) to submit.
+        # -> Fill the email field with example@gmail.com, fill the password with 123456789, then submit the login form.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
@@ -55,13 +55,25 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'View Details' action for the first product (Wireless Headphones) to open its detail page.
+        # -> Open the Catalog view and reveal product cards so a product detail can be opened. If product cards appear, open a product's detail page.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Open the Wireless Headphones product detail by clicking its 'View Details' link (index 904). After the detail page renders, the next action will be to click the Buy button on the product detail page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/a').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the Buy button (index 1044), wait for the UI to update, and verify the snackbar message 'Purchase successful!' appears.
+        # -> Click the Buy button for the Wireless Headphones, wait for UI feedback, and extract the visible snackbar text to verify it says 'Purchase successful!'.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the Buy button on the product detail page again, wait for UI feedback, and extract any visible snackbar/toast text to check for 'Purchase successful!'
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/button').nth(0)
@@ -69,7 +81,7 @@ async def run_test():
         
         # --> Assertions to verify final state
         frame = context.pages[-1]
-        assert await frame.locator("xpath=//*[contains(., 'Purchase successful!')]").nth(0).is_visible(), "The snackbar should display 'Purchase successful!' after buying the product."
+        assert await frame.locator("xpath=//*[contains(., 'Purchase successful!')]").nth(0).is_visible(), "The purchase success snackbar should be visible after completing a purchase"
         await asyncio.sleep(5)
 
     finally:
