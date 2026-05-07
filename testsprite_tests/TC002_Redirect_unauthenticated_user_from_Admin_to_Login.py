@@ -1,4 +1,5 @@
 import asyncio
+import re
 from playwright import async_api
 from playwright.async_api import expect
 
@@ -15,26 +16,36 @@ async def run_test():
         browser = await pw.chromium.launch(
             headless=True,
             args=[
-                "--window-size=1280,720",         # Set the browser window size
-                "--disable-dev-shm-usage",        # Avoid using /dev/shm which can cause issues in containers
-                "--ipc=host",                     # Use host-level IPC for better stability
-                "--single-process"                # Run the browser in a single process mode
+                "--window-size=1280,720",
+                "--disable-dev-shm-usage",
+                "--ipc=host",
+                "--single-process"
             ],
         )
 
         # Create a new browser context (like an incognito window)
         context = await browser.new_context()
-        context.set_default_timeout(5000)
+        # Wider default timeout to match the agent's DOM-stability budget;
+        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.
+        context.set_default_timeout(15000)
 
         # Open a new page in the browser context
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:5173
-        await page.goto("http://localhost:5173")
+        # -> navigate
+        await page.goto("http://localhost:5174")
+        try:
+            await page.wait_for_load_state("domcontentloaded", timeout=5000)
+        except Exception:
+            pass
         
-        # -> Navigate to http://localhost:5173/admin and verify that the unauthenticated visitor is redirected to the login page.
-        await page.goto("http://localhost:5173/admin")
+        # -> Navigate to http://localhost:5174/admin and verify that an unauthenticated visitor is redirected to the login page.
+        await page.goto("http://localhost:5174/admin")
+        try:
+            await page.wait_for_load_state("domcontentloaded", timeout=5000)
+        except Exception:
+            pass
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]

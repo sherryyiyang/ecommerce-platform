@@ -1,4 +1,5 @@
 import asyncio
+import re
 from playwright import async_api
 from playwright.async_api import expect
 
@@ -15,58 +16,74 @@ async def run_test():
         browser = await pw.chromium.launch(
             headless=True,
             args=[
-                "--window-size=1280,720",         # Set the browser window size
-                "--disable-dev-shm-usage",        # Avoid using /dev/shm which can cause issues in containers
-                "--ipc=host",                     # Use host-level IPC for better stability
-                "--single-process"                # Run the browser in a single process mode
+                "--window-size=1280,720",
+                "--disable-dev-shm-usage",
+                "--ipc=host",
+                "--single-process"
             ],
         )
 
         # Create a new browser context (like an incognito window)
         context = await browser.new_context()
-        context.set_default_timeout(5000)
+        # Wider default timeout to match the agent's DOM-stability budget;
+        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.
+        context.set_default_timeout(15000)
 
         # Open a new page in the browser context
         page = await context.new_page()
 
         # Interact with the page elements to simulate user flow
-        # -> Navigate to http://localhost:5173
-        await page.goto("http://localhost:5173")
+        # -> navigate
+        await page.goto("http://localhost:5174")
+        try:
+            await page.wait_for_load_state("domcontentloaded", timeout=5000)
+        except Exception:
+            pass
         
-        # -> Navigate directly to /login to reach the authentication page.
-        await page.goto("http://localhost:5173/login")
+        # -> Click the 'Login' link to open the login page.
+        # link "Login"
+        elem = page.locator("xpath=/html/body/div/header/div/a[3]").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.click()
         
-        # -> Fill the email and password fields with the test credentials and submit the login form (click Login).
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('example@gmail.com')
+        # -> Fill the email input with example@gmail.com (index 524), then fill password (index 533), then submit the login form (click index 539).
+        # email input
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div/div/input").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.fill("example@gmail.com")
         
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('123456789')
+        # -> Fill the email input with example@gmail.com (index 524), then fill password (index 533), then submit the login form (click index 539).
+        # password input
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.fill("123456789")
         
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Fill the email input with example@gmail.com (index 524), then fill password (index 533), then submit the login form (click index 539).
+        # button "Login"
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/button").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.click()
         
-        # -> Reveal or navigate to the product listing controls so a product's Purchase button becomes clickable (click the 'Catalog' link to ensure the catalog view is active).
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/header/div/a[2]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Click the Buy button on the first product card to initiate a purchase, then check the page for the exact snackbar text 'Purchase successful!'.
+        # button "Buy"
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/div/div/button").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.click()
         
-        # -> Click the 'Buy' button for 'Wireless Headphones' (element index 695) to initiate a purchase, then observe the UI for the snackbar text 'Purchase successful!'.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div/div/div/div/div/div/div/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Click the Buy button on the first product card (index 931), wait for UI to settle, then search the page for the exact text 'Purchase successful!'
+        # button "Buy"
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/div/div/button").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.click()
+        
+        # -> Click the Buy button on a different product (index 939), wait for the UI to settle, then search the page for the exact text 'Purchase successful!'
+        # button "Buy"
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div[2]/div/div/button").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.click()
         
         # --> Assertions to verify final state
-        frame = context.pages[-1]
-        assert await frame.locator("xpath=//*[contains(., 'Purchase successful!')]").nth(0).is_visible(), "The purchase success snackbar should be visible after initiating a purchase"
+        assert await page.locator("xpath=//*[contains(., 'Purchase successful!')]").nth(0).is_visible(), "The success snackbar 'Purchase successful!' should be visible after initiating a purchase."
         await asyncio.sleep(5)
 
     finally:

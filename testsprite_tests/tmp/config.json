@@ -2,7 +2,7 @@
   "status": "commited",
   "type": "frontend",
   "scope": "codebase",
-  "localEndpoint": "http://localhost:5173",
+  "localEndpoint": "http://localhost:5174",
   "loginUser": "example@gmail.com",
   "loginPassword": "123456789",
   "executionArgs": {
@@ -12,16 +12,10 @@
     "additionalInstruction": "",
     "serverMode": "development",
     "envs": {
-      "API_URL": "http://localhost:3000",
-      "API_KEY": "sk-user-bsCyksRpL8NzmdpLD3DLuoSODrPSI-TcN_dthya8JflaEeyq-_n0SXG-P0JoH0bY-LoVCKAV08k86EiEjIxdw5zpayPSYjUH17L0Nh-Nc2gnLD1GAZa2JxsxPoTNWF_7IO4",
-      "TESTSPRITE_URL": "https://dev.d3jiomw0rrav5x.amplifyapp.com",
-      "TS_API_ENDPOINT": "http://localhost:3000/api",
-      "TS_TUNNEL_ENDPOINT": "nlb-dev-9611f872753564b9.elb.us-east-1.amazonaws.com",
-      "TSEMCP_TUNNEL_CONTROL_URL": "wss://control-tun-dev.tsedev.com/ws",
-      "TSEMCP_TUNNEL_DATA_ADDRESS": "data-tun-dev.tsedev.com:7400",
-      "TSEMCP_TUNNEL_PROXY_URL": "http://proxy-tun-dev.tsedev.com:9090",
-      "TSEMCP_TUNNEL_VERSION": "2"
+      "API_KEY": "sk-user-AYXOFmLdXiqy6-eWTA80cZC6M6iWTaZlei-UpvgQSVh1r0qNcYXwHiZT06drsSrmPfMawnQYCB9vPSvNfqRdkpvCWBG7D_l7N6QsILkC4Fk9il5TjdREmAAhSQ62P2qSspE",
+      "TSEMCP_TUNNEL_VERSION": 2
     }
   },
-  "serverPort": 51394
+  "serverPort": 62442,
+  "proxy": "http://52a1382f-5804-4048-9eaf-ddc11e10f1f9:bIGnCUtN3y7EktIhSvMZO0J4Ge0EJ8eQ@tun.testsprite.com:8080"
 }
