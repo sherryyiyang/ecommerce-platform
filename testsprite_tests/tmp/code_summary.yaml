@@ -1,0 +1,127 @@
+version: "2"
+type: frontend
+tech_stack:
+  - TypeScript
+  - React 19
+  - React Router
+  - Material UI
+  - Vite
+routes:
+  - path: /
+    file: src/pages/ProductCatalog.tsx
+    auth_required: false
+    description: Product catalog landing page with product cards and buy buttons
+  - path: /login
+    file: src/pages/Login.tsx
+    auth_required: false
+    description: Login page for the demo account
+  - path: /product/:id
+    file: src/pages/ProductDetails.tsx
+    auth_required: false
+    description: Product detail page for a selected product
+  - path: /orders
+    file: src/pages/OrderHistory.tsx
+    auth_required: true
+    description: Protected order history page showing mock past orders
+  - path: /admin
+    file: src/pages/AdminPage.tsx
+    auth_required: true
+    description: Protected admin page for managing products in local UI state
+features:
+  - name: Demo Login
+    description: Users can sign in with a hard-coded demo email and password stored in the frontend
+    files:
+      - src/App.tsx
+      - src/pages/Login.tsx
+    entry_route: /login
+    user_interactions:
+      - Open the login page
+      - Enter email address
+      - Enter password
+      - Click Login to authenticate
+      - See an error alert for invalid credentials
+    api_calls: []
+    auth_required: false
+  - name: Product Catalog Browsing
+    description: Users can browse a mock product catalog loaded from local mock data
+    files:
+      - src/pages/ProductCatalog.tsx
+      - src/mockData.ts
+    entry_route: /
+    user_interactions:
+      - Open the catalog page
+      - Wait for products to load
+      - View product cards with images, categories, and prices
+      - Click View Details on a product
+      - Attempt to click Buy from the catalog
+    api_calls: []
+    auth_required: false
+  - name: Product Details Viewing
+    description: Users can view details for a selected mock product and attempt purchase from the detail page
+    files:
+      - src/pages/ProductDetails.tsx
+      - src/mockData.ts
+    entry_route: /product/:id
+    user_interactions:
+      - Navigate to a product details page
+      - Wait for the product details to load
+      - Read the product description and price
+      - Click Buy when authenticated
+      - See an error state for an invalid product id
+    api_calls: []
+    auth_required: false
+  - name: Protected Order History
+    description: Authenticated users can access a protected order history page backed by mock order data
+    files:
+      - src/App.tsx
+      - src/pages/OrderHistory.tsx
+      - src/mockData.ts
+    entry_route: /orders
+    user_interactions:
+      - Log in with the demo account
+      - Open the Orders page from navigation
+      - Wait for orders to load
+      - Review prior order cards with date and price
+    api_calls: []
+    auth_required: true
+  - name: Admin Product Management
+    description: Authenticated users can add, edit, and delete products in local component state
+    files:
+      - src/App.tsx
+      - src/pages/AdminPage.tsx
+      - src/mockData.ts
+    entry_route: /admin
+    user_interactions:
+      - Log in with the demo account
+      - Open the Admin page from navigation
+      - Fill the product form and submit a new product
+      - Edit an existing product and save changes
+      - Delete an existing product
+      - Observe snackbar feedback after each action
+    api_calls: []
+    auth_required: true
+  - name: Logout Flow
+    description: Authenticated users can log out and are redirected to the login page
+    files:
+      - src/App.tsx
+    entry_route: /
+    user_interactions:
+      - Log in with the demo account
+      - Click Logout in the top navigation
+      - Confirm redirect to the login page
+      - Attempt to access protected routes again
+    api_calls: []
+    auth_required: true
+known_limitations:
+  - issue: Authentication state is stored only in React state and resets on page refresh
+    location: src/App.tsx
+    impact: Users are logged out on reload and protected access is not persisted
+  - issue: All product and order data is mock frontend data with no backend persistence
+    location: src/mockData.ts
+    impact: Data changes are not saved across refreshes and no real API is exercised
+  - issue: Purchase actions only show a success snackbar and do not create orders
+    location: src/pages/ProductCatalog.tsx
+    impact: Buying a product does not update order history or persist a transaction
+  - issue: Admin create, edit, and delete actions only modify local component state
+    location: src/pages/AdminPage.tsx
+    impact: Admin changes disappear on refresh and do not affect the shared catalog

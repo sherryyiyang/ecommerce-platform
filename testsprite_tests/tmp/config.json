@@ -3,16 +3,17 @@
   "type": "frontend",
   "scope": "codebase",
   "localEndpoint": "http://localhost:5173",
-  "loginUser": "test@example.com",
-  "loginPassword": "123456abc.",
+  "loginUser": "example@gmail.com",
+  "loginPassword": "123456789",
   "executionArgs": {
     "projectName": "ecommerce-platform",
     "projectPath": "/Users/sherry/Projects/ecommerce-platform",
     "testIds": [],
     "additionalInstruction": "",
+    "serverMode": "production",
     "envs": {
-      "API_KEY": "sk-user-hm3ugh-1AcoL5NHq20I1IYOXtH3uSCvavIRYWDrfMTZVH7nYkXFpai_hj7mf8whaPttwGsRPRdKzz0e871OETqmnOL6Hd6yTXSSUNhAHGwZLv0FigAaXT2qsESGshbv5Ku8"
+      "API_KEY": "sk-user-sMTqXxMxTUxJpOavhkLhPoVNyqmqld3gLeA6RF8uPGNRiOrJUTrE6N1iJc75BSUyh1R9pNLGX0s17ci7o5h0Ub7zkQyDoyKmzpBp8vi2Xh9HbAHmZLP2LGBjAb2eQFX5tG8"
     }
   },
-  "proxy": "http://e5f439c5-4da8-43f6-a1d0-ebc1b78a70d2:M3muTw4pXEB7rqMckuuMIU7gBAQRYbb6@tun.testsprite.com:8080"
+  "serverPort": 51657
 }

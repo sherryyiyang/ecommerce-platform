@@ -1,424 +1,457 @@
 [
   {
     "id": "TC001",
-    "title": "Load product catalog successfully",
-    "description": "Verify that the product catalog page loads correctly displaying all product fields including name, description, image, price, and category.",
-    "category": "functional",
-    "priority": "High",
+    "title": "Sign in with demo credentials",
+    "description": "This test verifies that a visitor can log in with the demo account and reach the authenticated app state.",
+    "category": "Demo Login",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to the product catalog page."
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
       },
       {
         "type": "assertion",
-        "description": "Verify that all products are listed with correct name, description, image, price, and category."
+        "description": "Verify the authenticated app state is visible"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC002",
-    "title": "View product details correctly",
-    "description": "Verify that selecting a product from the catalog shows the correct product details including all fields.",
-    "category": "functional",
-    "priority": "High",
+    "title": "Open order history after direct access while signed out",
+    "description": "This verifies that an unauthenticated visitor who tries to open the protected order history page is redirected to the login page.",
+    "category": "Protected Order History",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to the product catalog page."
-      },
-      {
-        "type": "action",
-        "description": "Select a product to view its details."
+        "description": "Navigate to /orders"
       },
       {
         "type": "assertion",
-        "description": "Verify the product details page shows correct name, description, image, price, and category for the selected product."
+        "description": "Verify the login page is displayed"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC003",
-    "title": "Login success with hardcoded test account",
-    "description": "Verify that user can login successfully with the correct hardcoded test account credentials.",
-    "category": "functional",
-    "priority": "High",
+    "title": "Prevent unauthenticated access to admin page",
+    "description": "This verifies that a signed-out visitor who tries to open the protected admin page is redirected to sign in.",
+    "category": "Admin Product Management",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to the login page."
-      },
-      {
-        "type": "action",
-        "description": "Enter correct hardcoded test account email and password."
-      },
-      {
-        "type": "action",
-        "description": "Click the login button."
+        "description": "Navigate to /admin"
       },
       {
         "type": "assertion",
-        "description": "Verify that login succeeds and user is redirected to the product catalog or appropriate landing page."
+        "description": "Verify the login page is displayed"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC004",
-    "title": "Login failure with incorrect credentials",
-    "description": "Verify that login fails with invalid email or password and appropriate error message is displayed.",
-    "category": "error handling",
-    "priority": "High",
+    "title": "Browse the product catalog",
+    "description": "This test verifies that a visitor can open the catalog and see product cards with images, categories, and prices.",
+    "category": "Product Catalog Browsing",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to the login page."
-      },
-      {
-        "type": "action",
-        "description": "Enter invalid email and/or password."
-      },
-      {
-        "type": "action",
-        "description": "Click the login button."
+        "description": "Navigate to /"
       },
       {
         "type": "assertion",
-        "description": "Verify that login fails and an error message is shown indicating invalid credentials."
+        "description": "Verify product cards are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify product images, categories, and prices are displayed"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC005",
-    "title": "Simulated product purchase and order recording",
-    "description": "Verify that a logged-in user can perform a simulated purchase of a product and the order is recorded in order history.",
-    "category": "functional",
-    "priority": "High",
+    "title": "Log in and view protected order history",
+    "description": "This verifies that a signed-in user can open the protected order history page and review previously recorded orders.",
+    "category": "Protected Order History",
     "steps": [
       {
         "type": "action",
-        "description": "Login with valid test account."
+        "description": "Navigate to /login"
       },
       {
         "type": "action",
-        "description": "Navigate to product catalog and select a product."
+        "description": "Fill in the email field with {{LOGIN_USER}}"
       },
       {
         "type": "action",
-        "description": "Perform simulated purchase of the selected product."
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to the order history page"
       },
       {
         "type": "assertion",
-        "description": "Verify that the purchase is successful and order is recorded in user's order history."
+        "description": "Verify prior order cards are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify order date and price information are displayed"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC006",
-    "title": "Order history displays all past purchases",
-    "description": "Verify that the order history page accurately shows all previously purchased products for the logged-in user.",
-    "category": "functional",
-    "priority": "High",
+    "title": "Log out and lose access to protected routes",
+    "description": "This verifies that a signed-in user can log out from the top navigation and is then redirected back to the login page when attempting to revisit a protected route.",
+    "category": "Logout Flow",
     "steps": [
       {
         "type": "action",
-        "description": "Login with valid test account that has purchase history."
+        "description": "Navigate to /login"
       },
       {
         "type": "action",
-        "description": "Navigate to the order history page."
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the logout control in the top navigation"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to the order history page"
       },
       {
         "type": "assertion",
-        "description": "Verify that all past purchased products are listed correctly with accurate purchase details."
+        "description": "Verify the login page is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify protected content is not displayed"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC007",
-    "title": "Admin can add new product",
-    "description": "Verify that admin user can add a new product through the admin page and it appears in the product catalog.",
-    "category": "functional",
-    "priority": "Medium",
+    "title": "Open a product from the catalog",
+    "description": "This test verifies that a visitor can open a product details page from the catalog and view the selected product information.",
+    "category": "Product Catalog Browsing",
     "steps": [
       {
         "type": "action",
-        "description": "Login as admin user."
+        "description": "Navigate to /"
       },
       {
         "type": "action",
-        "description": "Navigate to the admin page."
-      },
-      {
-        "type": "action",
-        "description": "Use the add product feature to add a new product with all required fields."
+        "description": "Click a product card's details link"
       },
       {
         "type": "assertion",
-        "description": "Verify that the new product is added successfully and visible in the product catalog."
+        "description": "Verify the product details view is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product description and price are displayed"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC008",
-    "title": "Admin can edit existing product",
-    "description": "Verify that admin user can edit an existing product and changes are reflected in the product catalog.",
-    "category": "functional",
-    "priority": "Medium",
+    "title": "View a product's full details",
+    "description": "This test verifies that a visitor can open a specific product page and read its details.",
+    "category": "Product Details Viewing",
     "steps": [
       {
         "type": "action",
-        "description": "Login as admin user."
-      },
-      {
-        "type": "action",
-        "description": "Navigate to the admin page."
-      },
-      {
-        "type": "action",
-        "description": "Select an existing product and modify its fields."
-      },
-      {
-        "type": "action",
-        "description": "Save the changes."
+        "description": "Navigate to /product/1"
       },
       {
         "type": "assertion",
-        "description": "Verify that the product changes are saved and displayed correctly in the product catalog."
+        "description": "Verify the product details view is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product description and price are displayed"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC009",
-    "title": "Admin can delete existing product",
-    "description": "Verify that admin user can delete a product and it is removed from the product catalog.",
-    "category": "functional",
-    "priority": "Medium",
+    "title": "Open order history after authenticating from a protected route",
+    "description": "This verifies that a user who is redirected to sign in from the protected order history route can authenticate and then access the page successfully.",
+    "category": "Protected Order History",
     "steps": [
       {
         "type": "action",
-        "description": "Login as admin user."
+        "description": "Navigate to /orders"
       },
       {
         "type": "action",
-        "description": "Navigate to the admin page."
+        "description": "Fill in the email field with {{LOGIN_USER}}"
       },
       {
         "type": "action",
-        "description": "Delete an existing product."
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
       },
       {
         "type": "assertion",
-        "description": "Verify that the product is removed and no longer listed in the product catalog."
+        "description": "Verify prior order cards are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify order date and price information are displayed"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC010",
-    "title": "Frontend navigation between key pages",
-    "description": "Verify that frontend routes correctly between catalog, product details, login, order history, and admin pages.",
-    "category": "functional",
-    "priority": "High",
+    "title": "Log in and add a new product",
+    "description": "This verifies that an authenticated user can create a new product from the admin page and see confirmation.",
+    "category": "Admin Product Management",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to product catalog page."
+        "description": "Navigate to /login"
       },
       {
         "type": "action",
-        "description": "Click to view product details."
+        "description": "Fill in the email field with {{LOGIN_USER}}"
       },
       {
         "type": "action",
-        "description": "Navigate to login page."
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
       },
       {
         "type": "action",
-        "description": "Login successfully."
+        "description": "Submit the login form"
       },
       {
         "type": "action",
-        "description": "Navigate to order history page."
+        "description": "Click the link to the admin page"
       },
       {
         "type": "action",
-        "description": "If admin, navigate to admin page."
+        "description": "Fill in the product name field with Demo Product Alpha"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the product price field with a valid price"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the product category field with Demo Category"
+      },
+      {
+        "type": "action",
+        "description": "Submit the new product form"
       },
       {
         "type": "assertion",
-        "description": "Verify that navigation succeeds with correct page content rendered for each route."
+        "description": "Verify the new product appears in the admin product list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success confirmation is visible"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC011",
-    "title": "Backend REST API returns correct product data",
-    "description": "Verify that backend API endpoints return accurate and complete product information as expected.",
-    "category": "functional",
-    "priority": "High",
+    "title": "Edit an existing product from admin",
+    "description": "This verifies that an authenticated user can update an existing product in admin and see the updated product reflected in the list.",
+    "category": "Admin Product Management",
     "steps": [
       {
         "type": "action",
-        "description": "Send a GET request to the products API endpoint."
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to the admin page"
+      },
+      {
+        "type": "action",
+        "description": "Select an existing product to edit"
+      },
+      {
+        "type": "action",
+        "description": "Update the product name field to Demo Product Beta"
+      },
+      {
+        "type": "action",
+        "description": "Update the product price field to a valid price"
+      },
+      {
+        "type": "action",
+        "description": "Save the product changes"
       },
       {
         "type": "assertion",
-        "description": "Verify that the response includes all products with correct fields: name, description, image, price, and category."
+        "description": "Verify the updated product appears in the admin product list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success confirmation is visible"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC012",
-    "title": "Backend REST API supports order purchase recording",
-    "description": "Verify that backend API accepts purchase requests and records orders correctly in local storage.",
-    "category": "functional",
-    "priority": "High",
+    "title": "Delete an existing product from admin",
+    "description": "This verifies that an authenticated user can remove a product from admin and see confirmation that the product is no longer listed.",
+    "category": "Admin Product Management",
     "steps": [
       {
         "type": "action",
-        "description": "Login and obtain authentication token if needed."
+        "description": "Navigate to /login"
       },
       {
         "type": "action",
-        "description": "Send a POST request to purchase API endpoint with product and user details."
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to the admin page"
+      },
+      {
+        "type": "action",
+        "description": "Delete an existing product"
       },
       {
         "type": "assertion",
-        "description": "Verify API response confirms purchase success and order is stored correctly."
+        "description": "Verify the removed product is no longer displayed in the admin product list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success confirmation is visible"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC013",
-    "title": "Backend REST API returns correct order history",
-    "description": "Verify that the order history API endpoint returns accurate order data for the logged-in user.",
-    "category": "functional",
-    "priority": "High",
+    "title": "Attempt a purchase from the catalog",
+    "description": "This test verifies that a shopper can try buying a product from the catalog and see purchase feedback.",
+    "category": "Product Catalog Browsing",
     "steps": [
       {
         "type": "action",
-        "description": "Login as user with purchase history."
+        "description": "Navigate to /"
       },
       {
         "type": "action",
-        "description": "Send a GET request to order history API endpoint."
+        "description": "Click a product's buy action"
       },
       {
         "type": "assertion",
-        "description": "Verify the returned data matches the user's past purchases."
+        "description": "Verify a purchase success confirmation is visible"
       }
-    ]
+    ],
+    "priority": "High"
   },
   {
     "id": "TC014",
-    "title": "All data operations function fully locally",
-    "description": "Verify that all app functionality works without any external service calls and all data is managed locally.",
-    "category": "functional",
-    "priority": "High",
+    "title": "Show an error for invalid login",
+    "description": "This test verifies that submitting invalid credentials keeps the user on the login page and shows an authentication error.",
+    "category": "Demo Login",
     "steps": [
       {
         "type": "action",
-        "description": "Use network inspection tools to monitor external calls."
+        "description": "Navigate to /login"
       },
       {
         "type": "action",
-        "description": "Perform browsing, login, purchase, order viewing, and admin operations."
+        "description": "Fill in the email field with invalid credentials"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with invalid credentials"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
       },
       {
         "type": "assertion",
-        "description": "Verify there are no external network calls and data is handled/stored locally."
+        "description": "Verify an invalid credentials error alert is visible"
       }
-    ]
+    ],
+    "priority": "Medium"
   },
   {
     "id": "TC015",
-    "title": "Edge case: Purchase invalid product ID",
-    "description": "Verify the system handles purchase requests for invalid or non-existent product IDs gracefully.",
-    "category": "error handling",
-    "priority": "Medium",
+    "title": "Handle an invalid product page",
+    "description": "This test verifies that visiting an invalid product id shows the invalid product state instead of a product detail view.",
+    "category": "Product Details Viewing",
     "steps": [
       {
         "type": "action",
-        "description": "Login as valid user."
-      },
-      {
-        "type": "action",
-        "description": "Send a purchase request with an invalid product ID."
+        "description": "Navigate to /product/999999"
       },
       {
         "type": "assertion",
-        "description": "Verify the system returns an error response and does not record the order."
+        "description": "Verify an invalid product state is visible"
       }
-    ]
-  },
-  {
-    "id": "TC016",
-    "title": "Edge case: Admin attempts to add product with missing required fields",
-    "description": "Verify that the admin interface prevents adding products with missing mandatory fields.",
-    "category": "error handling",
-    "priority": "Medium",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Login as admin user."
-      },
-      {
-        "type": "action",
-        "description": "Attempt to add a product without specifying required fields (e.g., name or price)."
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the UI shows validation errors and product is not added."
-      }
-    ]
-  },
-  {
-    "id": "TC017",
-    "title": "Edge case: Order history empty state",
-    "description": "Verify that the order history page handles users with no purchase history gracefully.",
-    "category": "functional",
-    "priority": "Low",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Login with a user account that has no orders."
-      },
-      {
-        "type": "action",
-        "description": "Navigate to the order history page."
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the page shows appropriate message indicating no past orders."
-      }
-    ]
-  },
-  {
-    "id": "TC018",
-    "title": "Unauthorized access to admin page blocked",
-    "description": "Verify that non-admin users or unauthenticated visitors cannot access the admin page.",
-    "category": "security",
-    "priority": "High",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to the admin page without logging in."
-      },
-      {
-        "type": "assertion",
-        "description": "Verify access is denied and user is redirected or shown an error."
-      },
-      {
-        "type": "action",
-        "description": "Login as normal user."
-      },
-      {
-        "type": "action",
-        "description": "Attempt to access admin page."
-      },
-      {
-        "type": "assertion",
-        "description": "Verify access is denied for non-admin user."
-      }
-    ]
+    ],
+    "priority": "Medium"
   }
 ]
