@@ -34,39 +34,57 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> navigate
-        await page.goto("http://localhost:5174")
+        await page.goto("http://localhost:5173")
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
             pass
         
-        # -> Click the 'Login' link in the app header to open the login page.
+        # -> Create todo.md with the stepwise plan and then click the Login link (interactive element [6]) to open the login page.
         # link "Login"
         elem = page.locator("xpath=/html/body/div/header/div/a[3]").nth(0)
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
         
-        # -> Fill the email and password fields and submit the login form (email -> index 770, password -> index 778, submit -> index 784).
+        # -> Fill the email and password fields with example@gmail.com / 123456789 and submit the login form.
         # email input
         elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div/div/input").nth(0)
         await elem.wait_for(state="visible", timeout=10000)
         await elem.fill("example@gmail.com")
         
-        # -> Fill the email and password fields and submit the login form (email -> index 770, password -> index 778, submit -> index 784).
+        # -> Fill the email and password fields with example@gmail.com / 123456789 and submit the login form.
         # password input
         elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input").nth(0)
         await elem.wait_for(state="visible", timeout=10000)
         await elem.fill("123456789")
         
-        # -> Fill the email and password fields and submit the login form (email -> index 770, password -> index 778, submit -> index 784).
+        # -> Fill the email and password fields with example@gmail.com / 123456789 and submit the login form.
         # button "Login"
         elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/button").nth(0)
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
         
-        # -> Click the Logout button (index 1165), wait for the page to update, then verify the login page loaded by checking for the email input field (input[type='email']).
-        # button "Logout"
-        elem = page.locator("xpath=/html/body/div/header/div/button").nth(0)
+        # -> Click the Admin link (interactive element [892]) to open the admin product list page.
+        # link "Admin"
+        elem = page.locator("xpath=/html/body/div/header/div/a[4]").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.click()
+        
+        # -> Click the Delete button for the 'Wireless Headphones' product (interactive element [1294]) to attempt removal.
+        # button "Delete"
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/div/div/button[2]").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.click()
+        
+        # -> Click the Delete button for 'Phone Case' (index 1350) to trigger a new confirmation toast so it can be verified.
+        # button "Delete"
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div[7]/div/div/button[2]").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.click()
+        
+        # -> Click the Delete button for 'Desk Lamp' (interactive element [1342]) to trigger a new 'Product deleted' confirmation toast so it can be observed and the product absence can be verified.
+        # button "Delete"
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div[6]/div/div/button[2]").nth(0)
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
         

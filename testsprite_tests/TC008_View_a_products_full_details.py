@@ -34,45 +34,15 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> navigate
-        await page.goto("http://localhost:5174")
+        await page.goto("http://localhost:5173")
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
             pass
         
-        # -> Click the 'Login' link to open the login page.
-        # link "Login"
-        elem = page.locator("xpath=/html/body/div/header/div/a[3]").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.click()
-        
-        # -> Fill the email and password fields and submit the login form.
-        # email input
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div/div/input").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill("example@gmail.com")
-        
-        # -> Fill the email and password fields and submit the login form.
-        # password input
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill("123456789")
-        
-        # -> Fill the email and password fields and submit the login form.
-        # button "Login"
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/button").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.click()
-        
-        # -> Click the 'View Details' link on a product card (index 930).
+        # -> Click the 'View Details' link for the first product (Wireless Headphones) at index 144 to open the product detail page and then verify description and price.
         # link "View Details"
         elem = page.locator("xpath=/html/body/div/div/div/div/div/div/div/div/a").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.click()
-        
-        # -> Click the Buy button on the product detail page (index 1070) and verify the 'Purchase successful!' snackbar appears.
-        # button "Buy"
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/button").nth(0)
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
         

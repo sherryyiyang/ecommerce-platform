@@ -2,7 +2,7 @@
   "status": "commited",
   "type": "frontend",
   "scope": "codebase",
-  "localEndpoint": "http://localhost:5174",
+  "localEndpoint": "http://localhost:5173",
   "loginUser": "example@gmail.com",
   "loginPassword": "123456789",
   "executionArgs": {
@@ -10,12 +10,10 @@
     "projectPath": "/Users/sherry/Projects/ecommerce-platform",
     "testIds": [],
     "additionalInstruction": "",
-    "serverMode": "development",
+    "serverMode": "production",
     "envs": {
-      "API_KEY": "sk-user-AYXOFmLdXiqy6-eWTA80cZC6M6iWTaZlei-UpvgQSVh1r0qNcYXwHiZT06drsSrmPfMawnQYCB9vPSvNfqRdkpvCWBG7D_l7N6QsILkC4Fk9il5TjdREmAAhSQ62P2qSspE",
-      "TSEMCP_TUNNEL_VERSION": 2
+      "API_KEY": "sk-user-sMTqXxMxTUxJpOavhkLhPoVNyqmqld3gLeA6RF8uPGNRiOrJUTrE6N1iJc75BSUyh1R9pNLGX0s17ci7o5h0Ub7zkQyDoyKmzpBp8vi2Xh9HbAHmZLP2LGBjAb2eQFX5tG8"
     }
   },
-  "serverPort": 62442,
-  "proxy": "http://52a1382f-5804-4048-9eaf-ddc11e10f1f9:bIGnCUtN3y7EktIhSvMZO0J4Ge0EJ8eQ@tun.testsprite.com:8080"
+  "serverPort": 51657
 }

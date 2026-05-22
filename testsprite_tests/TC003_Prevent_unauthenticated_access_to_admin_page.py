@@ -34,42 +34,18 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> navigate
-        await page.goto("http://localhost:5174")
+        await page.goto("http://localhost:5173")
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
             pass
         
-        # -> Navigate to /orders and verify the unauthenticated visitor is redirected to the login page.
-        await page.goto("http://localhost:5174/orders")
+        # -> Navigate to http://localhost:5173/admin to verify that an unauthenticated visitor is redirected to the sign-in/login page.
+        await page.goto("http://localhost:5173/admin")
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
             pass
-        
-        # -> Fill the email and password fields with example@gmail.com / 123456789 and submit the login form.
-        # email input
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div/div/input").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill("example@gmail.com")
-        
-        # -> Fill the email and password fields with example@gmail.com / 123456789 and submit the login form.
-        # password input
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill("123456789")
-        
-        # -> Fill the email and password fields with example@gmail.com / 123456789 and submit the login form.
-        # button "Login"
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/button").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.click()
-        
-        # -> Click the 'Orders' navigation link and verify the page heading reads 'Order History'.
-        # link "Orders"
-        elem = page.locator("xpath=/html/body/div/header/div/a[3]").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.click()
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]

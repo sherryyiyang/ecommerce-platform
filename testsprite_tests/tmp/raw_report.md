@@ -5,138 +5,131 @@
 
 ## 1️⃣ Document Metadata
 - **Project Name:** ecommerce-platform
-- **Date:** 2026-05-06
+- **Date:** 2026-05-21
 - **Prepared by:** TestSprite AI Team
 
 ---
 
 ## 2️⃣ Requirement Validation Summary
 
-#### Test TC001 Redirect unauthenticated user from Orders to Login
-- **Test Code:** [TC001_Redirect_unauthenticated_user_from_Orders_to_Login.py](./TC001_Redirect_unauthenticated_user_from_Orders_to_Login.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/4a89a37e-e1da-4e17-a1bf-383a3efb89c7
+#### Test TC001 Sign in with demo credentials
+- **Test Code:** [TC001_Sign_in_with_demo_credentials.py](./TC001_Sign_in_with_demo_credentials.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/de25afd7-55a3-440d-851e-56b4994b8311
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC002 Redirect unauthenticated user from Admin to Login
-- **Test Code:** [TC002_Redirect_unauthenticated_user_from_Admin_to_Login.py](./TC002_Redirect_unauthenticated_user_from_Admin_to_Login.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/2660fdf6-9f9c-4d0b-9575-c6f5a1a29e79
+#### Test TC002 Open order history after direct access while signed out
+- **Test Code:** [TC002_Open_order_history_after_direct_access_while_signed_out.py](./TC002_Open_order_history_after_direct_access_while_signed_out.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/77a89c85-2bb0-4f3b-8707-81873f3de5fc
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC003 Log in with valid credentials and reach the product catalog
-- **Test Code:** [TC003_Log_in_with_valid_credentials_and_reach_the_product_catalog.py](./TC003_Log_in_with_valid_credentials_and_reach_the_product_catalog.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/a4cf7985-2e02-4f5f-a685-fd2f0c5b103b
+#### Test TC003 Prevent unauthenticated access to admin page
+- **Test Code:** [TC003_Prevent_unauthenticated_access_to_admin_page.py](./TC003_Prevent_unauthenticated_access_to_admin_page.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/b57bbeda-d199-4f95-b795-a28904e6d4a5
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC004 Redirect unauthenticated user to login when opening Orders directly
-- **Test Code:** [TC004_Redirect_unauthenticated_user_to_login_when_opening_Orders_directly.py](./TC004_Redirect_unauthenticated_user_to_login_when_opening_Orders_directly.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/bf87141c-0080-4cae-a865-6ea9d1d99dde
+#### Test TC004 Browse the product catalog
+- **Test Code:** [TC004_Browse_the_product_catalog.py](./TC004_Browse_the_product_catalog.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/611369d7-2756-4002-ac68-ac3f4edd3312
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC005 Log out and get redirected to login
-- **Test Code:** [TC005_Log_out_and_get_redirected_to_login.py](./TC005_Log_out_and_get_redirected_to_login.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/704c3c20-5673-4a6b-958e-7189f27d8d4e
+#### Test TC005 Log in and view protected order history
+- **Test Code:** [TC005_Log_in_and_view_protected_order_history.py](./TC005_Log_in_and_view_protected_order_history.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/7ac28bbf-a933-433b-8624-1da91b998105
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC006 Purchase a product from product details when authenticated
-- **Test Code:** [TC006_Purchase_a_product_from_product_details_when_authenticated.py](./TC006_Purchase_a_product_from_product_details_when_authenticated.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/440ea650-7440-4830-a91a-25ec81ba3e8c
+#### Test TC006 Log out and lose access to protected routes
+- **Test Code:** [TC006_Log_out_and_lose_access_to_protected_routes.py](./TC006_Log_out_and_lose_access_to_protected_routes.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/79bb8f59-b45e-48f5-8490-5c6ad362d331
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC007 Authenticated user can purchase a product from the catalog
-- **Test Code:** [TC007_Authenticated_user_can_purchase_a_product_from_the_catalog.py](./TC007_Authenticated_user_can_purchase_a_product_from_the_catalog.py)
+#### Test TC007 Open a product from the catalog
+- **Test Code:** [TC007_Open_a_product_from_the_catalog.py](./TC007_Open_a_product_from_the_catalog.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/6eb9b083-85fb-42a5-a3f6-b69d89680027
+- **Status:** ✅ Passed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC008 View a product's full details
+- **Test Code:** [TC008_View_a_products_full_details.py](./TC008_View_a_products_full_details.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/f3c580aa-16c1-4992-8147-0d7fae369a53
+- **Status:** ✅ Passed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC009 Open order history after authenticating from a protected route
+- **Test Code:** [TC009_Open_order_history_after_authenticating_from_a_protected_route.py](./TC009_Open_order_history_after_authenticating_from_a_protected_route.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/3ce74f28-3441-4a53-a74c-321d140a120c
+- **Status:** ✅ Passed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC010 Log in and add a new product
+- **Test Code:** [TC010_Log_in_and_add_a_new_product.py](./TC010_Log_in_and_add_a_new_product.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/be549f2a-d37b-444a-8b3f-6af979a91690
+- **Status:** ✅ Passed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC011 Edit an existing product from admin
+- **Test Code:** [TC011_Edit_an_existing_product_from_admin.py](./TC011_Edit_an_existing_product_from_admin.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/75b8201c-f437-45f3-8a7a-002d2dde6c92
+- **Status:** ✅ Passed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC012 Delete an existing product from admin
+- **Test Code:** [TC012_Delete_an_existing_product_from_admin.py](./TC012_Delete_an_existing_product_from_admin.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/cdd79aa7-2005-4fe5-8533-d169becb1de4
+- **Status:** ✅ Passed
+- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
+---
+
+#### Test TC013 Attempt a purchase from the catalog
+- **Test Code:** [TC013_Attempt_a_purchase_from_the_catalog.py](./TC013_Attempt_a_purchase_from_the_catalog.py)
 - **Test Error:** TEST FAILURE
 
-An authenticated purchase did not show the expected success message when Buy was clicked.
+The purchase action cannot be performed — the 'Buy' buttons are disabled on the catalog page, so a shopper cannot attempt a purchase.
 
 Observations:
-- The product catalog shows Buy buttons and a Logout button, confirming an authenticated user.
-- Buy was clicked multiple times on product cards, but the exact text 'Purchase successful!' was not found.
-- No success snackbar or confirmation message appeared on the page after the actions.
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/14c4b24f-9008-4d5c-96df-f2eca851e014
+- The product catalog page loaded successfully and shows multiple products.
+- Each product's 'Buy' button is present but rendered disabled (disabled=true) in the UI.
+- No purchase confirmation or checkout flow was reachable from the current page.
+
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/e7bc80fc-1ab4-4d30-a062-467aa44b89cd
 - **Status:** ❌ Failed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC008 Open a product detail page from the catalog
-- **Test Code:** [TC008_Open_a_product_detail_page_from_the_catalog.py](./TC008_Open_a_product_detail_page_from_the_catalog.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/76cb630d-81ce-4529-9edb-6cf3c3c34d11
+#### Test TC014 Show an error for invalid login
+- **Test Code:** [TC014_Show_an_error_for_invalid_login.py](./TC014_Show_an_error_for_invalid_login.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/d113fdcf-fbe5-4023-ba69-f7fc2a7a1d9f
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC009 Visitor can open a product details page from the catalog and return to catalog
-- **Test Code:** [TC009_Visitor_can_open_a_product_details_page_from_the_catalog_and_return_to_catalog.py](./TC009_Visitor_can_open_a_product_details_page_from_the_catalog_and_return_to_catalog.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/d0b6c751-bc21-40ec-9992-f28d798a740e
+#### Test TC015 Handle an invalid product page
+- **Test Code:** [TC015_Handle_an_invalid_product_page.py](./TC015_Handle_an_invalid_product_page.py)
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/35667a75-6de1-4278-9ed4-0c273d53766a/445a124e-f480-471e-b618-a41e84c0013a
 - **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC010 Prevent purchase from product details when unauthenticated
-- **Test Code:** [TC010_Prevent_purchase_from_product_details_when_unauthenticated.py](./TC010_Prevent_purchase_from_product_details_when_unauthenticated.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/745e47a4-ebb4-4365-add6-0620a485f750
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC011 Unauthenticated visitor cannot initiate purchase from the catalog
-- **Test Code:** [TC011_Unauthenticated_visitor_cannot_initiate_purchase_from_the_catalog.py](./TC011_Unauthenticated_visitor_cannot_initiate_purchase_from_the_catalog.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/3d88077f-fef2-40c0-96cc-daab98d2f0f2
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC012 View order history after authenticating
-- **Test Code:** [TC012_View_order_history_after_authenticating.py](./TC012_View_order_history_after_authenticating.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/fc36bc41-d2c8-421c-8960-759a88b0c207
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC013 Return to the catalog from product details
-- **Test Code:** [TC013_Return_to_the_catalog_from_product_details.py](./TC013_Return_to_the_catalog_from_product_details.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/31773e19-5bbd-432c-a66b-ab70438c511b
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC014 Show invalid credentials error on failed login
-- **Test Code:** [TC014_Show_invalid_credentials_error_on_failed_login.py](./TC014_Show_invalid_credentials_error_on_failed_login.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/fa905d15-f12a-4ba3-8de7-bc878432a83e
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
-#### Test TC015 Add a new product in the admin UI
-- **Test Code:** [TC015_Add_a_new_product_in_the_admin_UI.py](./TC015_Add_a_new_product_in_the_admin_UI.py)
-- **Test Error:** TEST BLOCKED
-
-The test could not be run to completion — the admin UI stopped rendering after the add-product submission, preventing verification of the snackbar and product list.
-
-Observations:
-- The admin page is blank and shows 0 interactive elements.
-- The expected snackbar 'Product added (UI only, not persisted).' was not visible.
-- The new product 'Test Product A' was not found in the admin product list.
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/9b64a24b-4297-4874-9a2d-3e1a0501e5cd/df38b269-90f1-48ce-b51f-e5d0c55500bb
-- **Status:** BLOCKED
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 
 ## 3️⃣ Coverage & Matching Metrics
 
-- **86.67** of tests passed
+- **93.33** of tests passed
 
 | Requirement        | Total Tests | ✅ Passed | ❌ Failed  |
 |--------------------|-------------|-----------|------------|

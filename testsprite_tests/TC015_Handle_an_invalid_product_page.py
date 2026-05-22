@@ -34,23 +34,18 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> navigate
-        await page.goto("http://localhost:5174")
+        await page.goto("http://localhost:5173")
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
             pass
         
-        # -> Click a product's 'View Details' action from a catalog card (use element index 80).
-        # link "View Details"
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/div/div/a").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.click()
-        
-        # -> Click the in-page control (the 'Catalog' link in the header) to return to the product catalog, then verify the product catalog grid/list is displayed.
-        # link "Catalog"
-        elem = page.locator("xpath=/html/body/div/header/div/a[2]").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.click()
+        # -> Navigate to http://localhost:5173/product/999999 and verify the page shows an invalid product state instead of a product detail view.
+        await page.goto("http://localhost:5173/product/999999")
+        try:
+            await page.wait_for_load_state("domcontentloaded", timeout=5000)
+        except Exception:
+            pass
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]

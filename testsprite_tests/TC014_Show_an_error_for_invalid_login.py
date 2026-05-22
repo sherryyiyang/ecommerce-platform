@@ -34,31 +34,31 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> navigate
-        await page.goto("http://localhost:5174")
+        await page.goto("http://localhost:5173")
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
             pass
         
-        # -> Click the 'Login' link (element index 31) to open the login page.
+        # -> Click the 'Login' link (element index 5) to open the login page and reveal the login form.
         # link "Login"
         elem = page.locator("xpath=/html/body/div/header/div/a[3]").nth(0)
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
         
-        # -> Fill the Email field (index 525) with 'invalid@example.com'.
+        # -> Input invalid email into the email field (index 499).
         # email input
         elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div/div/input").nth(0)
         await elem.wait_for(state="visible", timeout=10000)
         await elem.fill("invalid@example.com")
         
-        # -> Fill the Email field (index 525) with 'invalid@example.com'.
+        # -> Input invalid email into the email field (index 499).
         # password input
         elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input").nth(0)
         await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill("wrongpass")
+        await elem.fill("wrongpassword")
         
-        # -> Fill the Email field (index 525) with 'invalid@example.com'.
+        # -> Input invalid email into the email field (index 499).
         # button "Login"
         elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/button").nth(0)
         await elem.wait_for(state="visible", timeout=10000)

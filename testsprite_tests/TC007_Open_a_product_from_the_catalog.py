@@ -34,18 +34,17 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> navigate
-        await page.goto("http://localhost:5174")
+        await page.goto("http://localhost:5173")
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
             pass
         
-        # -> Navigate to /orders and verify the user is redirected to the login page (or sees the login form).
-        await page.goto("http://localhost:5174/orders")
-        try:
-            await page.wait_for_load_state("domcontentloaded", timeout=5000)
-        except Exception:
-            pass
+        # -> Click the 'View Details' link for the Wireless Headphones (element 17) to open its product details page.
+        # link "View Details"
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/div/div/a").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.click()
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]

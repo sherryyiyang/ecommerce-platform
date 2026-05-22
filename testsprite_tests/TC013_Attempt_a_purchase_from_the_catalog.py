@@ -34,28 +34,14 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> navigate
-        await page.goto("http://localhost:5174")
+        await page.goto("http://localhost:5173")
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
             pass
         
-        # -> Click the 'View Details' control on the first product card (index 92) to open its product details page.
-        # link "View Details"
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/div/div/a").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.click()
-        
-        # -> Click the 'Catalog' link (index 79) to return to the product catalog and verify product cards are displayed.
-        # link "Catalog"
-        elem = page.locator("xpath=/html/body/div/header/div/a[2]").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.click()
-        
-        # --> Test passed — verified by AI agent
-        frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        # --> Assertions to verify final state
+        assert await page.locator("xpath=//*[contains(., 'Purchase successful')]").nth(0).is_visible(), "The purchase success confirmation should be visible after buying a product."
         await asyncio.sleep(5)
 
     finally:

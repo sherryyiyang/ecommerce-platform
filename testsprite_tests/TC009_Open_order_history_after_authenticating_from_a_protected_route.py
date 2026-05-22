@@ -34,15 +34,40 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> navigate
-        await page.goto("http://localhost:5174")
+        await page.goto("http://localhost:5173")
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
             pass
         
-        # -> Click the 'View Details' link for a product (Wireless Headphones) to open the product details page and then verify the Buy action is disabled on that details page.
-        # link "View Details"
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/div/div/a").nth(0)
+        # -> Navigate to http://localhost:5173/orders to trigger the protected-route redirect to sign-in and observe the login form or any blocking behavior.
+        await page.goto("http://localhost:5173/orders")
+        try:
+            await page.wait_for_load_state("domcontentloaded", timeout=5000)
+        except Exception:
+            pass
+        
+        # -> Fill the email and password fields with the provided test credentials and submit the login form to access the orders page.
+        # email input
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div/div/input").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.fill("example@gmail.com")
+        
+        # -> Fill the email and password fields with the provided test credentials and submit the login form to access the orders page.
+        # password input
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.fill("123456789")
+        
+        # -> Fill the email and password fields with the provided test credentials and submit the login form to access the orders page.
+        # button "Login"
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/button").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.click()
+        
+        # -> Click the 'Orders' link (element index 1027) to open the orders page and verify that order cards with date and price information are displayed.
+        # link "Orders"
+        elem = page.locator("xpath=/html/body/div/header/div/a[3]").nth(0)
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
         

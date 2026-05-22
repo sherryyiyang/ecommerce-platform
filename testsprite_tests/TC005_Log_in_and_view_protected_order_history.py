@@ -34,15 +34,39 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> navigate
-        await page.goto("http://localhost:5174")
+        await page.goto("http://localhost:5173")
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
             pass
         
-        # -> Click the 'View Details' link for the first product (Wireless Headphones) to open its product detail page and then verify the product image, name, category, price, and description are shown.
-        # link "View Details"
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/div/div/a").nth(0)
+        # -> click
+        # link "Login"
+        elem = page.locator("xpath=/html/body/div/header/div/a[3]").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.click()
+        
+        # -> Fill the email and password fields (indices 499 and 507) with the provided test credentials and click the Login button (index 513).
+        # email input
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div/div/input").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.fill("example@gmail.com")
+        
+        # -> Fill the email and password fields (indices 499 and 507) with the provided test credentials and click the Login button (index 513).
+        # password input
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.fill("123456789")
+        
+        # -> Fill the email and password fields (indices 499 and 507) with the provided test credentials and click the Login button (index 513).
+        # button "Login"
+        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/button").nth(0)
+        await elem.wait_for(state="visible", timeout=10000)
+        await elem.click()
+        
+        # -> Click the 'Orders' link (interactive element index 890) to open the order history page and then verify order cards show date and price information.
+        # link "Orders"
+        elem = page.locator("xpath=/html/body/div/header/div/a[3]").nth(0)
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
         

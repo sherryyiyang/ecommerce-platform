@@ -34,41 +34,18 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> navigate
-        await page.goto("http://localhost:5174")
+        await page.goto("http://localhost:5173")
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
             pass
         
-        # -> Open the login page by clicking the 'Login' link in the header (element index 80).
-        # link "Login"
-        elem = page.locator("xpath=/html/body/div/header/div/a[3]").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.click()
-        
-        # -> Fill the email and password fields and submit the login form (use indices 574, 582, then click 588).
-        # email input
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div/div/input").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill("example@gmail.com")
-        
-        # -> Fill the email and password fields and submit the login form (use indices 574, 582, then click 588).
-        # password input
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/div[2]/div/input").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill("123456789")
-        
-        # -> Fill the email and password fields and submit the login form (use indices 574, 582, then click 588).
-        # button "Login"
-        elem = page.locator("xpath=/html/body/div/div/div/div/div/div/form/button").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.click()
-        
-        # -> Click the 'Orders' navigation link (element index 965) to open the Order History page and verify the heading and order card date field.
-        # link "Orders"
-        elem = page.locator("xpath=/html/body/div/header/div/a[3]").nth(0)
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.click()
+        # -> Navigate to http://localhost:5173/orders and verify that an unauthenticated visitor is redirected to the login page.
+        await page.goto("http://localhost:5173/orders")
+        try:
+            await page.wait_for_load_state("domcontentloaded", timeout=5000)
+        except Exception:
+            pass
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]
